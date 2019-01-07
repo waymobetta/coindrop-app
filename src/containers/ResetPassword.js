@@ -81,7 +81,7 @@ export default class ResetPassword extends Component {
     return (
       <form onSubmit={this.handleSendCodeClick}>
         <FormGroup bsSize="large" controlId="email">
-          <ControlLabel>Email</ControlLabel>
+          <ControlLabel>email</ControlLabel>
           <FormControl
             autoFocus
             type="email"
@@ -93,8 +93,8 @@ export default class ResetPassword extends Component {
           block
           type="submit"
           bsSize="large"
-          loadingText="Sending…"
-          text="Send Confirmation"
+          loadingText="sending…"
+          text="Send confirmation"
           isLoading={this.state.isSendingCode}
           disabled={!this.validateCodeForm()}
         />
@@ -106,7 +106,7 @@ export default class ResetPassword extends Component {
     return (
       <form onSubmit={this.handleConfirmClick}>
         <FormGroup bsSize="large" controlId="code">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <ControlLabel>confirmation code</ControlLabel>
           <FormControl
             autoFocus
             type="tel"
@@ -114,13 +114,13 @@ export default class ResetPassword extends Component {
             onChange={this.handleChange}
           />
           <HelpBlock>
-            Please check your email ({this.state.email}) for the confirmation
+            please check your email ({this.state.email}) for the confirmation
             code.
           </HelpBlock>
         </FormGroup>
         <hr />
         <FormGroup bsSize="large" controlId="password">
-          <ControlLabel>New Password</ControlLabel>
+          <ControlLabel>new password</ControlLabel>
           <FormControl
             type="password"
             value={this.state.password}
@@ -128,7 +128,7 @@ export default class ResetPassword extends Component {
           />
         </FormGroup>
         <FormGroup bsSize="large" controlId="confirmPassword">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <ControlLabel>confirm password</ControlLabel>
           <FormControl
             type="password"
             onChange={this.handleChange}
@@ -139,8 +139,8 @@ export default class ResetPassword extends Component {
           block
           type="submit"
           bsSize="large"
-          text="Confirm"
-          loadingText="Confirm…"
+          text="confirm"
+          loadingText="confirming…"
           isLoading={this.state.isConfirming}
           disabled={!this.validateResetForm()}
         />
@@ -152,10 +152,10 @@ export default class ResetPassword extends Component {
     return (
       <div className="success">
         <Glyphicon glyph="ok" />
-        <p>Your password has been reset.</p>
+        <p>your password has been reset.</p>
         <p>
           <Link to="/login">
-            Click here to login with your new credentials.
+            click here to login with your new credentials.
           </Link>
         </p>
       </div>

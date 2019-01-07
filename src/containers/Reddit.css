@@ -1,0 +1,13 @@
+.Reddit .lander {
+  padding: 0px 0;
+  text-align: center;
+}
+
+.Reddit .lander h1 {
+  font-family: "Open Sans", sans-serif;
+  /*font-weight: 600;*/
+}
+
+.Reddit .lander p {
+	color: #999;
+}

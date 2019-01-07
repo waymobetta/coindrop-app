@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { Badge } from "reactstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
 import "./App.css";
@@ -12,7 +13,8 @@ class App extends Component {
 
     this.state = {
       isAuthenticated: false,
-      isAuthenticating: true
+      isAuthenticating: true,
+      pendingTasks: 2
     };
   }
 
@@ -53,29 +55,46 @@ class App extends Component {
       <div className="App container">
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">coindrop</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
+            <LinkContainer to="/">
+              <NavItem className="NavItemLogo">
+                <img 
+                  className="Logo"
+                  alt="logo"
+                  src="https://user-images.githubusercontent.com/17755587/50741651-b6319900-11b4-11e9-85b1-7224911ca670.png"
+                />
+              </NavItem>
+           </LinkContainer>
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
               {this.state.isAuthenticated
                 ? <Fragment>
+                    <LinkContainer to="/badges">
+                      <NavItem>
+                        badges
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/tasks">
+                      <NavItem>tasks <Badge className="TaskBadge">{this.state.pendingTasks}</Badge>
+                      </NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/accounts">
+                      <NavItem>accounts</NavItem>
+                    </LinkContainer>
                     <LinkContainer to="/profile">
-                      <NavItem>Profile</NavItem>
+                      <NavItem>profile</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/settings">
-                      <NavItem>Settings</NavItem>
+                      <NavItem>settings</NavItem>
                     </LinkContainer>
-                    <NavItem onClick={this.handleLogout}>Logout</NavItem> 
+                    <NavItem onClick={this.handleLogout}>logout</NavItem> 
                   </Fragment>
                 : <Fragment>
                     <LinkContainer to="/signup">
-                      <NavItem>Signup</NavItem>
+                      <NavItem>signup</NavItem>
                     </LinkContainer>
                     <LinkContainer to="/login">
-                      <NavItem>Login</NavItem>
+                      <NavItem>login</NavItem>
                     </LinkContainer>
                   </Fragment>
               }

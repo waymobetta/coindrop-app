@@ -1,0 +1,21 @@
+.Badges .lander {
+	font-family: "Open Sans", sans-serif;
+  padding: 0px 0;
+  text-align: center;
+}
+
+.Badges .lander h1 {
+  font-family: "Open Sans", sans-serif;
+}
+
+ul {
+  list-style-type: upper-roman;
+  text-align: center;
+  font-size: 12pt;
+  color: #9836B8;
+}
+
+div #badge {
+	color: #9836B8;
+	font-size: 12pt;
+}

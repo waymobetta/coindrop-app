@@ -45,6 +45,7 @@ export default class ChangeEmail extends Component {
 
 		try {
 			const currentUser = await Auth.currentAuthenticatedUser();
+			
 			await Auth.updateUserAttributes(
 				currentUser,
 				{
@@ -91,7 +92,7 @@ export default class ChangeEmail extends Component {
 				<FormGroup
 					bsSize="large"
 					controlId="email">
-					<ControlLabel>New Email</ControlLabel>
+					<ControlLabel>new email</ControlLabel>
 					<FormControl
 						autoFocus
 						type="email"
@@ -104,8 +105,8 @@ export default class ChangeEmail extends Component {
 					block
 					type="submit"
 					bsSize="large"
-					text="Update Email"
-					loadingText="Updating.."
+					text="update email"
+					loadingText="updating.."
 					disabled={!this.validateEmailForm()}
 					isLoading={this.state.isSendingCode}
 				/>
@@ -119,7 +120,7 @@ export default class ChangeEmail extends Component {
 				<FormGroup
 					bsSize="large"
 					controlId="code">
-					<ControlLabel>Confirmation Code</ControlLabel>
+					<ControlLabel>confirmation code</ControlLabel>
 					<FormControl
 						autoFocus
 						type="tel"
@@ -127,15 +128,15 @@ export default class ChangeEmail extends Component {
 						onChange={this.handleChange}
 					/>
 					<HelpBlock>
-						Please check your email ({this.state.email}) for the confirmation code.
+						please check your email ({this.state.email}) for the confirmation code.
 					</HelpBlock>
 				</FormGroup>
 				<LoaderButton
 					block
 					type="submit"
 					bsSize="large"
-					text="Confirm"
-					loadingText="Confirm.."
+					text="confirm"
+					loadingText="confirming.."
 					disabled={!this.validateConfirmForm()}
 					isLoading={this.state.isConfirming}
 				/>
@@ -147,7 +148,7 @@ export default class ChangeEmail extends Component {
 		return (
 			<div className="ChangeEmail">
 			<div>
-				<p align="center">If you'd like to change your email, this is the place to do it!</p>
+				<p align="center">if you'd like to change your email, this is the place to do it!</p>
 				<br >
 				</br>
 			</div>

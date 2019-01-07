@@ -1,0 +1,24 @@
+.Accounts .lander {
+	font-family: "Open Sans", sans-serif;
+  padding: 0px 0;
+  text-align: center;
+}
+
+.Accounts .lander h1 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.Accounts .lander p {
+	color: #999;
+}
+
+.Accounts #account {
+	padding: 5px;
+	font-size: 13pt;
+}
+
+#AccountSpan {
+	color: #9836B8;
+	font-size: 13pt;
+	padding: 10px;
+}

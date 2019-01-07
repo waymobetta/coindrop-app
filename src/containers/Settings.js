@@ -14,20 +14,23 @@ export default class Settings extends Component {
 	render() {
 		return (
 			<div className="Settings">
+				<h1 align="center">settings</h1>
+				<p>
 				<LinkContainer to="/settings/email">
 					<LoaderButton
 						block
 						bsSize="large"
-						text="Change Email"
+						text="update email"
 					/>
 				</LinkContainer>
 				<LinkContainer to="/settings/password">
 					<LoaderButton
 						block
 						bsSize="large"
-						text="Change Password"
+						text="update password"
 					/>
 				</LinkContainer>
+				</p>
 			</div>
 		);
 	}

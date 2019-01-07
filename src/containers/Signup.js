@@ -82,14 +82,14 @@ export default class Signup extends Component {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
         <FormGroup controlId="confirmationCode" bsSize="large">
-          <ControlLabel>Confirmation Code</ControlLabel>
+          <ControlLabel>confirmation code</ControlLabel>
           <FormControl
             autoFocus
             type="tel"
             value={this.state.confirmationCode}
             onChange={this.handleChange}
           />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
+          <HelpBlock>please check your email for the code.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block
@@ -97,8 +97,8 @@ export default class Signup extends Component {
           disabled={!this.validateConfirmationForm()}
           type="submit"
           isLoading={this.state.isLoading}
-          text="Verify"
-          loadingText="Verifying…"
+          text="verify"
+          loadingText="verifying…"
         />
       </form>
     );
@@ -108,7 +108,7 @@ export default class Signup extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
+          <ControlLabel>email</ControlLabel>
           <FormControl
             autoFocus
             type="email"
@@ -117,7 +117,7 @@ export default class Signup extends Component {
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
+          <ControlLabel>password</ControlLabel>
           <FormControl
             value={this.state.password}
             onChange={this.handleChange}
@@ -125,7 +125,7 @@ export default class Signup extends Component {
           />
         </FormGroup>
         <FormGroup controlId="confirmPassword" bsSize="large">
-          <ControlLabel>Confirm Password</ControlLabel>
+          <ControlLabel>confirm password</ControlLabel>
           <FormControl
             value={this.state.confirmPassword}
             onChange={this.handleChange}
@@ -138,8 +138,8 @@ export default class Signup extends Component {
           disabled={!this.validateForm()}
           type="submit"
           isLoading={this.state.isLoading}
-          text="Signup"
-          loadingText="Signing up…"
+          text="sign up"
+          loadingText="signing up…"
         />
       </form>
     );

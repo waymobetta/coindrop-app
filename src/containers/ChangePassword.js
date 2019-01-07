@@ -61,7 +61,7 @@ export default class ChangePassword extends Component {
 		return (
 			<div className="ChangePassword">
 				<div>
-					<p align="center">If you'd like to change your password, this is the place to do it!</p>
+					<p align="center">if you'd like to change your password, this is the place to do it!</p>
 					<br >
 					</br>
 				</div>
@@ -69,7 +69,7 @@ export default class ChangePassword extends Component {
 					<FormGroup
 						bsSize="large"
 						controlId="oldPassword">
-						<ControlLabel>Old Password</ControlLabel>
+						<ControlLabel>old password</ControlLabel>
 						<FormControl
 							type="password"
 							onChange={this.handleChange}
@@ -80,7 +80,7 @@ export default class ChangePassword extends Component {
 					<FormGroup
 						bsSize="large"
 						controlId="password">
-						<ControlLabel>New Password</ControlLabel>
+						<ControlLabel>new password</ControlLabel>
 						<FormControl
 							type="password"
 							onChange={this.handleChange}
@@ -90,7 +90,7 @@ export default class ChangePassword extends Component {
 					<FormGroup
 						bsSize="large"
 						controlId="confirmPassword">
-						<ControlLabel>Confirm Password</ControlLabel>
+						<ControlLabel>confirm password</ControlLabel>
 						<FormControl
 							type="password"
 							onChange={this.handleChange}
@@ -101,8 +101,8 @@ export default class ChangePassword extends Component {
 						block
 						type="submit"
 						bsSize="large"
-						text="Update Password"
-						loadingText="Changing.."
+						text="update password"
+						loadingText="updating.."
 						disabled={!this.validateForm()}
 						isLoading={this.state.isChanging}
 					/>

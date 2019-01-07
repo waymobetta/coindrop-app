@@ -6,9 +6,9 @@ export default class ChangeEmailSuccess extends Component {
     return (
       <div className="ChangeEmailSuccess">
         <div className="lander">
-          <h1 align="center">Success!</h1>
-          <p align="center">Successfully updated email.</p>
-          <p align="center">Click <a href="/profile">here</a> to return to your profile</p>
+          <h1 align="center">success!</h1>
+          <p align="center">successfully updated email.</p>
+          <p align="center">click <a href="/profile">here</a> to return to your profile</p>
         </div>
       </div>
     );

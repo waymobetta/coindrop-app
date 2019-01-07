@@ -1,10 +1,20 @@
 @media all and (min-width: 480px) {
   .Settings {
-    padding: 60px 0;
+    /*padding: 60px 0;*/
+	font-family: "Open Sans", sans-serif;
     margin: 0 auto;
     max-width: 320px;
   }
 }
+
+.Settings {
+	text-align: left;
+}
+
 .Settings .LoaderButton:last-child {
-  margin-top: 15px;
+  margin-top: 10px;
+}
+
+.Settings p {
+	padding: 60px 0;
 }
