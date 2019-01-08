@@ -103,6 +103,9 @@ export default class ChangeEmail extends Component {
 				</FormGroup>
 				<LoaderButton
 					block
+					className="button--cd btn btn-outline-primary"
+          			outline
+          			color="primary"
 					type="submit"
 					bsSize="large"
 					text="update email"
@@ -133,6 +136,9 @@ export default class ChangeEmail extends Component {
 				</FormGroup>
 				<LoaderButton
 					block
+					className="button--cd btn btn-outline-primary"
+          			outline
+          			color="primary"
 					type="submit"
 					bsSize="large"
 					text="confirm"

@@ -99,6 +99,9 @@ export default class ChangePassword extends Component {
 					</FormGroup>
 					<LoaderButton
 						block
+						className="button--cd btn btn-outline-primary"
+          				outline
+          				color="primary"
 						type="submit"
 						bsSize="large"
 						text="update password"

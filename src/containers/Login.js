@@ -62,14 +62,18 @@ export default class Login extends Component {
               type="password"
             />
           </FormGroup>
-          <Link to="/login/reset">forgot password?</Link>
+          <Link to="/login/reset">forgot password?</Link><br/>
+          <Link to="/signup">no account?</Link>
           <LoaderButton
             block
+            className="button--cd btn btn-outline-primary"
+            outline
+            color="primary"
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
-            text="login"
+            text="log in"
             loadingText="logging in…"
           />
         </form>

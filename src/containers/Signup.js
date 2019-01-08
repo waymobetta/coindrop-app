@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import {
   HelpBlock,
   FormGroup,
@@ -132,8 +133,12 @@ export default class Signup extends Component {
             type="password"
           />
         </FormGroup>
+        <Link to="/login">already signed up?</Link><br/>
         <LoaderButton
           block
+          className="button--cd btn btn-outline-primary"
+          outline
+          color="primary"
           bsSize="large"
           disabled={!this.validateForm()}
           type="submit"

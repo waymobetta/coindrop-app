@@ -91,6 +91,9 @@ export default class ResetPassword extends Component {
         </FormGroup>
         <LoaderButton
           block
+          className="button--cd btn btn-outline-primary"
+          outline
+          color="primary"
           type="submit"
           bsSize="large"
           loadingText="sending…"
@@ -137,6 +140,9 @@ export default class ResetPassword extends Component {
         </FormGroup>
         <LoaderButton
           block
+          className="button--cd btn btn-outline-primary"
+          outline
+          color="primary"
           type="submit"
           bsSize="large"
           text="confirm"

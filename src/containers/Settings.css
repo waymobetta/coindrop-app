@@ -1,9 +1,9 @@
 @media all and (min-width: 480px) {
   .Settings {
-    /*padding: 60px 0;*/
-	font-family: "Open Sans", sans-serif;
+		font-family: "Open Sans", sans-serif;
     margin: 0 auto;
-    max-width: 320px;
+    align-content: center;
+    max-width: 150px;
   }
 }
 
@@ -12,9 +12,58 @@
 }
 
 .Settings .LoaderButton:last-child {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .Settings p {
 	padding: 60px 0;
+}
+
+:root {
+  --purple: #3C00FF;
+  --purple--light: #6b3eff;
+}
+
+.button--cd {
+  -webkit-transform: translateZ(50px); 
+  transform: translateZ(50px);
+}
+.button--cd {
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--purple);
+  transition: color .4s cubic-bezier(.17,.67,.83,.67);
+  margin: 15px auto;
+  color: var(--purple);
+  background-color: #fff;
+  position: relative;
+  z-index: 100;
+  min-width: 150px;
+}
+
+.button--cd:hover {
+  transition: color .4s cubic-bezier(.17,.67,.83,.67);
+  color: #fff;
+  background-color: #fff;
+  -webkit-transform-style: preserve-3d;
+  border: 2px solid var(--purple);
+}
+
+.button--cd:before {
+  border-radius: 3px;
+  background: linear-gradient(to right, #b500ff 0%, #3c00ff 100%);
+  content: '';    
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+  width: 100%;
+  z-index: -100;
+  transition: opacity 0.4s cubic-bezier(.17,.67,.83,.67);
+}
+
+.button--cd:hover:before {
+  opacity: 1;
+  transition: opacity 0.4s cubic-bezier(.17,.67,.83,.67);
 }

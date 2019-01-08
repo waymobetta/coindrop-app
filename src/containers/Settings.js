@@ -18,14 +18,20 @@ export default class Settings extends Component {
 				<p>
 				<LinkContainer to="/settings/email">
 					<LoaderButton
+						className="button--cd btn btn-outline-primary"
 						block
+						outline
+						color="primary"
 						bsSize="large"
 						text="update email"
 					/>
 				</LinkContainer>
 				<LinkContainer to="/settings/password">
 					<LoaderButton
+						className="button--cd btn btn-outline-primary"
 						block
+						outline
+						color="primary"
 						bsSize="large"
 						text="update password"
 					/>
