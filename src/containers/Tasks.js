@@ -1,15 +1,41 @@
 import React, { Component } from "react";
-import { Button, Collapse, Well } from "react-bootstrap";
+import { Button } from "reactstrap";
+import { Collapse, Well } from "react-bootstrap";
+import { TaskList } from "./TaskList";
 import "./Tasks.css";
 
-export default class Tasks extends Component {
+export default class Tasks extends Component { 
   constructor(props) {
     super(props);
 
     this.state = {
-      isTaskOneOpen: false,
-      isTaskTwoOpen: false
-    };
+      isEnlisting: false,
+      taskList: []
+    }
+  } 
+
+  componentWillMount = () => {    
+    this.setState({
+      taskList: TaskList
+    }); 
+  }
+
+  handleClick(event, taskName) {
+    if (taskName === "adchain acknowledged") {
+      this.setState({
+        isEnlisting: true
+      });
+
+      this.props.history.push("/tasks/adchainacknowledged");
+    } else if (taskName === "colony contributor") {
+      this.setState({
+        isEnlisting: true
+      });
+
+      this.props.history.push("/tasks/colonycontributor");
+    }
+
+    console.log(event.message);
   }
  
   render() {
@@ -30,10 +56,21 @@ export default class Tasks extends Component {
             <Collapse in={this.state.isTaskOneOpen}>
               <div>
                 <Well>
-                  The Colony project would like to invite you to help promote its upcoming token distrubtion event. Click <a href="https://colony.io/">here</a> if you are interested! <br/><br/>
+                  The Colony project would like to invite you to help promote its upcoming token distrubtion event.<br/><br/> Click <a href="/tasks/current/colonycontributor">here</a> if you are interested! <br/><br/>
                   <strong>Rewards:</strong><br/>
-                  Token allocation: <i>5000 Colony Network Token</i><br/>
-                  Badge: <a href="/badges">colony conscious</a>
+                  Token allocation: <i>2500 Colony Network Token</i><br/>
+                  Badge: <a href="/badges">colony contributor</a>
+                  <div align="right">
+                    <Button 
+                      className="Enlist"
+                      color="success"
+                      align="right"
+                      type="submit"
+                      onClick={event => {
+                        this.handleClick(event, "colony contributor")}}>
+                      Enlist!
+                    </Button>
+                  </div>
                 </Well>
               </div>
             </Collapse>
@@ -42,20 +79,29 @@ export default class Tasks extends Component {
                 className="TaskButton"
                 onClick={() => this.setState({ isTaskTwoOpen: !this.state.isTaskTwoOpen })}>
                 <div id="task">
-                  AdChain - Action
+                  adChain - Action
                 </div>
               </Button>
             </li>
             <Collapse in={this.state.isTaskTwoOpen}>
               <div>
                 <Well>
-                  adChain needs your help! The adChain team would like you to help them better regulate its TCR, the adChain Registry. 
-
-                    Based on your talents, you seem like an ideal candidate for the task! Click <a href="/tasks/adchainaction">here</a> to read a more detailed briefing! <br/><br/>
+                  adChain needs your help! <br/><br/>The adChain team would like you to help them better regulate its TCR, the adChain Registry. Based on your talents, you seem like an ideal candidate for the task!<br/><br/>Click <a href="/tasks/current/adchainacknowledged">here</a> to read a more detailed briefing! <br/><br/>
 
                     <strong>Rewards:</strong><br/>
-                    Token allocation: <i>5000 AdToken</i><br/>
-                    Badge: <a href="/badges">adChain associate</a>
+                    Token allocation: <i>10000 adToken</i><br/>
+                    Badge: <a href="/badges">adChain acknowledged</a>
+                  <div align="right">
+                    <Button
+                      color="success"
+                      className="Enlist"
+                      align="right"
+                      type="submit"
+                      onClick={event => {
+                        this.handleClick(event, "adchain acknowledged")}}>
+                      Enlist!
+                    </Button>
+                  </div>
                 </Well>
               </div>
             </Collapse>

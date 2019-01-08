@@ -7,6 +7,7 @@ import Signup from "./containers/Signup";
 import NotFound from "./containers/NotFound";
 import Badges from "./containers/Badges";
 import Tasks from "./containers/Tasks";
+import { AdChainAcknowledged, ColonyContributor } from "./tasks/TaskDescriptions";
 import Profile from "./containers/Profile";
 import Accounts from "./containers/Accounts";
 import Reddit from "./containers/Reddit";
@@ -28,6 +29,8 @@ export default ({ childProps }) =>
     <AuthenticatedRoute path="/profile" exact component={Profile} props={childProps} />
     <AuthenticatedRoute path="/badges" exact component={Badges} props={childProps} />
     <AuthenticatedRoute path="/tasks" exact component={Tasks} props={childProps} />
+    <AuthenticatedRoute path="/tasks/adchainacknowledged" exact component={AdChainAcknowledged} props={childProps} />
+    <AuthenticatedRoute path="/tasks/colonycontributor" exact component={ColonyContributor} props={childProps} />
     <AuthenticatedRoute path="/accounts" exact component={Accounts} props={childProps} />
     <AuthenticatedRoute path="/accounts/reddit" exact component={Reddit} props={childProps} />
     <AuthenticatedRoute path="/accounts/stackoverflow" exact component={StackOverflow} props={childProps} />

@@ -5,3 +5,18 @@
 .Profile .lander h1 {
   font-family: "Open Sans", sans-serif;
 }
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+  float: center;
+}
+
+span {
+	text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Badge from "./Badge";
+import { BadgeList } from "./BadgeList";
 import { Auth } from "aws-amplify";
 import "./Profile.css";
 
@@ -9,8 +11,15 @@ export default class Profile extends Component {
     this.state = {
       email: "",
       username: "",
-      wallet: "0x5bF50c00da77b1f3864Cae3C927d029750c040a8"
+      wallet: "0x5bF50c00da77b1f3864Cae3C927d029750c040a8",
+      badgeList: []
     };
+  }
+
+  componentWillMount = () => {
+    this.setState({
+      badgeList: BadgeList
+    });
   }
 
   async componentDidMount() {
@@ -44,6 +53,17 @@ export default class Profile extends Component {
               <a href={"https://etherscan.io/address/"+this.state.wallet}>
                 {this.state.wallet}
               </a>
+          </div>
+          <hr/>
+          <p>badges</p>
+          <div align="center">
+            <div className="row">
+              {
+                this.state.badgeList.map(badge => {
+                  return <Badge key={"Badge_"+badge.name} badge={badge} />;
+                })
+              }
+            </div>
           </div>
         </div>
       </div>

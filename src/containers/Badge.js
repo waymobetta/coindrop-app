@@ -14,7 +14,8 @@ export default class Badge extends Component {
 				</div>
 				<h2>{badge.name}</h2>
 				<div className="Badge-information">
-					<p>{badge.description}</p>
+					<p>{badge.description}<br/><br/>
+					<i>number of recipients: </i>{badge.recipientCount}</p>
 				</div>
 			</div>
 		);

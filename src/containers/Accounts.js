@@ -50,7 +50,6 @@ export default class Accounts extends Component {
 
       this.props.history.push("/accounts/stackoverflow")
     }
-    console.log(event.message);
   }
 
   render() {
@@ -99,19 +98,19 @@ export default class Accounts extends Component {
               {this.state.stackOverflowVerified
                 ? <span role="img" description="aria-label"><span id="AccountSpan">Stack Overflow</span> <Glyphicon glyph="ok"/></span>
                 : <span role="img" description="aria-label"><span id="AccountSpan">Stack Overflow</span> <Glyphicon glyph="remove"/></span>}
-            </Button>
-            <Collapse in={this.state.isStackOverflowDropOpen}>
-              <div align="center">
-                <nav className="navbar navbar-light bg-light">
-                  <form className="form-inline">
-                    <input
-                      className="form-control mr-sm-2"
-                      type="text"
-                      id="stackOverflowUserID"
-                      placeholder="01234567890"
-                      aria-label="verify"
-                      onChange={this.handleChange}
-                      />
+                </Button>
+                <Collapse in={this.state.isStackOverflowDropOpen}>
+                    <div align="center">
+                      <nav className="navbar navbar-light bg-light">
+                        <form className="form-inline">
+                          <input
+                            className="form-control mr-sm-2"
+                            type="text"
+                            id="stackOverflowUserID"
+                            placeholder="01234567890"
+                            aria-label="verify"
+                            onChange={this.handleChange}
+                          />
                     <Button
                       color="success"
                       className="SuccessButton"
