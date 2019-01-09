@@ -5,28 +5,81 @@ import {
 } from "react-bootstrap";
 import { Button } from "reactstrap";
 import "./Accounts.css";
+import { Auth } from "aws-amplify";
+import Reddit from "../util/Reddit";
+import StackOverflow from "../util/StackOverflow";
 
 export default class Accounts extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      userID: "",
       redditUsername: "",
       stackOverflowUserID: "",
       isVerifyingReddit: false,
       isVerifyingStackOverflow: false,
-      redditVerified: true,
+      redditVerified: false,
       stackOverflowVerified: false,
       isRedditDropOpen: false,
       isStackOverflowDropOpen: false
     };
   }
 
+  async componentWillMount() {
+    try {
+      const currentSession = await Auth.currentSession();
+
+      this.setState({
+        userID: currentSession.accessToken.payload.username
+      });
+
+      const redditUserInfo = await Reddit.getUser(currentSession.accessToken.payload.username);
+
+      const stackUserInfo = await StackOverflow.getUser(currentSession.accessToken.payload.username);
+
+      if (redditUserInfo.info.id > 0) {
+        this.setState({
+          redditUsername: redditUserInfo.info.reddit_data.username
+        });
+        if (redditUserInfo.info.reddit_data.verification_data.is_verified) {
+          this.setState({
+            redditVerified: true
+          });
+        }
+      }
+
+      if (stackUserInfo.info.id > 0) {
+        if (stackUserInfo.info.stackoverflow_data.verification_data.is_verified) {
+          this.setState({
+            stackOverflowVerified: true
+          });
+        }
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      console.log("did mount"); 
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
   validateRedditForm() {
+    if (this.state.redditVerified) {
+      return false;
+    }
     return this.state.redditUsername.length > 0;
   }
 
   validateStackOverflowForm() {
+    if (this.state.stackOverflowVerified) {
+      return false;
+    }
     return this.state.stackOverflowUserID.length > 0;
   }
 
@@ -36,17 +89,21 @@ export default class Accounts extends Component {
     });
   };
 
-  handleSubmit = (event, account) => {
+  handleSubmit = async (event, account) => {
     if (account === "reddit") {
       this.setState({
         isVerifyingReddit: true
       });
+
+      Reddit.generateVerificationCode(this.state.userID, this.state.redditUsername);
 
       this.props.history.push("/accounts/reddit")
     } else if (account === "stackOverflow") {
       this.setState({
         isVerifyingStackOverflow: true
       });
+
+      StackOverflow.generateVerificationCode(this.state.userID, Number(this.state.stackOverflowUserID));
 
       this.props.history.push("/accounts/stackoverflow")
     }

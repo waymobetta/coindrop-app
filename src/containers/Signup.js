@@ -9,6 +9,9 @@ import {
 import LoaderButton from "../components/LoaderButton";
 import "./Signup.css";
 import { Auth } from "aws-amplify";
+import CoindropAuth from "../util/CoindropAuth";
+import Reddit from "../util/Reddit";
+import StackOverflow from "../util/StackOverflow";
 
 export default class Signup extends Component {
   constructor(props) {
@@ -71,6 +74,36 @@ export default class Signup extends Component {
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
 
+      const currentUser = await Auth.currentAuthenticatedUser();
+
+      // TODO:
+      // refactor this block
+
+      ///////////////////////////////////
+
+      try {
+        await CoindropAuth.signUp(currentUser.username);
+        console.log("added auth user");
+      } catch (e) {
+        alert(e.message);
+      }
+
+      try {
+        await Reddit.addUser(currentUser.username);
+        console.log("added reddit user");
+      } catch (e) {
+        alert(e.message);
+      }
+
+      try {
+        await StackOverflow.addUser(currentUser.username);
+        console.log("added stack user");
+      } catch (e) {
+        alert(e.message);
+      }
+
+      ///////////////////////////////////
+
       this.props.userHasAuthenticated(true);
       this.props.history.push("/profile");
     } catch (e) {
@@ -94,6 +127,9 @@ export default class Signup extends Component {
         </FormGroup>
         <LoaderButton
           block
+          className="button--cd btn btn-outline-primary"
+          outline
+          color="primary"
           bsSize="large"
           disabled={!this.validateConfirmationForm()}
           type="submit"
