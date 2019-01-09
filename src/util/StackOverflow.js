@@ -64,7 +64,6 @@ const StackOverflow = {
 		}).then(res => {
 			return res.json();
 		}).then( jsonResponse => {
-			console.log(jsonResponse);
 			return jsonResponse;
 		});
 	},
@@ -83,7 +82,6 @@ const StackOverflow = {
 		}).then(res => {
 			return res.json();
 		}).then( jsonResponse => {
-			console.log(jsonResponse);
 			return jsonResponse;
 		});
 	}

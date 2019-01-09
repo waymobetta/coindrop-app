@@ -22,7 +22,6 @@ export default class Settings extends Component {
 						block
 						outline
 						color="primary"
-						bsSize="large"
 						text="update email"
 					/>
 				</LinkContainer>
@@ -32,7 +31,6 @@ export default class Settings extends Component {
 						block
 						outline
 						color="primary"
-						bsSize="large"
 						text="update password"
 					/>
 				</LinkContainer>

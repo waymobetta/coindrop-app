@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./StackOverflow.css";
 import { Auth } from "aws-amplify";
 import { Button } from "reactstrap";
 import StackOverflowModule from "../util/StackOverflow";
+import "./StackOverflow.css";
 
 export default class StackOverflow extends Component {
 	constructor(props) {
@@ -27,7 +27,7 @@ export default class StackOverflow extends Component {
 	  	if (stackUserInfo.info.id > 0) {
 				if (stackUserInfo.info.stackoverflow_data.verification_data.is_verified) {
 				  this.setState({
-				    stackOverflowVerified: true
+				    isVerified: true
 				  });
 				}
 			}
@@ -56,6 +56,10 @@ export default class StackOverflow extends Component {
         <div className="lander">
           <h1>Stack Overflow</h1>
           <Button
+						className="button--cd btn btn-outline-primary"
+          	outline
+          	color="primary"
+          	block
           	onClick={event => {
           		this.handleClick(event)}}
           	disabled={!this.validateClick()}>
