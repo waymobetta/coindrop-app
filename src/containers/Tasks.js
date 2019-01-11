@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { Collapse, Well } from "react-bootstrap";
-import { TaskList } from "./TaskList";
+import { Auth } from "aws-amplify";
+import TasksModule from "../util/Tasks";
 import "./Tasks.css";
 
 export default class Tasks extends Component { 
@@ -9,15 +10,29 @@ export default class Tasks extends Component {
     super(props);
 
     this.state = {
+      userID: "",
       isEnlisting: false,
-      taskList: []
+      tasks: [],
     }
-  } 
+  }
 
-  componentWillMount = () => {
-    this.setState({
-      taskList: TaskList
-    }); 
+  componentWillMount = async () => {
+    try {
+      const currentSession = await Auth.currentSession();
+
+      this.setState({
+        userID: currentSession.accessToken.payload.username
+      });
+
+      const tasks = await TasksModule.getTasks();
+
+      this.setState({
+        tasks: tasks.message.tasks
+      });
+
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   handleClick(event, taskName) {
@@ -34,8 +49,6 @@ export default class Tasks extends Component {
 
       this.props.history.push("/tasks/colonycontributor");
     }
-
-    console.log(event.message);
   }
  
   render() {
@@ -110,6 +123,10 @@ export default class Tasks extends Component {
               </div>
             </Collapse>
           </ol>
+          <br/>
+          <div>
+            {console.log(this.state.tasks[0])}
+          </div>
         </div>
       </div>
     );

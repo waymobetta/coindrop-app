@@ -79,12 +79,12 @@ export default class Reddit extends Component {
           	onClick={event => {
           		this.handleClick(event)}}
           	disabled={this.validateClick()}>
-          	Verify!
+          	verify!
           </Button>
           <div>
 	          {this.state.isVerified
-						  ? <span role="img" description="aria-label"><span id="AccountSpanSuccess">Verified </span> <Glyphicon glyph="ok"/></span>
-						  : <span role="img" description="aria-label"><span id="AccountSpanFail">Not Verified</span> <Glyphicon glyph="remove"/></span>}
+						  ? <span role="img" description="aria-label"><span id="AccountSpanSuccess">verified </span> <Glyphicon glyph="ok"/></span>
+						  : <span role="img" description="aria-label"><span id="AccountSpanFail">not verified</span> <Glyphicon glyph="remove"/></span>}
 					</div>
         </div>
       </div>
