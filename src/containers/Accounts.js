@@ -38,19 +38,22 @@ export default class Accounts extends Component {
 
       const stackUserInfo = await StackOverflow.getUser(currentSession.accessToken.payload.username);
 
-      if (redditUserInfo.info.id > 0) {
+      if (redditUserInfo.message.info.id > 0) {
         this.setState({
-          redditUsername: redditUserInfo.info.reddit_data.username
+          redditUsername: redditUserInfo.message.info.reddit_data.username
         });
-        if (redditUserInfo.info.reddit_data.verification_data.is_verified) {
+        if (redditUserInfo.message.info.reddit_data.verification_data.is_verified) {
           this.setState({
             redditVerified: true
           });
         }
       }
 
-      if (stackUserInfo.info.id > 0) {
-        if (stackUserInfo.info.stackoverflow_data.verification_data.is_verified) {
+      if (stackUserInfo.message.info.id > 0) {
+        this.setState({
+          stackOverflowUserID: stackUserInfo.message.info.id
+        });
+        if (stackUserInfo.message.info.stackoverflow_data.verification_data.is_verified) {
           this.setState({
             stackOverflowVerified: true
           });
@@ -135,8 +138,9 @@ export default class Accounts extends Component {
                       onChange={this.handleChange}
                       />
                     <Button
-                      color="success"
-                      className="SuccessButton"
+                      className="button--cd btn btn-outline-primary"
+                      outline
+                      color="primary"
                       type="submit"
                       onClick={event => {
                         this.handleSubmit(event, "reddit")}}
@@ -149,7 +153,7 @@ export default class Accounts extends Component {
             </Collapse>
           </div>
           <div>
-            <Button 
+            <Button
               className="TaskButton"
               onClick={() => this.setState({ isStackOverflowDropOpen: !this.state.isStackOverflowDropOpen })}>
               {this.state.stackOverflowVerified
@@ -162,15 +166,16 @@ export default class Accounts extends Component {
                         <form className="form-inline">
                           <input
                             className="form-control mr-sm-2"
-                            type="text"
+                            type="tel"
                             id="stackOverflowUserID"
                             placeholder="01234567890"
                             aria-label="verify"
                             onChange={this.handleChange}
                           />
                     <Button
-                      color="success"
-                      className="SuccessButton"
+                      className="button--cd btn btn-outline-primary"
+                      outline
+                      color="primary"
                       type="submit"
                       onClick={event => {
                         this.handleSubmit(event, "stackOverflow")}}

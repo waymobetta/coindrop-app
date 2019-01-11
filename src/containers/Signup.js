@@ -82,21 +82,21 @@ export default class Signup extends Component {
       ///////////////////////////////////
 
       try {
-        await CoindropAuth.signUp(currentUser.username);
+        CoindropAuth.signUp(currentUser.username);
         console.log("added auth user");
       } catch (e) {
         alert(e.message);
       }
 
       try {
-        await Reddit.addUser(currentUser.username);
+        Reddit.addUser(currentUser.username);
         console.log("added reddit user");
       } catch (e) {
         alert(e.message);
       }
 
       try {
-        await StackOverflow.addUser(currentUser.username);
+        StackOverflow.addUser(currentUser.username);
         console.log("added stack user");
       } catch (e) {
         alert(e.message);
@@ -115,7 +115,7 @@ export default class Signup extends Component {
   renderConfirmationForm() {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" bsSize="large">
+        <FormGroup controlId="confirmationCode">
           <ControlLabel>confirmation code</ControlLabel>
           <FormControl
             autoFocus
@@ -130,7 +130,6 @@ export default class Signup extends Component {
           className="button--cd btn btn-outline-primary"
           outline
           color="primary"
-          bsSize="large"
           disabled={!this.validateConfirmationForm()}
           type="submit"
           isLoading={this.state.isLoading}
@@ -144,7 +143,7 @@ export default class Signup extends Component {
   renderForm() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
+        <FormGroup controlId="email">
           <ControlLabel>email</ControlLabel>
           <FormControl
             autoFocus
@@ -153,7 +152,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
+        <FormGroup controlId="password">
           <ControlLabel>password</ControlLabel>
           <FormControl
             value={this.state.password}
@@ -161,7 +160,7 @@ export default class Signup extends Component {
             type="password"
           />
         </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
+        <FormGroup controlId="confirmPassword">
           <ControlLabel>confirm password</ControlLabel>
           <FormControl
             value={this.state.confirmPassword}
@@ -175,7 +174,6 @@ export default class Signup extends Component {
           className="button--cd btn btn-outline-primary"
           outline
           color="primary"
-          bsSize="large"
           disabled={!this.validateForm()}
           type="submit"
           isLoading={this.state.isLoading}

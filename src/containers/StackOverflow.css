@@ -12,6 +12,14 @@
 	color: #999;
 }
 
+#AccountSpanSuccess {
+  color: green;
+}
+
+#AccountSpanFail {
+  color: red;
+}
+
 :root {
   --purple: #3C00FF;
   --purple--light: #6b3eff;

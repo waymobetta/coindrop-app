@@ -75,11 +75,11 @@ export default class Badge extends Component {
 		return (
 			<div className="Task">
 				<ol>
-				<div className="Task-information">
-					<li>
-						{this.renderTasks(task)}
-	        </li>
-	       </div>
+					<div className="Task-information">
+						<li>
+							{this.renderTasks(task)}
+	        	</li>
+	       	</div>
 				</ol>
 			</div>
 		);

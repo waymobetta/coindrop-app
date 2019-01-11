@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { Button } from "reactstrap";
+import {
+  Glyphicon
+} from "react-bootstrap";
 import StackOverflowModule from "../util/StackOverflow";
 import "./StackOverflow.css";
 
@@ -10,6 +13,7 @@ export default class StackOverflow extends Component {
 
 		this.state = {
 			userID: "",
+			verificationCode: "",
 			isVerified: false
 		}
 	}
@@ -24,12 +28,15 @@ export default class StackOverflow extends Component {
 	  	
 	  	const stackUserInfo = await StackOverflowModule.getUser(this.state.userID);
 
-	  	if (stackUserInfo.info.id > 0) {
-				if (stackUserInfo.info.stackoverflow_data.verification_data.is_verified) {
+	  	if (stackUserInfo.message.info.id > 0) {
+				if (stackUserInfo.message.info.stackoverflow_data.verification_data.is_verified) {
 				  this.setState({
 				    isVerified: true
 				  });
 				}
+				this.setState({
+					verificationCode: stackUserInfo.message.info.stackoverflow_data.verification_data.stored_verification_code
+				});
 			}
 		} catch (e) {
 			alert(e.message);
@@ -38,11 +45,12 @@ export default class StackOverflow extends Component {
 
 	validateClick() {
     if (this.state.isVerified) {
-      return false;
+      return true;
     }
-  }
+    return false;
+	}
 
-	handleClick = async event => {
+	handleClick = event => {
 		try {
 			StackOverflowModule.validateVerificationCode(this.state.userID);
 		} catch (e) {
@@ -54,17 +62,30 @@ export default class StackOverflow extends Component {
     return (
       <div className="StackOverflow">
         <div className="lander">
-          <h1>Stack Overflow</h1>
+          <h1>stack overflow</h1>
+          <p>verification code</p>
+          <div>
+          	<strong>code: </strong>{this.state.verificationCode}
+          </div>
+          <div>
+          	<br/>
+          	<i>already posted this code? click verify below to check </i>
+          </div>
           <Button
-						className="button--cd btn btn-outline-primary"
+          	className="button--cd btn btn-outline-primary"
           	outline
           	color="primary"
           	block
           	onClick={event => {
           		this.handleClick(event)}}
-          	disabled={!this.validateClick()}>
-          	Validate!
+          	disabled={this.validateClick()}>
+          	Verify!
           </Button>
+          <div>
+	          {this.state.isVerified
+						  ? <span role="img" description="aria-label"><span id="AccountSpanSuccess">Verified </span> <Glyphicon glyph="ok"/></span>
+						  : <span role="img" description="aria-label"><span id="AccountSpanFail">Not Verified</span> <Glyphicon glyph="remove"/></span>}
+					</div>
         </div>
       </div>
     );

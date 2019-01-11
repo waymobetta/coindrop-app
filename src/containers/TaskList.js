@@ -17,6 +17,22 @@ export const TaskList = [
     allocation: 10000,
     tokenName: "adToken",
     badge: "adchain acknowledged"
+  },
+  {
+    name: "adchain acknowledged",
+    type: "action",
+    description: `adChain needs your help! The adChain team would like you to help them better regulate its TCR, the adChain Registry. <br/>Based on your talents, you seem like an ideal candidate for the task! Click <a href="/tasks/adchainaction">here</a> to read a more detailed briefing!`,
+    allocation: 10000,
+    tokenName: "adToken",
+    badge: "adchain acknowledged" 
+  },
+  {
+    name: "adchain acknowledged",
+    type: "action",
+    description: `adChain needs your help! The adChain team would like you to help them better regulate its TCR, the adChain Registry. <br/>Based on your talents, you seem like an ideal candidate for the task! Click <a href="/tasks/adchainaction">here</a> to read a more detailed briefing!`,
+    allocation: 10000,
+    tokenName: "adToken",
+    badge: "adchain acknowledged"
   }
 ];
 

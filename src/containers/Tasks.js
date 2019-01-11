@@ -14,7 +14,7 @@ export default class Tasks extends Component {
     }
   } 
 
-  componentWillMount = () => {    
+  componentWillMount = () => {
     this.setState({
       taskList: TaskList
     }); 
@@ -61,9 +61,11 @@ export default class Tasks extends Component {
                   Token allocation: <i>2500 Colony Network Token</i><br/>
                   Badge: <a href="/badges">colony contributor</a>
                   <div align="right">
-                    <Button 
-                      className="Enlist"
-                      color="success"
+                    <Button
+                      className="button--cd btn btn-outline-primary"
+                      outline
+                      color="primary"
+                      block
                       align="right"
                       type="submit"
                       onClick={event => {
@@ -93,8 +95,10 @@ export default class Tasks extends Component {
                     Badge: <a href="/badges">adChain acknowledged</a>
                   <div align="right">
                     <Button
-                      color="success"
-                      className="Enlist"
+                      className="button--cd btn btn-outline-primary"
+                      outline
+                      color="primary"
+                      block
                       align="right"
                       type="submit"
                       onClick={event => {

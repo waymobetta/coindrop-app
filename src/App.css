@@ -18,3 +18,9 @@
 .TaskBadge {
 	background-color: #9836B8;
 }
+
+#dropdown-no-carat {
+	padding: 0;
+	border: none;
+	background: none;
+}

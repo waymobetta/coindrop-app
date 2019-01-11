@@ -69,7 +69,6 @@ export default class Login extends Component {
             className="button--cd btn btn-outline-primary"
             outline
             color="primary"
-            bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}

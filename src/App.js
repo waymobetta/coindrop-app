@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
 import "./App.css";
 import { Auth } from "aws-amplify";
+import { TaskList } from "./containers/TaskList";
 
 class App extends Component {
   constructor(props) {
@@ -14,8 +15,14 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       isAuthenticating: true,
-      pendingTasks: 2
+      pendingTasks: 0
     };
+  }
+
+  componentWillMount() {
+    this.setState({
+      pendingTasks: TaskList.length
+    });
   }
 
   async componentDidMount() {
@@ -25,7 +32,7 @@ class App extends Component {
     }
     catch(e) {
       if (e !== 'No current user') {
-        alert(e);
+        console.log("not logged in");
       }
     }
 

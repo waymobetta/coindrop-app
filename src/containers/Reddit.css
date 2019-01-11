@@ -5,11 +5,18 @@
 
 .Reddit .lander h1 {
   font-family: "Open Sans", sans-serif;
-  /*font-weight: 600;*/
 }
 
 .Reddit .lander p {
 	color: #999;
+}
+
+#AccountSpanSuccess {
+  color: green;
+}
+
+#AccountSpanFail {
+  color: red;
 }
 
 :root {
@@ -21,6 +28,7 @@
   -webkit-transform: translateZ(50px); 
   transform: translateZ(50px);
 }
+
 .button--cd {
   height: 40px;
   border-radius: 5px;
