@@ -31,18 +31,6 @@ const Tasks = {
 	},
 	// for company usage only
 	addTask(auth_user_id, taskObj) {
-		// sample task object	
-		const sampleObj = {
-			"title": "test title",
-			"type": "action",
-			"author": "test company",
-			"description": "test test test",
-			"token": "test token",
-			"token_allocation": 1000,
-			"badge_data": {
-				"name": "test badge"
-			}
-		}
 		const payload = taskObj
 		return fetch(`http://localhost:5000/api/v1/addtask`, {
 			method: "POST",

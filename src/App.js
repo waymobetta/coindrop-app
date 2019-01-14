@@ -6,7 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
 import "./App.css";
 import { Auth } from "aws-amplify";
-import { TaskList } from "./containers/TaskList";
+import TasksModule from "./util/Tasks";
 
 class App extends Component {
   constructor(props) {
@@ -19,10 +19,23 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-    this.setState({
-      pendingTasks: TaskList.length
-    });
+  componentWillMount = async () => {
+    try {
+      const currentSession = await Auth.currentSession();
+
+      this.setState({
+        userID: currentSession.accessToken.payload.username
+      });
+
+      const tasks = await TasksModule.getTasks();
+
+      this.setState({
+        pendingTasks: tasks.message.tasks.length
+      });
+
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   async componentDidMount() {

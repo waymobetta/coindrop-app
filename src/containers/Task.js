@@ -1,70 +1,24 @@
 import React, { Component } from 'react';
-import { Button, Collapse, Well } from "react-bootstrap";
-import { TaskList, generateTaskListVars } from "./TaskList";
+import { UncontrolledCollapse } from "reactstrap";
+import { Button, Well } from "react-bootstrap";
 import './Task.css';
 
-export default class Badge extends Component {
+export default class Task extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {}
-	}
-
-	componentWillRender = () => {
-		console.log("task render");
-
-		let newStateObj = {}
-
-    const taskListVars = generateTaskListVars(TaskList);
-
-    for (let i = 0; i < taskListVars.length; i++) {
-      newStateObj[taskListVars[i]] = false;
-    }
-
-		this.setState({
-			taskList: TaskList
-		});
-	}
-
-	handleClick = taskVar => {
-		switch (taskVar) {
-			case (taskVar === "isTaskOneOpen"):
-				return this.setState({
-					isTaskOneOpen: !this.state.isTaskOneOpen
-				});
-			case (taskVar === "isTaskTwoOpen"):
-				return this.setState({
-					isTaskTwoOpen: !this.state.isTaskTwoOpen
-				});
-			default:
-				return
+		this.state = {
+			isOpen: false
 		}
 	}
 
-	renderTasks(task) {
-		const taskListVars = generateTaskListVars(TaskList);
-
-		for (let i = 0; i < taskListVars.length; i++) {
-
-			return (
-				<div>
-					<Button
-						className="TaskButton"
-						onClick={this.handleClick(taskListVars[i])}>
-						<div id="task">
-							{task.name}
-						</div>
-					</Button>
-		      <Collapse in={this.state.isTaskOneOpen}>
-	          <Well>
-	          	{task.description}<br/><br/>
-	              <strong>Rewards:</strong><br/>
-	              Token allocation: <i>{task.allocation}</i><br/>
-	              Badge: <a href="/badges">{task.badge}</a>
-	          </Well>
-		      </Collapse>
-	      </div>
-			);
+	handleClick = e => {
+		try {
+			this.setState({
+				isOpen: !this.state.isOpen
+			});
+		} catch (e) {
+			alert(e.message);
 		}
 	}
 
@@ -74,14 +28,23 @@ export default class Badge extends Component {
 
 		return (
 			<div className="Task">
-				<ol>
-					<div className="Task-information">
-						<li>
-							{this.renderTasks(task)}
-	        			</li>
-	       			</div>
-				</ol>
-			</div>
+        <Button
+        	id={"toggler"+task.id}
+          className="TaskButton"
+          onClick={event => {this.handleClick(event)}}>
+          <div id="task">
+            {task.title} - <i><span style={{color:"black"}}>{task.type}</span></i>
+          </div>
+        </Button>
+        <UncontrolledCollapse toggler={"toggler"+task.id}>
+          <Well>
+            {task.description}<br/><br/>
+            <strong>Rewards:</strong><br/>
+            Token allocation: <i>{task.token_allocation}</i><br/>
+            Badge: <a href="/badges">{task.badge_data.name}</a>
+          </Well>
+        </UncontrolledCollapse>
+      </div>
 		);
 	}
 }
