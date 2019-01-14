@@ -1,9 +1,10 @@
-@media all and (min-width: 480px) {
+@media all and (min-width: 500px) {
   .Settings {
 		font-family: "Open Sans", sans-serif;
     margin: 0 auto;
     align-content: center;
-    max-width: 150px;
+    min-width: 200px;
+    max-width: 200px;
   }
 }
 
@@ -13,6 +14,7 @@
 
 .Settings .LoaderButton:last-child {
   margin-top: 5px;
+  min-width: 200px;
 }
 
 .Settings p {
@@ -38,7 +40,7 @@
   background-color: #fff;
   position: relative;
   z-index: 100;
-  min-width: 150px;
+  min-width: 500px;
 }
 
 .button--cd:hover {

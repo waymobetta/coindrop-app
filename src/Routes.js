@@ -14,7 +14,7 @@ import Profile from "./containers/Profile";
 import Accounts from "./containers/Accounts";
 import Reddit from "./containers/Reddit";
 import StackOverflow from "./containers/StackOverflow";
-import Settings from "./containers/Settings";
+import Settings from "./components/Settings";
 import ResetPassword from "./containers/ResetPassword";
 import ChangePassword from "./containers/ChangePassword";
 import ChangeEmail from "./containers/ChangeEmail";

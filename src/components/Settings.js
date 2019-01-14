@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import LoaderButton from "../components/LoaderButton";
+import LoaderButton from "./LoaderButton";
 import "./Settings.css";
 
 export default class Settings extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-		};
-	}
-
 	render() {
 		return (
 			<div className="Settings">
@@ -32,6 +25,15 @@ export default class Settings extends Component {
 						outline
 						color="primary"
 						text="update password"
+					/>
+				</LinkContainer>
+				<LinkContainer to="/settings/walletaddress">
+					<LoaderButton
+						className="button--cd btn btn-outline-primary"
+						block
+						outline
+						color="primary"
+						text="update wallet address"
 					/>
 				</LinkContainer>
 				</p>
