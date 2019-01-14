@@ -30,7 +30,7 @@ const Tasks = {
 		});
 	},
 	// for company usage only
-	addTask(auth_user_id, taskObj) {
+	async addTask(taskObj) {
 		const payload = taskObj
 		return fetch(`http://localhost:5000/api/v1/addtask`, {
 			method: "POST",
