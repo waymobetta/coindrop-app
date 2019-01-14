@@ -103,7 +103,6 @@ export default class ChangePassword extends Component {
           				outline
           				color="primary"
 						type="submit"
-						bsSize="large"
 						text="update password"
 						loadingText="updating.."
 						disabled={!this.validateForm()}

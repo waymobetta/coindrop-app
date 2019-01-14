@@ -107,7 +107,6 @@ export default class ChangeEmail extends Component {
           			outline
           			color="primary"
 					type="submit"
-					bsSize="large"
 					text="update email"
 					loadingText="updating.."
 					disabled={!this.validateEmailForm()}
@@ -140,7 +139,6 @@ export default class ChangeEmail extends Component {
           			outline
           			color="primary"
 					type="submit"
-					bsSize="large"
 					text="confirm"
 					loadingText="confirming.."
 					disabled={!this.validateConfirmForm()}
