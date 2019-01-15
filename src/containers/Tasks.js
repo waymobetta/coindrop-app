@@ -45,7 +45,7 @@ export default class Tasks extends Component {
             <ol>
               {
                 this.state.tasks.map(task => {
-                  return <li><Task key={"Task_"+task.id} task={task} /></li>
+                  return <li><Task key={"Task_" + task.id} task={task} /></li>
                 })
               }
             </ol>

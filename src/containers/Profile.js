@@ -29,6 +29,10 @@ export default class Profile extends Component {
 
       const walletResponse = await CoindropAuth.getUserWallet(currentUserInfo.username);
 
+      if (walletResponse.status === false) {
+        walletResponse.message = "0x0"
+      }
+
       // const currentUser = await Auth.currentAuthenticatedUser();
 
       // console.log(currentUser.signInUserSession.idToken.jwtToken);
