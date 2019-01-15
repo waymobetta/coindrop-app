@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { Button } from "reactstrap";
 import {
-  Glyphicon
+	Well,
+	Glyphicon
 } from "react-bootstrap";
 import StackOverflowModule from "../util/StackOverflow";
 import "./StackOverflow.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default class StackOverflow extends Component {
 	constructor(props) {
@@ -13,7 +15,9 @@ export default class StackOverflow extends Component {
 
 		this.state = {
 			userID: "",
+			stackOverflowUserID: "",
 			verificationCode: "",
+			codeCopied: false,
 			isVerified: false
 		}
 	}
@@ -35,6 +39,7 @@ export default class StackOverflow extends Component {
 				  });
 				}
 				this.setState({
+					stackOverlowUserID: stackUserInfo.message.info.stackoverflow_data.user_id,
 					verificationCode: stackUserInfo.message.info.stackoverflow_data.verification_data.stored_verification_code
 				});
 			}
@@ -65,13 +70,44 @@ export default class StackOverflow extends Component {
 	}
 
   render() {
+
+  	const profileURL = "https://stackoverflow.com/users/edit/" + this.state.stackOverlowUserID
+
     return (
-      <div className="StackOverflow">
+      <div 
+      	align="center"
+      	className="StackOverflow">
         <div className="lander">
           <h1>stack overflow</h1>
           <p>verification code</p>
-          <div>
+          <div
+          	className="CodeDiv">
           	<strong>code: </strong>{this.state.verificationCode}
+          		<div
+          			className="Divider">
+          		</div>
+          	<CopyToClipboard
+          		text={this.state.verificationCode}
+          		onCopy={() => this.setState({codeCopied: true})}>
+          		<span 
+          			role="img"
+          			description="aria-label">
+          			<Glyphicon glyph="pushpin"/>
+          		</span>
+        	</CopyToClipboard>
+	        	{this.state.codeCopied
+	        		? <span style={{color: '#9836B8'}}>copied</span>
+	        		: null}
+          </div>
+          <br />
+          <div
+          	align="center"
+          	className="WellDiv">
+          	<Well
+          		bsSize="small">
+	          	<h2>please paste this code in the "about me" section of your Stack Overflow <a href={profileURL} target="_blank" rel="noopener noreferrer">profile</a>
+	          	</h2>
+          	</Well>
           </div>
           <div>
           	<br/>

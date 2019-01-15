@@ -1,11 +1,9 @@
 .StackOverflow .lander {
   padding: 0px 0;
-  text-align: center;
 }
 
 .StackOverflow .lander h1 {
   font-family: "Open Sans", sans-serif;
-  /*font-weight: 600;*/
 }
 
 .StackOverflow .lander p {
@@ -18,6 +16,25 @@
 
 #AccountSpanFail {
   color: red;
+}
+
+.CodeDiv {
+  text-align: center;
+}
+
+.Divider {
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
+.WellDiv {
+  max-width: 450px;
+}
+
+h2 {
+  color: black;
+  font-size: 11pt;
 }
 
 :root {

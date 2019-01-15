@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import RedditModule from "../util/Reddit";
 import "./Reddit.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default class Reddit extends Component {
 	constructor(props) {
@@ -15,6 +16,7 @@ export default class Reddit extends Component {
 		this.state = {
 			userID: "",
 			verificationCode: "",
+			codeCopied: false,
 			isVerified: false
 		}
 	}
@@ -73,8 +75,24 @@ export default class Reddit extends Component {
         <div className="lander">
           <h1>reddit</h1>
           <p>verification code</p>
-          <div>
+          <div
+          	className="CodeDiv">
           	<strong>code: </strong>{this.state.verificationCode}
+          		<div
+          			className="Divider">
+          		</div>
+          	<CopyToClipboard
+          		text={this.state.verificationCode}
+          		onCopy={() => this.setState({codeCopied: true})}>
+          		<span 
+          			role="img"
+          			description="aria-label">
+          			<Glyphicon glyph="pushpin"/>
+          		</span>
+        	</CopyToClipboard>
+	        	{this.state.codeCopied
+	        		? <span style={{color: '#9836B8'}}>copied</span>
+	        		: null}
           </div>
           <br />
           <div
@@ -82,7 +100,7 @@ export default class Reddit extends Component {
           	className="WellDiv">
           	<Well
           		bsSize="small">
-	          	<h2>please paste this code in the <u>title</u> section of a new post <a href="https://www.reddit.com/r/testing_QA_adChain/submit">here</a> at the coindrop subreddit
+	          	<h2>please paste this code in the <u>title</u> section of a new post <a href="https://www.reddit.com/r/testing_QA_adChain/submit" target="_blank" rel="noopener noreferrer">here</a> at the coindrop subreddit
 	          	</h2>
           	</Well>
           </div>

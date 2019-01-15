@@ -18,6 +18,16 @@
   color: red;
 }
 
+.CodeDiv {
+  text-align: center;
+}
+
+.Divider {
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
 .WellDiv {
   max-width: 450px;
 }
