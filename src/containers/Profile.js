@@ -4,6 +4,7 @@ import { BadgeList } from "./BadgeList";
 import { Auth } from "aws-amplify";
 import CoindropAuth from "../util/CoindropAuth";
 import "./Profile.css";
+import Emoji from "../util/Emoji";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Profile extends Component {
       email: "",
       username: "",
       wallet: "",
+      profilePhotoURL: "",
       badgeList: []
     };
   }
@@ -33,6 +35,8 @@ export default class Profile extends Component {
         walletResponse.message = "0x0"
       }
 
+      const emojiURL = Emoji.fetchRandomEmoji();
+
       // const currentUser = await Auth.currentAuthenticatedUser();
 
       // console.log(currentUser.signInUserSession.idToken.jwtToken);
@@ -40,7 +44,8 @@ export default class Profile extends Component {
       this.setState({
         email: currentUserInfo.attributes.email,
         username: currentUserInfo.username,
-        wallet: walletResponse.message
+        wallet: walletResponse.message,
+        profilePhotoURL: emojiURL
       });
     }
     catch(e) {
@@ -54,7 +59,7 @@ export default class Profile extends Component {
         <div className="lander">
           <div align="center">
             <h1>profile</h1>
-            <img alt="profile_photo" src="https://user-images.githubusercontent.com/17755587/50730991-bd05d080-110e-11e9-836f-f9e9d7798a11.png" height="200" width="200"/> 
+            <img alt="" src={this.state.profilePhotoURL} height="60" width="75"/> 
             <p style={{ color: "#999" }}><i>{this.state.email}</i></p>
             <p>&nbsp;</p>
             <strong>ethereum: </strong>
