@@ -1,6 +1,5 @@
 .Reddit .lander {
   padding: 0px 0;
-  text-align: center;
 }
 
 .Reddit .lander h1 {
@@ -17,6 +16,15 @@
 
 #AccountSpanFail {
   color: red;
+}
+
+.WellDiv {
+  max-width: 450px;
+}
+
+h2 {
+  color: black;
+  font-size: 11pt;
 }
 
 :root {

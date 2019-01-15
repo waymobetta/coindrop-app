@@ -16,13 +16,13 @@ export default class TaskBuilder extends Component {
     this.state = {
       userID: "",
       isTaskSubmitted: false,
-      taskTitle: "wmb task 1",
-      taskAuthor: "waymobetta",
-      taskType: "select type",
-      taskDescription: "test description",
-      taskTokenName: "YEW",
-      taskTokenAllocation: 2500,
-      taskBadge: "wmb"
+      taskTitle: "",
+      taskAuthor: "",
+      taskType: "",
+      taskDescription: "",
+      taskTokenName: "",
+      taskTokenAllocation: "",
+      taskBadge: ""
     }
   }
 
@@ -44,6 +44,7 @@ export default class TaskBuilder extends Component {
       this.state.taskTitle.length > 0 &&
       this.state.taskAuthor.length > 0 &&
       this.state.taskTokenName.length > 0 &&
+      this.state.taskTokenAllocation.length > 0 &&
       this.state.taskType !== "select type" &&
       this.state.taskBadge.length > 0
     );
@@ -66,20 +67,21 @@ export default class TaskBuilder extends Component {
       author: this.state.taskAuthor,
       description: this.state.taskDescription,
       token: this.state.taskTokenName,
-      token_allocation: this.state.taskTokenAllocation,
+      token_allocation: Number(this.state.taskTokenAllocation),
       badge_data: {
         name: this.state.taskBadge
       }
     }
 
     try {
-      await TasksModule.addTask(taskObj);
+      const addTaskResponse = await TasksModule.addTask(taskObj);
 
-      this.setState({
-        isTaskSubmitted: true
-      });
-
-      this.props.history.push("/taskbuilder/success")
+      if (addTaskResponse.message === "success") {
+        this.setState({
+          isTaskSubmitted: true
+        });
+        this.props.history.push("/taskbuilder/success")
+      }
     } catch (e) {
       alert(e.message);
       this.setState({
@@ -161,7 +163,7 @@ export default class TaskBuilder extends Component {
               <FormGroup controlId="taskTokenAllocation">
                 <ControlLabel>token allocation</ControlLabel>
                   <FormControl
-                    type="number"
+                    type="text"
                     name="tokenAllocation"
                     placeholder="2500"
                     onChange={this.handleChange}

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { Button } from "reactstrap";
 import {
-  Glyphicon
+	Well,
+	Glyphicon
 } from "react-bootstrap";
 import RedditModule from "../util/Reddit";
 import "./Reddit.css";
@@ -66,12 +67,24 @@ export default class Reddit extends Component {
 
   render() {
     return (
-      <div className="Reddit">
+      <div 
+      	align="center"
+      	className="Reddit">
         <div className="lander">
           <h1>reddit</h1>
           <p>verification code</p>
           <div>
           	<strong>code: </strong>{this.state.verificationCode}
+          </div>
+          <br />
+          <div
+          	align="center"
+          	className="WellDiv">
+          	<Well
+          		bsSize="small">
+	          	<h2>please paste this code in the <u>title</u> section of a new post <a href="https://www.reddit.com/r/testing_QA_adChain/submit">here</a> at the coindrop subreddit
+	          	</h2>
+          	</Well>
           </div>
           <div>
           	<br/>
