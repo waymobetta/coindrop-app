@@ -15,6 +15,8 @@ import Accounts from "./containers/Accounts";
 import Reddit from "./containers/Reddit";
 import StackOverflow from "./containers/StackOverflow";
 import Settings from "./components/Settings";
+import Wallets from "./containers/Wallets";
+import UpdateWalletsSuccess from "./components/UpdateWalletsSuccess";
 import ResetPassword from "./containers/ResetPassword";
 import ChangePassword from "./containers/ChangePassword";
 import ChangeEmail from "./containers/ChangeEmail";
@@ -22,6 +24,7 @@ import ChangePasswordSuccess from "./components/ChangePasswordSuccess";
 import ChangeEmailSuccess from "./components/ChangeEmailSuccess";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import Test from "./containers/Test";
 
 export default ({ childProps }) =>
   <Switch>
@@ -96,6 +99,16 @@ export default ({ childProps }) =>
         exact
         component={Settings} 
         props={childProps} />
+    <AuthenticatedRoute
+        path="/settings/wallets"
+        exact
+        component={Wallets}
+        props={childProps} />
+    <AuthenticatedRoute
+        path="/settings/wallets/success"
+        exact
+        component={UpdateWalletsSuccess}
+        props={childProps} />
     <AuthenticatedRoute 
         path="/settings/password" 
         exact 
@@ -127,6 +140,12 @@ export default ({ childProps }) =>
         path="/taskbuilder/success"
         exact
         component={TaskBuilderSuccess}
+        props={childProps} />
+
+    <AuthenticatedRoute
+        path="/test"
+        exact
+        component={Test}
         props={childProps} />
 
     { /* Finally, catch all unmatched routes */ }

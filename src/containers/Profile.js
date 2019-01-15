@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Badge from "./Badge";
 import { BadgeList } from "./BadgeList";
 import { Auth } from "aws-amplify";
+import CoindropAuth from "../util/CoindropAuth";
 import "./Profile.css";
 
 export default class Profile extends Component {
@@ -11,7 +12,7 @@ export default class Profile extends Component {
     this.state = {
       email: "",
       username: "",
-      wallet: "0x5bF50c00da77b1f3864Cae3C927d029750c040a8",
+      wallet: "",
       badgeList: []
     };
   }
@@ -26,13 +27,16 @@ export default class Profile extends Component {
     try {
       const currentUserInfo = await Auth.currentUserInfo();
 
+      const walletResponse = await CoindropAuth.getUserWallet(currentUserInfo.username);
+
       // const currentUser = await Auth.currentAuthenticatedUser();
 
       // console.log(currentUser.signInUserSession.idToken.jwtToken);
 
       this.setState({
         email: currentUserInfo.attributes.email,
-        username: currentUserInfo.username
+        username: currentUserInfo.username,
+        wallet: walletResponse.message
       });
     }
     catch(e) {

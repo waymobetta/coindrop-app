@@ -17,11 +17,10 @@ const Reddit = {
 			return jsonResponse;
 		});
 	},
-	addUser(auth_user_id) {
+	async addUser(auth_user_id) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id,
-				"wallet_address": "",
 				"reddit_data": {
 					"username": "",
 					"link_karma": 0,

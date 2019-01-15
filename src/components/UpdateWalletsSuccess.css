@@ -1,14 +1,9 @@
 @media all and (min-width: 480px) {
-  .ChangeEmail {
-    padding: 0px 0;
+  .UpdateWallets {
+    padding: 60px 0;
   }
 
-  h1 {
-    font-family: "Open Sans", sans-serif;
-    padding: 0px;
-  } 
-
-  .ChangeEmail form {
+  .UpdateWallets form {
     margin: 0 auto;
     max-width: 320px;
   }

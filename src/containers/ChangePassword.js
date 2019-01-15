@@ -59,56 +59,61 @@ export default class ChangePassword extends Component {
 
 	render() {
 		return (
-			<div className="ChangePassword">
-				<div>
-					<p align="center">if you'd like to change your password, this is the place to do it!</p>
-					<br >
-					</br>
+			<div
+				align="center"
+				className="updatePassword">
+				<h1>update password</h1>
+				<div className="ChangePassword">
+					<div>
+						<p align="center">if you'd like to change your password, this is the place to do it</p>
+						<br >
+						</br>
+					</div>
+					<form onSubmit={this.handleChangeClick}>
+						<FormGroup
+							bsSize="large"
+							controlId="oldPassword">
+							<ControlLabel>old password</ControlLabel>
+							<FormControl
+								type="password"
+								onChange={this.handleChange}
+								value={this.state.oldPassword}
+							/>
+						</FormGroup>
+						<hr />
+						<FormGroup
+							bsSize="large"
+							controlId="password">
+							<ControlLabel>new password</ControlLabel>
+							<FormControl
+								type="password"
+								onChange={this.handleChange}
+								value={this.state.password}
+							/>
+						</FormGroup>
+						<FormGroup
+							bsSize="large"
+							controlId="confirmPassword">
+							<ControlLabel>confirm password</ControlLabel>
+							<FormControl
+								type="password"
+								onChange={this.handleChange}
+								value={this.state.confirmPassword}
+							/>
+						</FormGroup>
+						<LoaderButton
+							block
+							className="button--cd btn btn-outline-primary"
+	          				outline
+	          				color="primary"
+							type="submit"
+							text="update password"
+							loadingText="updating.."
+							disabled={!this.validateForm()}
+							isLoading={this.state.isChanging}
+						/>
+					</form>
 				</div>
-				<form onSubmit={this.handleChangeClick}>
-					<FormGroup
-						bsSize="large"
-						controlId="oldPassword">
-						<ControlLabel>old password</ControlLabel>
-						<FormControl
-							type="password"
-							onChange={this.handleChange}
-							value={this.state.oldPassword}
-						/>
-					</FormGroup>
-					<hr />
-					<FormGroup
-						bsSize="large"
-						controlId="password">
-						<ControlLabel>new password</ControlLabel>
-						<FormControl
-							type="password"
-							onChange={this.handleChange}
-							value={this.state.password}
-						/>
-					</FormGroup>
-					<FormGroup
-						bsSize="large"
-						controlId="confirmPassword">
-						<ControlLabel>confirm password</ControlLabel>
-						<FormControl
-							type="password"
-							onChange={this.handleChange}
-							value={this.state.confirmPassword}
-						/>
-					</FormGroup>
-					<LoaderButton
-						block
-						className="button--cd btn btn-outline-primary"
-          				outline
-          				color="primary"
-						type="submit"
-						text="update password"
-						loadingText="updating.."
-						disabled={!this.validateForm()}
-						isLoading={this.state.isChanging}
-					/>
-				</form>
 			</div>
 		);
 	}

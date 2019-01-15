@@ -82,22 +82,26 @@ export default class Signup extends Component {
       ///////////////////////////////////
 
       try {
-        CoindropAuth.signUp(currentUser.username);
-        console.log("added auth user");
+        setTimeout(async () => {
+          await CoindropAuth.signUp(currentUser.username);
+          console.log("added auth user");
+        }, 250);
       } catch (e) {
         alert(e.message);
       }
 
       try {
-        Reddit.addUser(currentUser.username);
-        console.log("added reddit user");
+        setTimeout(async () => {
+          await Reddit.addUser(currentUser.username);
+        }, 250);
       } catch (e) {
         alert(e.message);
       }
 
       try {
-        StackOverflow.addUser(currentUser.username);
-        console.log("added stack user");
+        setTimeout(async () => {
+          await StackOverflow.addUser(currentUser.username);
+        }, 250);
       } catch (e) {
         alert(e.message);
       }

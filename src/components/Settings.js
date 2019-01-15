@@ -9,6 +9,15 @@ export default class Settings extends Component {
 			<div className="Settings">
 				<h1 align="center">settings</h1>
 				<p>
+				<LinkContainer to="/settings/wallets">
+					<LoaderButton
+						className="button--cd btn btn-outline-primary"
+						block
+						outline
+						color="primary"
+						text="update wallets"
+					/>
+				</LinkContainer>
 				<LinkContainer to="/settings/email">
 					<LoaderButton
 						className="button--cd btn btn-outline-primary"
@@ -25,15 +34,6 @@ export default class Settings extends Component {
 						outline
 						color="primary"
 						text="update password"
-					/>
-				</LinkContainer>
-				<LinkContainer to="/settings/walletaddress">
-					<LoaderButton
-						className="button--cd btn btn-outline-primary"
-						block
-						outline
-						color="primary"
-						text="update wallet address"
 					/>
 				</LinkContainer>
 				</p>

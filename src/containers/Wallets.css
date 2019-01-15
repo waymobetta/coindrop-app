@@ -1,17 +1,24 @@
 @media all and (min-width: 480px) {
-  .ChangeEmail {
+  .Wallets {
     padding: 0px 0;
   }
+}
 
-  h1 {
-    font-family: "Open Sans", sans-serif;
-    padding: 0px;
-  } 
+.Wallets .lander {
+	font-family: "Open Sans", sans-serif;
+  padding: 0px 0;
+}
 
-  .ChangeEmail form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
+.Wallets .lander h1 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.Wallets .lander p {
+	color: #999;
+}
+
+.WalletsForm {
+  max-width: 350px;
 }
 
 :root {

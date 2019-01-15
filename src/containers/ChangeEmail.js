@@ -150,15 +150,20 @@ export default class ChangeEmail extends Component {
 
 	render() {
 		return (
-			<div className="ChangeEmail">
-			<div>
-				<p align="center">if you'd like to change your email, this is the place to do it!</p>
-				<br >
-				</br>
-			</div>
-				{!this.state.codeSent
-					? this.renderUpdateForm()
-					: this.renderConfirmationForm()}
+			<div
+				align="center"
+				className="updateEmail">
+				<h1>update email</h1>
+				<div className="ChangeEmail">
+					<div>
+						<p align="center">if you'd like to change your email, this is the place to do it</p>
+						<br >
+						</br>
+					</div>
+						{!this.state.codeSent
+							? this.renderUpdateForm()
+							: this.renderConfirmationForm()}
+				</div>
 			</div>
 		);
 	}
