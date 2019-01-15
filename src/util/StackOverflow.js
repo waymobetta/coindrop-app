@@ -67,7 +67,7 @@ const StackOverflow = {
 			return jsonResponse;
 		});
 	},
-	validateVerificationCode(auth_user_id) {
+	async validateVerificationCode(auth_user_id) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id

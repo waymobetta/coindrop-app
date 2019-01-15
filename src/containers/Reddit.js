@@ -50,9 +50,15 @@ export default class Reddit extends Component {
     return false;
   }
 
-	handleClick = event => {
+	handleClick = async event => {
 		try {
-			RedditModule.validateVerificationCode(this.state.userID);
+			const validationResponse = await RedditModule.validateVerificationCode(this.state.userID);
+
+			if (validationResponse.message === "success") {
+				this.setState({
+					isVerified: true
+				});
+			}
 		} catch (e) {
 			alert(e.message);
 		}
@@ -76,10 +82,9 @@ export default class Reddit extends Component {
           	outline
           	color="primary"
           	block
-          	onClick={event => {
-          		this.handleClick(event)}}
+          	onClick={this.handleClick}
           	disabled={this.validateClick()}>
-          	verify!
+          	verify
           </Button>
           <div>
 	          {this.state.isVerified
