@@ -65,11 +65,6 @@ export default class Signup extends Component {
     this.setState({ isLoading: false });
   }
 
-  addRedditUser = async username => {
-    const addRedditUserResponse = await Reddit.addUser(username); 
-    return addRedditUserResponse;
-  }
-
   handleConfirmationSubmit = async event => {
     event.preventDefault();
 
