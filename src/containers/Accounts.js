@@ -64,14 +64,6 @@ export default class Accounts extends Component {
     }
   }
 
-  async componentDidMount() {
-    try {
-      console.log("did mount"); 
-    } catch (e) {
-      alert(e.message);
-    }
-  }
-
   validateRedditForm() {
     if (this.state.redditVerified) {
       return false;
