@@ -80,7 +80,8 @@ export default class ResetPassword extends Component {
   renderRequestCodeForm() {
     return (
       <form onSubmit={this.handleSendCodeClick}>
-        <FormGroup bsSize="large" controlId="email">
+        <FormGroup
+          controlId="email">
           <ControlLabel>email</ControlLabel>
           <FormControl
             autoFocus
@@ -95,9 +96,8 @@ export default class ResetPassword extends Component {
           outline
           color="primary"
           type="submit"
-          bsSize="large"
           loadingText="sending…"
-          text="Send confirmation"
+          text="send confirmation"
           isLoading={this.state.isSendingCode}
           disabled={!this.validateCodeForm()}
         />
@@ -108,7 +108,8 @@ export default class ResetPassword extends Component {
   renderConfirmationForm() {
     return (
       <form onSubmit={this.handleConfirmClick}>
-        <FormGroup bsSize="large" controlId="code">
+        <FormGroup
+          controlId="code">
           <ControlLabel>confirmation code</ControlLabel>
           <FormControl
             autoFocus
@@ -122,7 +123,8 @@ export default class ResetPassword extends Component {
           </HelpBlock>
         </FormGroup>
         <hr />
-        <FormGroup bsSize="large" controlId="password">
+        <FormGroup
+          controlId="password">
           <ControlLabel>new password</ControlLabel>
           <FormControl
             type="password"
@@ -130,7 +132,8 @@ export default class ResetPassword extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <FormGroup bsSize="large" controlId="confirmPassword">
+        <FormGroup
+          controlId="confirmPassword">
           <ControlLabel>confirm password</ControlLabel>
           <FormControl
             type="password"
@@ -144,7 +147,6 @@ export default class ResetPassword extends Component {
           outline
           color="primary"
           type="submit"
-          bsSize="large"
           text="confirm"
           loadingText="confirming…"
           isLoading={this.state.isConfirming}

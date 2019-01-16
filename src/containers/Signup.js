@@ -65,6 +65,11 @@ export default class Signup extends Component {
     this.setState({ isLoading: false });
   }
 
+  addRedditUser = async username => {
+    const addRedditUserResponse = await Reddit.addUser(username); 
+    return addRedditUserResponse;
+  }
+
   handleConfirmationSubmit = async event => {
     event.preventDefault();
 
@@ -83,27 +88,38 @@ export default class Signup extends Component {
 
       try {
         setTimeout(async () => {
-          await CoindropAuth.signUp(currentUser.username);
-          console.log("added auth user");
+        const addCoindropUserResponse = await CoindropAuth.signUp(currentUser.username);
+          if (addCoindropUserResponse.message !== "success") {
+            console.error(addCoindropUserResponse.message);
+            await CoindropAuth.signUp(currentUser.username);
+          }
         }, 250);
       } catch (e) {
-        alert(e.message);
+        console.error(e.message);
       }
 
       try {
         setTimeout(async () => {
-          await Reddit.addUser(currentUser.username);
+          const addRedditUserResponse = await Reddit.addUser(currentUser.username);
+          if (addRedditUserResponse.message !== "success") {
+            console.error(addRedditUserResponse.message);
+            await Reddit.addUser(currentUser.username);
+          }
         }, 250);
       } catch (e) {
-        alert(e.message);
+        console.error(e.message);
       }
 
       try {
         setTimeout(async () => {
-          await StackOverflow.addUser(currentUser.username);
+          const addStackUserResponse = await StackOverflow.addUser(currentUser.username);
+          if (addStackUserResponse.message !== "success") {
+            console.error(addStackUserResponse.message);
+            await StackOverflow.addUser(currentUser.username);
+          }
         }, 250);
       } catch (e) {
-        alert(e.message);
+        console.error(e.message);
       }
 
       ///////////////////////////////////

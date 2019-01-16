@@ -1,0 +1,47 @@
+.Test .lander {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.Test .lander h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+}
+
+.Test .lander p {
+  color: #999;
+}
+
+.root--bg1 {
+  background-image: url(../components/assets/coindrop_logo.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: fixed;
+  z-index: -1;
+  right: -30%;
+  bottom: -50%;
+  width: 130vh;
+  height: 130vh;
+  opacity: .1;
+  transform: translateZ(-1px);
+  pointer-events: none;
+}
+
+.root--bg1.halfOpacity {
+  opacity: .5;
+}
+
+.root--bg2 {
+  background-image: url(../components/assets/coindrop_logo.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: fixed;
+  z-index: 0;
+  left: -30%;
+  top: -50%;
+  width: 130vh;
+  height: 130vh;
+  opacity: .1;
+  transform: translateZ(-1px);
+  pointer-events: none;
+}
