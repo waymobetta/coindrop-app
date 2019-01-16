@@ -86,7 +86,6 @@ export default class Signup extends Component {
         const addCoindropUserResponse = await CoindropAuth.signUp(currentUser.username);
           if (addCoindropUserResponse.message !== "success") {
             console.error(addCoindropUserResponse.message);
-            await CoindropAuth.signUp(currentUser.username);
           }
         }, 250);
       } catch (e) {
@@ -98,7 +97,6 @@ export default class Signup extends Component {
           const addRedditUserResponse = await Reddit.addUser(currentUser.username);
           if (addRedditUserResponse.message !== "success") {
             console.error(addRedditUserResponse.message);
-            await Reddit.addUser(currentUser.username);
           }
         }, 250);
       } catch (e) {
@@ -110,7 +108,6 @@ export default class Signup extends Component {
           const addStackUserResponse = await StackOverflow.addUser(currentUser.username);
           if (addStackUserResponse.message !== "success") {
             console.error(addStackUserResponse.message);
-            await StackOverflow.addUser(currentUser.username);
           }
         }, 250);
       } catch (e) {
