@@ -2,14 +2,14 @@ const CoindropAuth = {
 	async signUp(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
-				"auth_user_id": auth_user_id,
-				"Authorization": "Bearer " + jwt_token
+				"auth_user_id": auth_user_id
 			}
 		}
 		return fetch(`http://localhost:5000/api/v1/adduserid`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
