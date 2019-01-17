@@ -15,6 +15,7 @@ export default class Wallets extends Component {
 
     this.state = {
       userID: "",
+      token: "",
       ethWalletAddress: "",
       btcWalletAddress: ""
     }
@@ -22,14 +23,17 @@ export default class Wallets extends Component {
 
   componentWillMount = async () => {
     try {
-      const currentSession = await Auth.currentSession();
+      const currentUser = await Auth.currentAuthenticatedUser();
+
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: currentSession.accessToken.payload.username
+        userID: currentUser.signInUserSession.accessToken.payload.username,
+        token: jwt
       });
 
     } catch (e) {
-      alert(e.message);
+      console.error(e.message);
     }
   }
 
@@ -51,7 +55,7 @@ export default class Wallets extends Component {
     this.setState({ isLoading: true });
 
     try {
-      await CoindropAuth.updateWallet(this.state.userID, this.state.ethWalletAddress);
+      await CoindropAuth.updateWallet(this.state.userID, this.state.ethWalletAddress, this.state.token);
 
       this.setState({
         isWalletSubmitted: true

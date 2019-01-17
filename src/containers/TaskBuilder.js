@@ -15,6 +15,7 @@ export default class TaskBuilder extends Component {
 
     this.state = {
       userID: "",
+      token: "",
       isTaskSubmitted: false,
       taskTitle: "",
       taskAuthor: "",
@@ -28,14 +29,17 @@ export default class TaskBuilder extends Component {
 
   componentWillMount = async () => {
     try {
-      const currentSession = await Auth.currentSession();
+      const currentUser = await Auth.currentAuthenticatedUser();
+
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: currentSession.accessToken.payload.username
+        userID: currentUser.signInUserSession.accessToken.payload.username,
+        token: jwt
       });
 
     } catch (e) {
-      alert(e.message);
+      console.error(e.message);
     }
   }
 
@@ -74,7 +78,7 @@ export default class TaskBuilder extends Component {
     }
 
     try {
-      const addTaskResponse = await TasksModule.addTask(taskObj);
+      const addTaskResponse = await TasksModule.addTask(taskObj, this.state.token);
 
       if (addTaskResponse.message === "success") {
         this.setState({
@@ -83,7 +87,7 @@ export default class TaskBuilder extends Component {
         this.props.history.push("/taskbuilder/success")
       }
     } catch (e) {
-      alert(e.message);
+      console.error(e.message);
       this.setState({
         isLoading: false
       });

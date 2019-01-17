@@ -1,8 +1,9 @@
 const CoindropAuth = {
-	async signUp(auth_user_id) {
+	async signUp(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
-				"auth_user_id": auth_user_id
+				"auth_user_id": auth_user_id,
+				"Authorization": "Bearer " + jwt_token
 			}
 		}
 		return fetch(`http://localhost:5000/api/v1/adduserid`, {
@@ -17,7 +18,7 @@ const CoindropAuth = {
 			return jsonResponse
 		});
 	},
-	async updateWallet(auth_user_id, wallet_address) {
+	async updateWallet(auth_user_id, wallet_address, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id,
@@ -27,7 +28,8 @@ const CoindropAuth = {
 		return fetch(`http://localhost:5000/api/v1/updatewallet`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -36,7 +38,7 @@ const CoindropAuth = {
 			return jsonResponse
 		});
 	},
-	async getUserWallet(auth_user_id) {
+	async getUserWallet(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id
@@ -45,7 +47,8 @@ const CoindropAuth = {
 		return fetch(`http://localhost:5000/api/v1/getwalletaddress`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {

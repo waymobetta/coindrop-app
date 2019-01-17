@@ -28,15 +28,18 @@ export default class Accounts extends Component {
 
   async componentWillMount() {
     try {
-      const currentSession = await Auth.currentSession();
+      const currentUser = await Auth.currentAuthenticatedUser();
+
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: currentSession.accessToken.payload.username
+        userID: currentUser.signInUserSession.accessToken.payload.username,
+        token: jwt
       });
 
-      const redditUserInfo = await Reddit.getUser(currentSession.accessToken.payload.username);
+      const redditUserInfo = await Reddit.getUser(currentUser.signInUserSession.accessToken.payload.username, jwt);
 
-      const stackUserInfo = await StackOverflow.getUser(currentSession.accessToken.payload.username);
+      const stackUserInfo = await StackOverflow.getUser(currentUser.signInUserSession.accessToken.payload.username, jwt);
 
       if (redditUserInfo.message.info.id > 0) {
         this.setState({
@@ -60,7 +63,7 @@ export default class Accounts extends Component {
         }
       }
     } catch (e) {
-      alert(e.message);
+      console.error(e.message);
     }
   }
 
@@ -90,7 +93,7 @@ export default class Accounts extends Component {
         isVerifyingReddit: true
       });
 
-      Reddit.generateVerificationCode(this.state.userID, this.state.redditUsername);
+      Reddit.generateVerificationCode(this.state.userID, this.state.redditUsername, this.state.token);
 
       this.props.history.push("/accounts/reddit")
     } else if (account === "stackOverflow") {
@@ -98,7 +101,7 @@ export default class Accounts extends Component {
         isVerifyingStackOverflow: true
       });
 
-      StackOverflow.generateVerificationCode(this.state.userID, Number(this.state.stackOverflowUserID));
+      StackOverflow.generateVerificationCode(this.state.userID, Number(this.state.stackOverflowUserID), this.state.token);
 
       this.props.history.push("/accounts/stackoverflow")
     }

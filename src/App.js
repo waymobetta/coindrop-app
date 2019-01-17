@@ -21,13 +21,15 @@ class App extends Component {
 
   componentWillMount = async () => {
     try {
-      const currentSession = await Auth.currentSession();
+      const currentUser = await Auth.currentAuthenticatedUser();
+
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: currentSession.accessToken.payload.username
+        userID: currentUser.signInUserSession.accessToken.payload.username
       });
 
-      const tasks = await TasksModule.getTasks();
+      const tasks = await TasksModule.getTasks(jwt);
 
       this.setState({
         pendingTasks: tasks.message.tasks.length

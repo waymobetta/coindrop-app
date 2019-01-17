@@ -76,6 +76,8 @@ export default class Signup extends Component {
 
       const currentUser = await Auth.currentAuthenticatedUser();
 
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
+
       // TODO:
       // refactor this block
 
@@ -83,7 +85,7 @@ export default class Signup extends Component {
 
       try {
         setTimeout(async () => {
-        const addCoindropUserResponse = await CoindropAuth.signUp(currentUser.username);
+        const addCoindropUserResponse = await CoindropAuth.signUp(currentUser.username, jwt);
           if (addCoindropUserResponse.message !== "success") {
             console.error(addCoindropUserResponse.message);
           }
@@ -94,7 +96,7 @@ export default class Signup extends Component {
 
       try {
         setTimeout(async () => {
-          const addRedditUserResponse = await Reddit.addUser(currentUser.username);
+          const addRedditUserResponse = await Reddit.addUser(currentUser.username, jwt);
           if (addRedditUserResponse.message !== "success") {
             console.error(addRedditUserResponse.message);
           }
@@ -105,7 +107,7 @@ export default class Signup extends Component {
 
       try {
         setTimeout(async () => {
-          const addStackUserResponse = await StackOverflow.addUser(currentUser.username);
+          const addStackUserResponse = await StackOverflow.addUser(currentUser.username, jwt);
           if (addStackUserResponse.message !== "success") {
             console.error(addStackUserResponse.message);
           }

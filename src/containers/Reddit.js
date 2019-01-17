@@ -23,13 +23,16 @@ export default class Reddit extends Component {
 
 	async componentWillMount() {
 		try {
-	    const currentSession = await Auth.currentSession();
+			const currentUser = await Auth.currentAuthenticatedUser();
+
+	  	const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
 	    this.setState({
-	      userID: currentSession.accessToken.payload.username
+	      userID: currentUser.signInUserSession.accessToken.payload.username,
+	      token: jwt
 	    });
 	  	
-	  	const redditUserInfo = await RedditModule.getUser(this.state.userID);
+	  	const redditUserInfo = await RedditModule.getUser(this.state.userID, jwt);
 
 	  	if (redditUserInfo.message.info.id > 0) {
 				if (redditUserInfo.message.info.reddit_data.verification_data.is_verified) {
@@ -42,7 +45,7 @@ export default class Reddit extends Component {
 				});
 			}
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 		}
 	}
 
@@ -55,7 +58,7 @@ export default class Reddit extends Component {
 
 	handleClick = async event => {
 		try {
-			const validationResponse = await RedditModule.validateVerificationCode(this.state.userID);
+			const validationResponse = await RedditModule.validateVerificationCode(this.state.userID, this.state.token);
 
 			if (validationResponse.message === "success") {
 				this.setState({
@@ -63,7 +66,7 @@ export default class Reddit extends Component {
 				});
 			}
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 		}
 	}
 

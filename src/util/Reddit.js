@@ -1,5 +1,5 @@
 const Reddit = {
-	getUser(auth_user_id) {
+	async getUser(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id
@@ -8,7 +8,8 @@ const Reddit = {
 		return fetch(`http://localhost:5000/api/v1/getreddituser`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -17,7 +18,7 @@ const Reddit = {
 			return jsonResponse;
 		});
 	},
-	async addUser(auth_user_id) {
+	async addUser(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id,
@@ -38,7 +39,8 @@ const Reddit = {
 		return fetch(`http://localhost:5000/api/v1/addreddituser`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -47,7 +49,7 @@ const Reddit = {
 			return jsonResponse;
 		});
 	},
-	generateVerificationCode(auth_user_id, username) {
+	async generateVerificationCode(auth_user_id, username, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id,
@@ -59,7 +61,8 @@ const Reddit = {
 		return fetch(`http://localhost:5000/api/v1/generateredditverificationcode`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -68,7 +71,7 @@ const Reddit = {
 			return jsonResponse;
 		});
 	},
-	async validateVerificationCode(auth_user_id) {
+	async validateVerificationCode(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id
@@ -77,7 +80,8 @@ const Reddit = {
 		return fetch(`http://localhost:5000/api/v1/validateredditverificationcode`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -88,4 +92,4 @@ const Reddit = {
 	}
 }
 
-export default Reddit;
+export default Reddit; 

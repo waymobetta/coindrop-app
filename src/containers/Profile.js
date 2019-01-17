@@ -27,9 +27,13 @@ export default class Profile extends Component {
 
   async componentDidMount() {
     try {
-      const currentUserInfo = await Auth.currentUserInfo();
+      const currentUser = await Auth.currentAuthenticatedUser();
 
-      const walletResponse = await CoindropAuth.getUserWallet(currentUserInfo.username);
+      const userID = currentUser.signInUserSession.accessToken.payload.username;
+      const userEmail = currentUser.attributes.email;
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
+
+      const walletResponse = await CoindropAuth.getUserWallet(userID, jwt);
 
       if (walletResponse.status === false) {
         walletResponse.message = "0x0"
@@ -37,19 +41,15 @@ export default class Profile extends Component {
 
       const emojiURL = Emoji.fetchRandomEmoji();
 
-      // const currentUser = await Auth.currentAuthenticatedUser();
-
-      // console.log(currentUser.signInUserSession.idToken.jwtToken);
-
       this.setState({
-        email: currentUserInfo.attributes.email,
-        username: currentUserInfo.username,
+        email: userEmail,
+        username: userID,
         wallet: walletResponse.message,
         profilePhotoURL: emojiURL
       });
     }
     catch(e) {
-      alert(e.message);
+      console.error(e.message);
     }
   }
 

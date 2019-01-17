@@ -1,5 +1,5 @@
 const StackOverflow = {
-	getUser(auth_user_id) {
+	async getUser(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id
@@ -8,7 +8,8 @@ const StackOverflow = {
 		return fetch(`http://localhost:5000/api/v1/getstackuser`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -17,7 +18,7 @@ const StackOverflow = {
 			return jsonResponse;
 		});
 	},
-	async addUser(auth_user_id) {
+	async addUser(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id,
@@ -37,7 +38,8 @@ const StackOverflow = {
 		return fetch(`http://localhost:5000/api/v1/addstackuser`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -46,7 +48,7 @@ const StackOverflow = {
 			return jsonResponse;
 		});
 	},
-	generateVerificationCode(auth_user_id, user_id) {
+	async generateVerificationCode(auth_user_id, user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id,
@@ -58,7 +60,8 @@ const StackOverflow = {
 		return fetch(`http://localhost:5000/api/v1/generatestackverificationcode`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {
@@ -67,7 +70,7 @@ const StackOverflow = {
 			return jsonResponse;
 		});
 	},
-	async validateVerificationCode(auth_user_id) {
+	async validateVerificationCode(auth_user_id, jwt_token) {
 		const payload = {
 			"info": {
 				"auth_user_id": auth_user_id
@@ -76,7 +79,8 @@ const StackOverflow = {
 		return fetch(`http://localhost:5000/api/v1/validatestackverificationcode`, {
 			method: "POST",
 			headers: {
-				"Content-type": "application/json"
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
 			},
 			body: JSON.stringify(payload)
 		}).then(res => {

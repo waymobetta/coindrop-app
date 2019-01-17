@@ -57,7 +57,7 @@ export default class ChangeEmail extends Component {
 				codeSent: true
 			});
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 			this.setState({
 				isSendingCode: false
 			});
@@ -79,7 +79,7 @@ export default class ChangeEmail extends Component {
 
 			this.props.history.push("/settings/emailsuccess");
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 			this.setState({
 				isConfirming: false
 			});

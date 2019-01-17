@@ -24,13 +24,16 @@ export default class StackOverflow extends Component {
 
 	async componentWillMount() {
 		try {
-	    const currentSession = await Auth.currentSession();
+	  	const currentUser = await Auth.currentAuthenticatedUser();
+
+	  	const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
 	    this.setState({
-	      userID: currentSession.accessToken.payload.username
+	      userID: currentUser.signInUserSession.accessToken.payload.username,
+	      token: jwt
 	    });
-	  	
-	  	const stackUserInfo = await StackOverflowModule.getUser(this.state.userID);
+		
+	  	const stackUserInfo = await StackOverflowModule.getUser(this.state.userID, jwt);
 
 	  	if (stackUserInfo.message.info.id > 0) {
 				if (stackUserInfo.message.info.stackoverflow_data.verification_data.is_verified) {
@@ -44,7 +47,7 @@ export default class StackOverflow extends Component {
 				});
 			}
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 		}
 	}
 
@@ -57,7 +60,7 @@ export default class StackOverflow extends Component {
 
 	handleClick = async event => {
 		try {
-			const validationResponse = await StackOverflowModule.validateVerificationCode(this.state.userID);
+			const validationResponse = await StackOverflowModule.validateVerificationCode(this.state.userID, this.state.token);
 
 			if (validationResponse.message === "success") {
 				this.setState({

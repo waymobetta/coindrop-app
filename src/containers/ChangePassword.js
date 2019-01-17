@@ -40,8 +40,6 @@ export default class ChangePassword extends Component {
 		try {
 			const currentUser = await Auth.currentAuthenticatedUser();
 
-			console.log(`Current User: ${currentUser[0]}`);
-
 			await Auth.changePassword(
 				currentUser,
 				this.state.oldPassword,
@@ -50,7 +48,7 @@ export default class ChangePassword extends Component {
 
 			this.props.history.push("/settings/passwordsuccess");
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 			this.setState({
 				isChanging: false
 			});

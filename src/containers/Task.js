@@ -18,7 +18,7 @@ export default class Task extends Component {
 				isOpen: !this.state.isOpen
 			});
 		} catch (e) {
-			alert(e.message);
+			console.error(e.message);
 		}
 	}
 
