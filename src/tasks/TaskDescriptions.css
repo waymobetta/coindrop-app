@@ -1,15 +1,16 @@
 .TaskAuthor .lander {
-  padding: 0px 0;
+  font-family: "Open Sans", sans-serif;
+  padding: 0px;
   text-align: center;
 }
 
-.TaskAuthor .lander h1 {
-  font-family: "Open Sans", sans-serif;
-  padding: 0px;
-}
-
-.TaskAuthor .lander p {
-  	color: #9836B8;
+.TaskTitle {
+	color: #9836B8;
 	font-size: 13pt;
 	padding: 0px;
+}
+
+.InfoDescription {
+	font-size: 11pt;
+	color: #999;
 }

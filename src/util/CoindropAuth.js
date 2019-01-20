@@ -44,7 +44,7 @@ const CoindropAuth = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/getwalletaddress`, {
+		return fetch(`http://localhost:5000/api/v1/getwallet`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",

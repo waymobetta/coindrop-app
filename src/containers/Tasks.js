@@ -36,24 +36,61 @@ export default class Tasks extends Component {
     }
   }
 
-  render() {  
+  handleClick = e => {
+
+    e.target.id = e.target.id.replace(/\s/g, '');
+
+    const path = `/tasks/${e.target.id}`
+    this.props.history.push(path);
+  }
+
+  renderNoTasks() {
     return (
-      <div className="Tasks">
-        <div className="lander">
-          <h1>
-            tasks
-          </h1>
-          <div align="center">
-            <ol>
-              {
-                this.state.tasks.map(task => {
-                  return <li><Task key={"Task_" + task.id} task={task} /></li>
-                })
-              }
-            </ol>
-          </div>
+      <div className="lander">
+        <h1>
+          tasks
+        </h1>
+        <p>You have no tasks at the moment. Subscribe to the coindrop email service to be notiied when new tasks are available for you.</p>
+      </div>
+    )
+  }
+
+  renderTasks() {
+    return (
+      <div className="lander">
+        <h1>
+          tasks
+        </h1>
+        <div align="center">
+          <ol>
+            {
+              this.state.tasks.map(task => {
+                return <li key={"Item_" + task.id}>
+                  <Task key={"Task_" + task.id} task={task} />
+                  <button
+                    id={task.title}
+                    onClick={this.handleClick}
+                    type="submit">
+                    yo
+                    </button>
+                  <br />
+                  <br />
+                </li>
+              })
+            }
+          </ol>
         </div>
       </div>
     )
+  }
+
+  render() { 
+    return (
+      <div className="Tasks">
+        {this.state.tasks === null
+          ? this.renderNoTasks()
+          : this.renderTasks()}
+      </div>
+    );
   }
 }

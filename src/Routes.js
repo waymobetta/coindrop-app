@@ -10,6 +10,7 @@ import Tasks from "./containers/Tasks";
 import TaskBuilder from "./containers/TaskBuilder";
 import TaskBuilderSuccess from "./components/TaskBuilderSuccess";
 import { AdChainAcknowledged, ColonyContributor } from "./tasks/TaskDescriptions";
+import AdChainArchaeologist from "./tasks/AdChainArchaeologist";
 import Profile from "./containers/Profile";
 import Accounts from "./containers/Accounts";
 import Reddit from "./containers/Reddit";
@@ -70,16 +71,6 @@ export default ({ childProps }) =>
         component={Tasks} 
         props={childProps} />
     <AuthenticatedRoute 
-        path="/tasks/adchainacknowledged" 
-        exact 
-        component={AdChainAcknowledged} 
-        props={childProps} />
-    <AuthenticatedRoute 
-        path="/tasks/colonycontributor" 
-        exact 
-        component={ColonyContributor} 
-        props={childProps} />
-    <AuthenticatedRoute 
         path="/accounts" 
         exact 
         component={Accounts} 
@@ -130,7 +121,7 @@ export default ({ childProps }) =>
         component={ChangePasswordSuccess} 
         props={childProps} />
 
-    { /* FOR PROJECT USE: authenticated routes for task creation */ }
+    { /* FOR PROJECT USE: authenticated routes, task specific */ }
     <AuthenticatedRoute
         path="/taskbuilder"
         exact
@@ -141,6 +132,25 @@ export default ({ childProps }) =>
         exact
         component={TaskBuilderSuccess}
         props={childProps} />
+
+    { /* task descriptions */ }
+    <AuthenticatedRoute 
+        path="/tasks/adchainacknowledged" 
+        exact 
+        component={AdChainAcknowledged} 
+        props={childProps} />
+    <AuthenticatedRoute 
+        path="/tasks/colonycontributor" 
+        exact 
+        component={ColonyContributor} 
+        props={childProps} />
+    <AuthenticatedRoute
+        path="/tasks/adchainarchaeologist"
+        exact
+        component={AdChainArchaeologist}
+        props={childProps} />
+
+    { /* testing purposes */ }
 
     <AuthenticatedRoute
         path="/test"

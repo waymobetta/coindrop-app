@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { UncontrolledCollapse } from "reactstrap";
+import LoaderButton from "../components/LoaderButton";
 import { Button, Well } from "react-bootstrap";
 import './Task.css';
 
@@ -8,11 +9,12 @@ export default class Task extends Component {
 		super(props);
 
 		this.state = {
-			isOpen: false
+			isOpen: false,
+			isEnlisting: false
 		}
 	}
 
-	handleClick = e => {
+	handleTaskClick = e => {
 		try {
 			this.setState({
 				isOpen: !this.state.isOpen
@@ -31,7 +33,7 @@ export default class Task extends Component {
         <Button
         	id={"toggler"+task.id}
           className="TaskButton"
-          onClick={event => {this.handleClick(event)}}>
+          onClick={this.handleTaskClick}>
           <div id="task">
             {task.title} - <i><span style={{color:"black"}}>{task.type}</span></i>
           </div>
@@ -40,7 +42,7 @@ export default class Task extends Component {
           <Well>
             {task.description}<br/><br/>
             <strong>Rewards:</strong><br/>
-            Token allocation: <i>{task.token_allocation}</i><br/>
+            Token Allocation: <i>{task.token_allocation} {task.token}</i><br/>
             Badge: <a href="/badges">{task.badge_data.name}</a>
           </Well>
         </UncontrolledCollapse>

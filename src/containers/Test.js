@@ -4,12 +4,6 @@ import Reddit from "../util/Reddit";
 import "./Test.css";
 
 export default class Test extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {}
-	}
-
 	componentWillMount = async () => {
 		const currentUser = await Auth.currentAuthenticatedUser();
 

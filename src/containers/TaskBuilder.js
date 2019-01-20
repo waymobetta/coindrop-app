@@ -140,8 +140,8 @@ export default class TaskBuilder extends Component {
                     action
                   </option>
                   <option
-                    value="promotion">
-                    promotion
+                    value="quiz">
+                    quiz
                   </option>
                 </FormControl>
               </FormGroup>
