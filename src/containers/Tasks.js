@@ -38,9 +38,9 @@ export default class Tasks extends Component {
 
   handleClick = e => {
 
-    e.target.id = e.target.id.replace(/\s/g, '');
+    const pathArr = e.target.id.split('-');
 
-    const path = `/tasks/${e.target.id}`
+    const path = `/tasks/${pathArr[0]}/${pathArr[1]}`
     this.props.history.push(path);
   }
 
@@ -68,7 +68,7 @@ export default class Tasks extends Component {
                 return <li key={"Item_" + task.id}>
                   <Task key={"Task_" + task.id} task={task} />
                   <button
-                    id={task.title}
+                    id={`${task.author}-${task.title}`}
                     onClick={this.handleClick}
                     type="submit">
                     yo
