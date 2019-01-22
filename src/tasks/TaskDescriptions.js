@@ -1,6 +1,5 @@
 import React from "react";
 import "./TaskDescriptions.css";
-import Info from "../components/Info";
 
 export const AdChainArchaeologist = () => {
   return (
@@ -12,11 +11,10 @@ export const AdChainArchaeologist = () => {
           archaeologist
         </p>
         <br />
-        <Info
-          className="InfoDescription"
-          description={
-          "this is the test description of the adChain archaeologist task"
-        } />
+        <div
+          className="InfoDescription">
+          this is a test description of the adChain archaeologist task
+        </div>
       </div>
     </div>
   );
@@ -32,11 +30,10 @@ export const AdChainAcknowledged = () => {
           acknowledged
         </p>
         <br />
-        <Info
-          className="InfoDescription"
-          description={
-            "this is a test description of the adChain acknowledged task"
-          } />
+        <div
+          className="InfoDescription">
+          this is a test description of the adChain acknowledged task
+        </div>
       </div>
     </div>
   );
@@ -52,11 +49,10 @@ export const ColonyContributor = () => {
           contributor
         </p>
         <br />
-        <Info
-          className="InfoDescription"
-          description={
-            "this is a test description of the colony contributor task"
-          } />
+        <div
+          className="InfoDescription">
+          this is a test description of the colony contributor task
+        </div>
       </div>
     </div>
   );

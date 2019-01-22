@@ -71,7 +71,7 @@ export default class Tasks extends Component {
                     id={`${task.author}-${task.title}`}
                     onClick={this.handleClick}
                     type="submit">
-                    yo
+                      go
                     </button>
                   <br />
                   <br />

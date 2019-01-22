@@ -4,10 +4,8 @@ import {
   FormControl,
   ControlLabel
 } from "react-bootstrap";
-import { UncontrolledAlert } from 'reactstrap';
 import LoaderButton from "../components/LoaderButton";
 import { Auth } from "aws-amplify";
-import Info from "../components/Info";
 import "./AdChainArchaeologist.css";
 
 export default class AdChainArchaeologist extends Component {
@@ -15,6 +13,8 @@ export default class AdChainArchaeologist extends Component {
     super(props);
 
     this.state = {
+      userID: "",
+      token: "",
       isLoading: false,
       isQuizSubmitted: false,
       qOneAns: "",
@@ -28,8 +28,6 @@ export default class AdChainArchaeologist extends Component {
   // componentWillMount = async () => {
   //   try {
   //     const currentUser = await Auth.currentAuthenticatedUser();
-
-  //     const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
   //     this.setState({
   //       userID: currentUser.signInUserSession.accessToken.payload.username,
@@ -47,25 +45,29 @@ export default class AdChainArchaeologist extends Component {
     });
   }
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
 
     const quizObj = {
-      qOneAns: "",
-      qTwoAns: ""
+      qOneAns: this.state.qOneAns,
+      qTwoAns: this.state.qTwoAns,
+      qThreeAns: this.state.qThreeAns,
+      qFourAns: this.state.qFourAns,
+      qFiveAns: this.state.qFiveAns
     }
 
     try {
       // send quiz results to backend
       // if response == "success"
+      console.log("Sending quiz answers: ", quizObj);
 
       this.setState({
           isQuizSubmitted: true
       });
 
-      this.props.history.push("/task/adchainarchaeologist/success")
+      this.props.history.push("/tasks/success")
     } catch (e) {
       console.error(e.message);
       this.setState({
@@ -80,7 +82,7 @@ export default class AdChainArchaeologist extends Component {
       this.state.qTwoAns.length > 0 &&
       this.state.qThreeAns.length > 0 &&
       this.state.qFourAns.length > 0 &&
-      this.state.qFiveAns.length > 0
+      this.state.qFiveAns > 0
     );
   }
   
@@ -95,22 +97,25 @@ export default class AdChainArchaeologist extends Component {
           archaeologist
         </p>
         <br />
-        <Info
-          className="InfoDescription"
-          description={
-            "Welcome to the archaeologist quiz. Each correct question will reward token. Each incorrect question will not. You only get 1 chance. Good luck!"
-        } />
+        <div
+          className="InfoDescription">
+            Welcome to the archaeologist quiz. <br />Each correct question will reward token. Each incorrect question will not. <br />You only get 1 chance.<br /><br />Good luck!
+        </div>
         <br />
         <div 
           align="center"
           className="TaskBuilderForm">
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="qOneAns">
+              <FormGroup controlId="qOneAns">
               <div
                 align="left">
-              <ControlLabel>question 1:</ControlLabel>
+              <ControlLabel>1. How many domains currently hold the status “In Registry” in the adChain Publisher Registry?</ControlLabel>
               </div>
-              <p>What is the adChain Registry?</p>
+              <i>hint: filter out the noise..</i>
+              <div
+                className="InfoDescription">
+                answer format: number
+              </div>
               <FormControl
                 autoFocus
                 type="text"
@@ -118,16 +123,19 @@ export default class AdChainArchaeologist extends Component {
                 onChange={this.handleChange}
                 value={this.state.qOneAns}
               />
-            </FormGroup>
-            <br />
-            <FormGroup controlId="qTwoAns">
+              </FormGroup>
+              <br />
+              <FormGroup controlId="qTwoAns">
               <div
                 align="left">
-              <ControlLabel>question 2:</ControlLabel>
+              <ControlLabel>2. What is the name of the cryptocurrency used to curate the adChain Publisher Registry?</ControlLabel>
               </div>
-              <p>What is the name of the cryptocurrency used to curate the adChain Publisher Registry?</p>
+              <i>hint: we had a token launch, not an ICO..</i>
+              <div
+                className="InfoDescription">
+                  answer format: lowercase
+              </div>
               <FormControl
-                autoFocus
                 type="text"
                 placeholder="answer"
                 onChange={this.handleChange}
@@ -138,14 +146,13 @@ export default class AdChainArchaeologist extends Component {
             <FormGroup controlId="qThreeAns">
               <div
                 align="left">
-                <ControlLabel>question 3:</ControlLabel>
+                <ControlLabel>3. And what is the contract address of this cryptocurrency?</ControlLabel>
               </div>
-              <p>What is the contract address of the previous cryptocurrency?</p>
-              <i><Info
-                description={
-                  "Hint: use etherscan.io"
-                }
-                /></i>
+              <i>hint: maybe our friends at <a href="https://etherscan.io">etherscan</a> can help..</i>
+              <div
+                className="InfoDescription">
+                answer format: 0x123456789
+              </div>
               <FormControl
                 type="text"
                 placeholder="answer"
@@ -157,14 +164,13 @@ export default class AdChainArchaeologist extends Component {
             <FormGroup controlId="qFourAns">
               <div
                 align="left">
-                <ControlLabel>question 4:</ControlLabel>
+                <ControlLabel>4. What date did the adChain Publisher Release Candidate go live on the Ethereum Mainnet?</ControlLabel>
               </div>
-              <p>What is the contract address of the previous cryptocurrency?</p>
-              <i><Info
-                description={
-                  "Hint: use etherscan.io"
-                }
-                /></i>
+              <i>hint: reading is the perfect <a href="https://medium.com">medium</a> for getting company updates..</i>
+              <div
+                className="InfoDescription">
+                answer format: 040612
+              </div>
               <FormControl
                 type="text"
                 placeholder="answer"
@@ -176,14 +182,13 @@ export default class AdChainArchaeologist extends Component {
             <FormGroup controlId="qFiveAns">
               <div
                 align="left">
-                <ControlLabel>question 5:</ControlLabel>
+                <ControlLabel>5. According to the “Claiming ADT Rewards Breakdown” located within the help section of the adChain Publisher Registry, how many ways are there to earn adToken rewards?</ControlLabel>
               </div>
-              <p>What is the contract address of the previous cryptocurrency?</p>
-              <i><Info
-                description={
-                  "Hint: use etherscan.io"
-                }
-                /></i>
+              <i>hint: the path to the answer is in the question..</i>
+              <div
+                className="InfoDescription">
+                answer format: number
+              </div>
               <FormControl
                 type="text"
                 placeholder="answer"
@@ -199,7 +204,7 @@ export default class AdChainArchaeologist extends Component {
               type="submit"
               disabled={!this.validateForm()}
               isLoading={this.state.isTaskSubmitted}
-              text="submit"
+              text="send"
               loadingText="submitting task.."
             />
           </form>

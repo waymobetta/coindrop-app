@@ -4,7 +4,7 @@
   }
 }
 
-. .lander {
+.lander {
 	font-family: "Open Sans", sans-serif;
   padding: 0px 0;
 }
@@ -26,6 +26,10 @@
   max-height: 250px;
   min-width: 350px;
   max-width: 400px;
+}
+
+.InfoDescription {
+  color: #999;
 }
 
 :root {
