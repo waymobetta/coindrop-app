@@ -1,7 +1,7 @@
 const Tasks = {
 	async submitAnswers(quizObj, jwt_token) {
 		const payload = quizObj;
-		return fetch(`http://localhost:5000/api/v1/submitanswers`, {
+		return fetch(`http://localhost:5000/api/v1/getresults`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",

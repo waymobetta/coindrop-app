@@ -109,7 +109,7 @@ export default class AdChainArchaeologist extends Component {
               <FormGroup controlId="qOneAns">
               <div
                 align="left">
-              <ControlLabel>1. How many domains currently hold the status “In Registry” in the adChain Publisher Registry?</ControlLabel>
+              <ControlLabel>1. How many domains currently hold the status 'In Registry' in the adChain Publisher Registry?</ControlLabel>
               </div>
               <i>hint: filter out the noise..</i>
               <div
@@ -182,7 +182,7 @@ export default class AdChainArchaeologist extends Component {
             <FormGroup controlId="qFiveAns">
               <div
                 align="left">
-                <ControlLabel>5. According to the “Claiming ADT Rewards Breakdown” located within the help section of the adChain Publisher Registry, how many ways are there to earn adToken rewards?</ControlLabel>
+                <ControlLabel>5. According to the 'Claiming ADT Rewards Breakdown' located within the help section of the adChain Publisher Registry, how many ways are there to earn adToken rewards?</ControlLabel>
               </div>
               <i>hint: the path to the answer is in the question..</i>
               <div
