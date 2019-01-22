@@ -7,6 +7,7 @@ import {
 import LoaderButton from "../components/LoaderButton";
 import { Auth } from "aws-amplify";
 import "./AdChainArchaeologist.css";
+import Quiz from "../util/Quiz";
 
 export default class AdChainArchaeologist extends Component {
   constructor(props) {
@@ -25,19 +26,20 @@ export default class AdChainArchaeologist extends Component {
     }
   }
 
-  // componentWillMount = async () => {
-  //   try {
-  //     const currentUser = await Auth.currentAuthenticatedUser();
+  componentWillMount = async () => {
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser();
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
-  //     this.setState({
-  //       userID: currentUser.signInUserSession.accessToken.payload.username,
-  //       token: jwt
-  //     });
+      this.setState({
+        userID: currentUser.signInUserSession.accessToken.payload.username,
+        token: jwt
+      });
 
-  //   } catch (e) {
-  //     console.error(e.message);
-  //   }
-  // }
+    } catch (e) {
+      console.error(e.message);
+    }
+  }
 
   handleChange = event => {
     this.setState({
@@ -45,7 +47,7 @@ export default class AdChainArchaeologist extends Component {
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
@@ -60,14 +62,20 @@ export default class AdChainArchaeologist extends Component {
 
     try {
       // send quiz results to backend
-      // if response == "success"
-      console.log("Sending quiz answers: ", quizObj);
+      const quizResultsResponse = await Quiz.sendAnswers(quizObj, this.state.token);
 
-      this.setState({
+      if (quizResultsResponse.status === true) {
+        this.setState({
           isQuizSubmitted: true
-      });
+        });
+      }
 
-      this.props.history.push("/tasks/success")
+      // TODO
+      // do something with quiz results
+      // modal or success page to claim token?
+      console.log(`Nice! You got ${quizResultsResponse.message} questions right!`);
+
+      // this.props.history.push("/tasks/success")
     } catch (e) {
       console.error(e.message);
       this.setState({
