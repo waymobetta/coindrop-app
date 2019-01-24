@@ -113,12 +113,11 @@ export default class AdChainArchaeologist extends Component {
 
   validateForm = () => {
     return (
-      true
-      // this.state.qOneAns.length > 0 &&
-      // this.state.qTwoAns.length > 0 &&
-      // this.state.qThreeAns.length > 0 &&
-      // this.state.qFourAns.length > 0 &&
-      // this.state.qFiveAns > 0
+      this.state.qOneAns.length > 0 &&
+      this.state.qTwoAns.length > 0 &&
+      this.state.qThreeAns.length > 0 &&
+      this.state.qFourAns.length > 0 &&
+      this.state.qFiveAns > 0
     );
   }
 

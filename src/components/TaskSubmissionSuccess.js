@@ -7,8 +7,8 @@ export default class TaskSubmissionSuccess extends Component {
       <div className="TaskSubmissionSuccess">
         <div className="lander">
           <h1 align="center">success!</h1>
-          <p align="center">successfully submitted task</p>
-          <p align="center">click <a href="/tasks">here</a> to return to the task builder!</p>
+          <p align="center">successfully completed task</p>
+          <p align="center">click <a href="/tasks">here</a> to return to your tasks!</p>
         </div>
       </div>
     );
