@@ -25,28 +25,27 @@ export default class Task extends Component {
 	}
 
 	render() {	
-		
 		const { task } = this.props;
 
 		return (
 			<div className="Task">
-        <Button
-        	id={"toggler"+task.id}
-          className="TaskButton"
-          onClick={this.handleTaskClick}>
-          <div id="task">
-            {task.title} - <i><span style={{color:"black"}}>{task.type}</span></i>
-          </div>
-        </Button>
-        <UncontrolledCollapse toggler={"toggler"+task.id}>
-          <Well>
-            {task.description}<br/><br/>
-            <strong>Rewards:</strong><br/>
-            Token Allocation: <i>{task.token_allocation} {task.token}</i><br/>
-            Badge: <a href="/badges">{task.badge_data.name}</a>
-          </Well>
-        </UncontrolledCollapse>
-      </div>
+		        <Button
+		        	id={"toggler"+task.id}
+		          className="TaskButton"
+		          onClick={this.handleTaskClick}>
+		          <div id="task">
+		            {task.title} - <i><span style={{color:"black"}}>{task.type}</span></i> - {task.is_completed ? <span style={{color:"green"}}>completed</span> : <span style={{color:"orange"}}>not complete</span>}
+		          </div>
+		        </Button>
+		        <UncontrolledCollapse toggler={"toggler"+task.id}>
+		          <Well>
+		            {task.description}<br/><br/>
+		            <strong>Rewards:</strong><br/>
+		            Token Allocation: <i>{task.token_allocation} {task.token}</i><br/>
+		            Badge: <a href="/badges">{task.badge_data.name}</a>
+		          </Well>
+		        </UncontrolledCollapse>
+      		</div>
 		);
 	}
 }

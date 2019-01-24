@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { Auth } from "aws-amplify";
@@ -18,6 +18,7 @@ export default class AdChainArchaeologist extends Component {
       token: "",
       isLoading: false,
       isQuizSubmitted: false,
+      numberCorrect: 0,
       qOneAns: "",
       qTwoAns: "",
       qThreeAns: "",
@@ -52,7 +53,11 @@ export default class AdChainArchaeologist extends Component {
 
     this.setState({ isLoading: true });
 
+    // TODO:
+    // fix passing in quiz title
     const quizObj = {
+      title: "archaeologist",
+      userID: this.state.userID,
       qOneAns: this.state.qOneAns,
       qTwoAns: this.state.qTwoAns,
       qThreeAns: this.state.qThreeAns,
@@ -62,7 +67,7 @@ export default class AdChainArchaeologist extends Component {
 
     try {
       // send quiz results to backend
-      const quizResultsResponse = await Quiz.sendAnswers(quizObj, this.state.token);
+      const quizResultsResponse = await Quiz.postAnswers(quizObj, this.state.token);
 
       if (quizResultsResponse.status === true) {
         this.setState({
@@ -70,12 +75,34 @@ export default class AdChainArchaeologist extends Component {
         });
       }
 
-      // TODO
-      // do something with quiz results
-      // modal or success page to claim token?
-      console.log(`Nice! You got ${quizResultsResponse.message} questions right!`);
+      let quizResultMessage;
 
-      // this.props.history.push("/tasks/success")
+      switch (true) {
+        case quizResultsResponse.message === 5:
+          quizResultMessage = `Nice! You got ${quizResultsResponse.message} questions right!`;
+          break;
+        case quizResultsResponse.message === 4:
+          quizResultMessage = `Not bad! You got ${quizResultsResponse.message} questions right!`;
+          break;
+        case quizResultsResponse.message === 3:
+          quizResultMessage = `You did alright..you got ${quizResultsResponse.message} questions right`;
+          break;
+        case quizResultsResponse.message === 2:
+          quizResultMessage = `You got ${quizResultsResponse.message} questions right...try a little harder next time`;
+          break;
+        case quizResultsResponse.message === 1:
+          quizResultMessage = `Not good..you only got $(quizResultsResponse.message} question right`;
+          break;
+        default:
+          quizResultMessage = `Ouch...you didn't get any questions right`
+          break;
+      }
+
+      // TODO:
+      // upgrade alert to modal, etc.
+      alert(quizResultMessage);
+
+      this.props.history.push("/tasks/success")
     } catch (e) {
       console.error(e.message);
       this.setState({
@@ -86,14 +113,15 @@ export default class AdChainArchaeologist extends Component {
 
   validateForm = () => {
     return (
-      this.state.qOneAns.length > 0 &&
-      this.state.qTwoAns.length > 0 &&
-      this.state.qThreeAns.length > 0 &&
-      this.state.qFourAns.length > 0 &&
-      this.state.qFiveAns > 0
+      true
+      // this.state.qOneAns.length > 0 &&
+      // this.state.qTwoAns.length > 0 &&
+      // this.state.qThreeAns.length > 0 &&
+      // this.state.qFourAns.length > 0 &&
+      // this.state.qFiveAns > 0
     );
   }
-  
+
   render() {
     return (
       <div
@@ -211,8 +239,8 @@ export default class AdChainArchaeologist extends Component {
               color="primary"
               type="submit"
               disabled={!this.validateForm()}
-              isLoading={this.state.isTaskSubmitted}
               text="send"
+              isLoading={this.state.isLoading}
               loadingText="submitting task.."
             />
           </form>

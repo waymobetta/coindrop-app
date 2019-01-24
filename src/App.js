@@ -13,6 +13,8 @@ class App extends Component {
     super(props);
 
     this.state = {
+      userID: "",
+      token: "",
       isAuthenticated: false,
       isAuthenticating: true,
       pendingTasks: 0
@@ -23,17 +25,21 @@ class App extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser();
 
+      const userID = currentUser.signInUserSession.accessToken.payload.username;
       const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username
+        userID: currentUser.signInUserSession.accessToken.payload.username,
+        token: jwt
       });
 
-      const tasks = await TasksModule.getTasks(jwt);
+      const tasksForUser = await TasksModule.getTasksForUser(userID, jwt);
 
-      this.setState({
-        pendingTasks: tasks.message.tasks.length
-      });
+      if (tasksForUser.status === true) {
+        this.setState({
+          pendingTasks: tasksForUser.message.tasks.length
+        });
+      }
 
     } catch (e) {
       console.error(e.message);

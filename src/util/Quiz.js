@@ -1,7 +1,8 @@
 const Quiz = {
-	async sendAnswers(quizObj, jwt_token) {
+	async postAnswers(quizObj, jwt_token) {
 		const payload = {
-			"title": "archaeologist",
+			"title": quizObj.title,
+			"auth_user_id": quizObj.userID,
 			"quiz_info": {
 				"quiz_data": [
 					{
@@ -27,6 +28,24 @@ const Quiz = {
 				]
 			}
 		}
+		return fetch(`http://localhost:5000/api/v1/postresults`, {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+				"Authorization": "Bearer " + jwt_token
+			},
+			body: JSON.stringify(payload)
+		}).then(res => {
+			return res.json();
+		}).then(jsonResponse => {
+			return jsonResponse;
+		});
+	},
+	async getResults(quizObj, jwt_token) {
+		const payload = {
+			"title": quizObj.title,
+			"auth_user_id": quizObj.userID
+			}
 		return fetch(`http://localhost:5000/api/v1/getresults`, {
 			method: "POST",
 			headers: {

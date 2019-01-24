@@ -14,9 +14,7 @@ const Tasks = {
 	},
 	async getTasksForUser(auth_user_id, jwt_token) {
 		const payload = {
-			"info": {
-				"auth_user_id": auth_user_id		
-			}
+			"auth_user_id": auth_user_id		
 		}
 		return fetch(`http://localhost:5000/api/v1/getusertasks`, {
 			method: "POST",

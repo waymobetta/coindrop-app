@@ -10,8 +10,7 @@ export default class Tasks extends Component {
 
     this.state = {
       userID: "",
-      isEnlisting: false,
-      tasks: [],
+      tasks: []
     }
   }
 
@@ -19,17 +18,20 @@ export default class Tasks extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser();
 
+      const userID = currentUser.signInUserSession.accessToken.payload.username;
       const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username
+        userID: userID
       });
 
-      const tasks = await TasksModule.getTasks(jwt);
+      const tasksForUser = await TasksModule.getTasksForUser(userID, jwt);
 
-      this.setState({
-        tasks: tasks.message.tasks
-      });
+      if (tasksForUser.status === true) {
+        this.setState({
+          tasks: tasksForUser.message.tasks
+        });
+      }
 
     } catch (e) {
       console.error(e.message);
@@ -70,6 +72,7 @@ export default class Tasks extends Component {
                   <button
                     id={`${task.author}-${task.title}`}
                     onClick={this.handleClick}
+                    disabled={task.is_completed}
                     type="submit">
                       go
                     </button>
@@ -87,9 +90,11 @@ export default class Tasks extends Component {
   render() { 
     return (
       <div className="Tasks">
-        {this.state.tasks === null
-          ? this.renderNoTasks()
-          : this.renderTasks()}
+        {
+          this.state.tasks.length <= 0
+            ? this.renderNoTasks()
+            : this.renderTasks()
+        }
       </div>
     );
   }
