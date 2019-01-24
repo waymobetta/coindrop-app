@@ -41,7 +41,7 @@ export default class Accounts extends Component {
 
       const stackUserInfo = await StackOverflow.getUser(currentUser.signInUserSession.accessToken.payload.username, jwt);
 
-      if (redditUserInfo.message.info.id > 0) {
+      if (redditUserInfo.status === true) {
         this.setState({
           redditUsername: redditUserInfo.message.info.reddit_data.username
         });
@@ -52,7 +52,7 @@ export default class Accounts extends Component {
         }
       }
 
-      if (stackUserInfo.message.info.id > 0) {
+      if (stackUserInfo.status === true) {
         this.setState({
           stackOverflowUserID: stackUserInfo.message.info.id
         });
@@ -68,17 +68,11 @@ export default class Accounts extends Component {
   }
 
   validateRedditForm() {
-    if (this.state.redditVerified) {
-      return false;
-    }
-    return this.state.redditUsername.length > 0;
+    return !this.state.redditVerified;
   }
 
   validateStackOverflowForm() {
-    if (this.state.stackOverflowVerified) {
-      return false;
-    }
-    return this.state.stackOverflowUserID.length > 0;
+    return !this.state.stackOverflowVerified;
   }
 
   handleChange = event => {

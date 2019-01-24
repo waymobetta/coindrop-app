@@ -78,7 +78,7 @@ export default class Tasks extends Component {
     return (
       <div className="Tasks">
         {
-          this.state.tasks.length <= 0
+          this.state.tasks === null
             ? this.renderNoTasks()
             : this.renderTasks()
         }
