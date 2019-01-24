@@ -41,11 +41,11 @@ const Quiz = {
 			return jsonResponse;
 		});
 	},
-	async getResults(quizObj, jwt_token) {
+	async getResults(newQuizObj, jwt_token) {
 		const payload = {
-			"title": quizObj.title,
-			"auth_user_id": quizObj.userID
-			}
+			"title": newQuizObj.title,
+			"auth_user_id": newQuizObj.userID
+		}
 		return fetch(`http://localhost:5000/api/v1/getresults`, {
 			method: "POST",
 			headers: {

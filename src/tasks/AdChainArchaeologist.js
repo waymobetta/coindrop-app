@@ -67,31 +67,38 @@ export default class AdChainArchaeologist extends Component {
 
     try {
       // send quiz results to backend
-      const quizResultsResponse = await Quiz.postAnswers(quizObj, this.state.token);
+      const postAnswerResponse = await Quiz.postAnswers(quizObj, this.state.token);
 
-      if (quizResultsResponse.status === true) {
+      if (postAnswerResponse.status === true) {
         this.setState({
           isQuizSubmitted: true
         });
       }
 
+      const newQuizObj = {
+        title: "archaeologist",
+        userID: this.state.userID
+      }
+
+      const quizResultsResponse = await Quiz.getResults(newQuizObj, this.state.token);
+
       let quizResultMessage;
 
       switch (true) {
-        case quizResultsResponse.message === 5:
-          quizResultMessage = `Nice! You got ${quizResultsResponse.message} questions right!`;
+        case quizResultsResponse.message.questions_correct === 5:
+          quizResultMessage = `Nice! You got ${quizResultsResponse.message.questions_correct} questions right!`;
           break;
-        case quizResultsResponse.message === 4:
-          quizResultMessage = `Not bad! You got ${quizResultsResponse.message} questions right!`;
+        case quizResultsResponse.message.questions_correct === 4:
+          quizResultMessage = `Not bad! You got ${quizResultsResponse.message.questions_correct} questions right!`;
           break;
-        case quizResultsResponse.message === 3:
-          quizResultMessage = `You did alright..you got ${quizResultsResponse.message} questions right`;
+        case quizResultsResponse.message.questions_correct === 3:
+          quizResultMessage = `You did alright..you got ${quizResultsResponse.message.questions_correct} questions right`;
           break;
-        case quizResultsResponse.message === 2:
-          quizResultMessage = `You got ${quizResultsResponse.message} questions right...try a little harder next time`;
+        case quizResultsResponse.message.questions_correct === 2:
+          quizResultMessage = `You got ${quizResultsResponse.message.questions_correct} questions right...try a little harder next time`;
           break;
-        case quizResultsResponse.message === 1:
-          quizResultMessage = `Not good..you only got $(quizResultsResponse.message} question right`;
+        case quizResultsResponse.message.questions_correct === 1:
+          quizResultMessage = `Not good..you only got $(quizResultsResponse.message.questions_correct} question right`;
           break;
         default:
           quizResultMessage = `Ouch...you didn't get any questions right`

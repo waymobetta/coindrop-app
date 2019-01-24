@@ -10,6 +10,7 @@ export default class Tasks extends Component {
 
     this.state = {
       userID: "",
+      token: "",
       tasks: []
     }
   }
@@ -22,7 +23,8 @@ export default class Tasks extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken;
 
       this.setState({
-        userID: userID
+        userID: userID,
+        token: jwt
       });
 
       const tasksForUser = await TasksModule.getTasksForUser(userID, jwt);
@@ -36,14 +38,6 @@ export default class Tasks extends Component {
     } catch (e) {
       console.error(e.message);
     }
-  }
-
-  handleClick = e => {
-
-    const pathArr = e.target.id.split('-');
-
-    const path = `/tasks/${pathArr[0]}/${pathArr[1]}`
-    this.props.history.push(path);
   }
 
   renderNoTasks() {
@@ -68,14 +62,7 @@ export default class Tasks extends Component {
             {
               this.state.tasks.map(task => {
                 return <li key={"Item_" + task.id}>
-                  <Task key={"Task_" + task.id} task={task} />
-                  <button
-                    id={`${task.author}-${task.title}`}
-                    onClick={this.handleClick}
-                    disabled={task.is_completed}
-                    type="submit">
-                      go
-                    </button>
+                  <Task key={"Task_" + task.id} task={task} userID={this.state.userID} token={this.state.token} history={this.props.history} />
                   <br />
                   <br />
                 </li>

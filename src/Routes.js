@@ -67,11 +67,6 @@ export default ({ childProps }) =>
         component={Badges} 
         props={childProps} />
     <AuthenticatedRoute 
-        path="/tasks" 
-        exact 
-        component={Tasks} 
-        props={childProps} />
-    <AuthenticatedRoute 
         path="/accounts" 
         exact 
         component={Accounts} 
@@ -135,6 +130,11 @@ export default ({ childProps }) =>
         props={childProps} />
 
     { /* task descriptions */ }
+    <AuthenticatedRoute 
+        path="/tasks" 
+        exact 
+        component={Tasks} 
+        props={childProps} />
     <AuthenticatedRoute 
         path="/tasks/adchain/acknowledged" 
         exact 
