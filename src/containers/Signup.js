@@ -89,7 +89,7 @@ export default class Signup extends Component {
           if (addCoindropUserResponse.message !== "success") {
             console.error(addCoindropUserResponse.message);
           }
-        }, 250);
+        }, 500);
       } catch (e) {
         console.error(e.message);
       }
@@ -100,7 +100,7 @@ export default class Signup extends Component {
           if (addRedditUserResponse.message !== "success") {
             console.error(addRedditUserResponse.message);
           }
-        }, 250);
+        }, 500);
       } catch (e) {
         console.error(e.message);
       }
@@ -111,7 +111,7 @@ export default class Signup extends Component {
           if (addStackUserResponse.message !== "success") {
             console.error(addStackUserResponse.message);
           }
-        }, 250);
+        }, 500);
       } catch (e) {
         console.error(e.message);
       }

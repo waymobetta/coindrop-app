@@ -46,7 +46,7 @@ export default class Tasks extends Component {
         <h1>
           tasks
         </h1>
-        <p>You have no tasks at the moment. Subscribe to the coindrop email service to be notiied when new tasks are available for you.</p>
+        <p>You have no tasks at the moment. Subscribe to the coindrop email service to be notified when new tasks are available for you.</p>
       </div>
     )
   }
