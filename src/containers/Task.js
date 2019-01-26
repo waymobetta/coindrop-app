@@ -19,17 +19,20 @@ export default class Task extends Component {
 	componentWillMount = async () => {
 		const { task, userID, token } = this.props;
 
-		const quizObj = {
-			title: task.title,
-			userID: userID
-		}
+		if (task.type === 'quiz') {
 
-		const quizResultResponse = await Quiz.getResults(quizObj, token);
-		if (quizResultResponse.status !== false) {
-			const score = `${(quizResultResponse.message.questions_correct/(quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect))*100}%`
-			this.setState({
-				quizScore: score
-			});
+			const quizObj = {
+				title: task.title,
+				userID: userID
+			}
+
+			const quizResultResponse = await Quiz.getResults(quizObj, token);
+			if (quizResultResponse.status !== false) {
+				const score = `${(quizResultResponse.message.questions_correct/(quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect))*100}%`
+				this.setState({
+					quizScore: score
+				});
+			}
 		}
 	}
 
