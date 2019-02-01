@@ -1,3 +1,5 @@
+import { baseURL } from './api'
+
 const StackOverflow = {
 	async getUser(auth_user_id, jwt_token) {
 		const payload = {
@@ -5,7 +7,7 @@ const StackOverflow = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/getstackuser`, {
+		return fetch(`${baseURL}/getstackuser`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -35,7 +37,7 @@ const StackOverflow = {
 				}
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/addstackuser`, {
+		return fetch(`${baseURL}/addstackuser`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -57,7 +59,7 @@ const StackOverflow = {
 				}
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/generatestackverificationcode`, {
+		return fetch(`${baseURL}/generatestackverificationcode`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -76,7 +78,7 @@ const StackOverflow = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/validatestackverificationcode`, {
+		return fetch(`${baseURL}/validatestackverificationcode`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",

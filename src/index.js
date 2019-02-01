@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from "react-router-dom";
 import Amplify from "aws-amplify";
+import dotenv from 'dotenv'
+dotenv.config()
 
 Amplify.configure({
   Auth: {

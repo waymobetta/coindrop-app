@@ -1,3 +1,5 @@
+import { baseURL } from './api'
+
 const Reddit = {
 	async getUser(auth_user_id, jwt_token) {
 		const payload = {
@@ -5,7 +7,7 @@ const Reddit = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/getreddituser`, {
+		return fetch(`${baseURL}/getreddituser`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -36,7 +38,7 @@ const Reddit = {
 				}
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/addreddituser`, {
+		return fetch(`${baseURL}/addreddituser`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -58,7 +60,7 @@ const Reddit = {
 				}
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/generateredditverificationcode`, {
+		return fetch(`${baseURL}/generateredditverificationcode`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -77,7 +79,7 @@ const Reddit = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/validateredditverificationcode`, {
+		return fetch(`${baseURL}/validateredditverificationcode`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -92,4 +94,4 @@ const Reddit = {
 	}
 }
 
-export default Reddit; 
+export default Reddit;

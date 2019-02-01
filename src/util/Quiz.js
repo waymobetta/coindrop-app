@@ -1,3 +1,5 @@
+import { baseURL } from './api'
+
 const Quiz = {
 	async postAnswers(quizObj, jwt_token) {
 		const payload = {
@@ -28,7 +30,7 @@ const Quiz = {
 				]
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/postresults`, {
+		return fetch(`${baseURL}/postresults`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -46,7 +48,7 @@ const Quiz = {
 			"title": newQuizObj.title,
 			"auth_user_id": newQuizObj.userID
 		}
-		return fetch(`http://localhost:5000/api/v1/getresults`, {
+		return fetch(`${baseURL}/getresults`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",

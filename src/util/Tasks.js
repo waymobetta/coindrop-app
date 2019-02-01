@@ -1,6 +1,8 @@
+import { baseURL } from './api'
+
 const Tasks = {
 	async getTasks(jwt_token) {
-		return fetch(`http://localhost:5000/api/v1/gettasks`, {
+		return fetch(`${baseURL}/gettasks`, {
 			method: "GET",
 			headers: {
 				"Content-type": "application/json",
@@ -14,9 +16,9 @@ const Tasks = {
 	},
 	async getTasksForUser(auth_user_id, jwt_token) {
 		const payload = {
-			"auth_user_id": auth_user_id		
+			"auth_user_id": auth_user_id
 		}
-		return fetch(`http://localhost:5000/api/v1/getusertasks`, {
+		return fetch(`${baseURL}/getusertasks`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -32,7 +34,7 @@ const Tasks = {
 	// for company usage only
 	async addTask(taskObj, jwt_token) {
 		const payload = taskObj
-		return fetch(`http://localhost:5000/api/v1/addtask`, {
+		return fetch(`${baseURL}/addtask`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",

@@ -1,3 +1,5 @@
+import { baseURL } from './api'
+
 const CoindropAuth = {
 	async signUp(auth_user_id, jwt_token) {
 		const payload = {
@@ -5,7 +7,7 @@ const CoindropAuth = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/adduserid`, {
+		return fetch(`${baseURL}/adduserid`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -25,7 +27,7 @@ const CoindropAuth = {
 				"wallet_address": wallet_address
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/updatewallet`, {
+		return fetch(`${baseURL}/updatewallet`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
@@ -44,7 +46,7 @@ const CoindropAuth = {
 				"auth_user_id": auth_user_id
 			}
 		}
-		return fetch(`http://localhost:5000/api/v1/getwallet`, {
+		return fetch(`${baseURL}/getwallet`, {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
