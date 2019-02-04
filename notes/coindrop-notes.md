@@ -4,7 +4,7 @@ Direct to consumer marketing
 
 A new age of direct to consumer marketing is emerging- one where blockchain technology combines with a new method for targeting chosen brand preferences to recognize and reward the consumer. All tracked, secure and 100% verifiable.
 
-This new form of brand recognition can identify and reward the individual for their contributions/loyalty to the overall brand as well as specifically within certain product lanes of that brand (think skiing-only products of the Patagonia). 
+This new form of brand recognition can identify and reward the individual for their contributions/loyalty to the overall brand as well as specifically within certain product lanes of that brand (think skiing-only products of Patagonia). 
 
 Individuals specify which brands they are partial to, eliminating the shear amount of unwanted noise from other irrelevant companies vying for the individual's attention. Furthermore, as highlighted above, individuals can specify which segments within these preferred brands that they are most interested in, providing further filtering for the individual and reducing a lot of guesswork for the brand.
 
