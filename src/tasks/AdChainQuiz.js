@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Auth } from 'aws-amplify'
 import './AdChainQuiz.css'
-import Quiz from '../util/Quiz'
 
 export default class AdChainArchaeologist extends Component {
   constructor (props) {
@@ -9,9 +8,7 @@ export default class AdChainArchaeologist extends Component {
 
     this.state = {
       userID: '',
-      token: '',
-      isLoading: false,
-      isQuizSubmitted: false
+      token: ''
     }
   }
 
@@ -26,45 +23,6 @@ export default class AdChainArchaeologist extends Component {
       })
     } catch (e) {
       console.error(e.message)
-    }
-  }
-
-  handleChange (event) {
-    this.setState({
-      [event.target.id]: event.target.value
-    })
-  }
-
-  async handleSubmit (event) {
-    event.preventDefault()
-
-    this.setState({ isLoading: true })
-
-    // TODO:
-    // fix passing in quiz title
-    const quizObj = {
-      title: 'archaeologist',
-      userID: this.state.userID
-    }
-
-    try {
-      // send quiz results to backend
-      const postAnswerResponse = await Quiz.postAnswers(quizObj, this.state.token)
-
-      if (postAnswerResponse.status === true) {
-        this.setState({
-          isQuizSubmitted: true
-        })
-      }
-
-      // const quizResultsResponse = await Quiz.getResults(newQuizObj, this.state.token);
-
-      this.props.history.push('/tasks/success')
-    } catch (e) {
-      console.error(e.message)
-      this.setState({
-        isLoading: false
-      })
     }
   }
 
