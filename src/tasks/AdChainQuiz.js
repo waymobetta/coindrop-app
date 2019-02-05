@@ -15,7 +15,7 @@ export default class AdChainArchaeologist extends Component {
     }
   }
 
-  componentWillMount = async () => {
+  async componentWillMount() {
     try {
       const currentUser = await Auth.currentAuthenticatedUser();
       const jwt = currentUser.signInUserSession.accessToken.jwtToken;
@@ -30,13 +30,13 @@ export default class AdChainArchaeologist extends Component {
     }
   }
 
-  handleChange = event => {
+  handleChange(event) {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
-  handleSubmit = async event => {
+  async handleSubmit(event) {
     event.preventDefault();
 
     this.setState({ isLoading: true });
@@ -45,12 +45,7 @@ export default class AdChainArchaeologist extends Component {
     // fix passing in quiz title
     const quizObj = {
       title: "archaeologist",
-      userID: this.state.userID,
-      qOneAns: this.state.qOneAns,
-      qTwoAns: this.state.qTwoAns,
-      qThreeAns: this.state.qThreeAns,
-      qFourAns: this.state.qFourAns,
-      qFiveAns: this.state.qFiveAns
+      userID: this.state.userID
     }
 
     try {
