@@ -9,6 +9,7 @@ export default class Task extends Component {
 	constructor(props) {
 		super(props);
 
+
 		this.state = {
 			isOpen: false,
 			quizScore: null,
@@ -50,11 +51,11 @@ export default class Task extends Component {
 		const pathArr = e.target.id.split('-');
 
     	const path = `/tasks/${pathArr[0]}/${pathArr[1]}`
-    	
+
     	this.props.history.push(path);
 	}
 
-	render() {	
+	render() {
 		const { task } = this.props;
 
 		if (this.state.quizScore !== null) {
