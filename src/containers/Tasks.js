@@ -1,48 +1,47 @@
-import React, { Component } from "react";
-import { Auth } from "aws-amplify";
-import TasksModule from "../util/Tasks";
-import Task from "./Task";
-import "./Tasks.css";
+import React, { Component } from 'react'
+import { Auth } from 'aws-amplify'
+import TasksModule from '../util/Tasks'
+import Task from './Task'
+import './Tasks.css'
 
 export default class Tasks extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
-      userID: "",
-      token: "",
+      userID: '',
+      token: '',
       tasks: []
     }
   }
 
-  componentWillMount = async () => {
+  async componentWillMount () {
     try {
-      const currentUser = await Auth.currentAuthenticatedUser();
+      const currentUser = await Auth.currentAuthenticatedUser()
 
-      const userID = currentUser.signInUserSession.accessToken.payload.username;
-      const jwt = currentUser.signInUserSession.accessToken.jwtToken;
+      const userID = currentUser.signInUserSession.accessToken.payload.username
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
         userID: userID,
         token: jwt
-      });
+      })
 
-      const tasksForUser = await TasksModule.getTasksForUser(userID, jwt);
+      const tasksForUser = await TasksModule.getTasksForUser(userID, jwt)
 
       if (tasksForUser.status === true) {
         this.setState({
           tasks: tasksForUser.message.tasks
-        });
+        })
       }
-
     } catch (e) {
-      console.error(e.message);
+      console.error(e.message)
     }
   }
 
-  renderNoTasks() {
+  renderNoTasks () {
     return (
-      <div className="lander">
+      <div className='lander'>
         <h1>
           tasks
         </h1>
@@ -51,18 +50,18 @@ export default class Tasks extends Component {
     )
   }
 
-  renderTasks() {
+  renderTasks () {
     return (
-      <div className="lander">
+      <div className='lander'>
         <h1>
           tasks
         </h1>
-        <div align="center">
+        <div align='center'>
           <ol>
             {
               this.state.tasks.map(task => {
-                return <li key={"Item_" + task.id}>
-                  <Task key={"Task_" + task.id} task={task} userID={this.state.userID} token={this.state.token} history={this.props.history} />
+                return <li key={'Item_' + task.id}>
+                  <Task key={'Task_' + task.id} task={task} userID={this.state.userID} token={this.state.token} history={this.props.history} />
                   <br />
                   <br />
                 </li>
@@ -74,15 +73,15 @@ export default class Tasks extends Component {
     )
   }
 
-  render() { 
+  render () {
     return (
-      <div className="Tasks">
+      <div className='Tasks'>
         {
           this.state.tasks === null
             ? this.renderNoTasks()
             : this.renderTasks()
         }
       </div>
-    );
+    )
   }
 }

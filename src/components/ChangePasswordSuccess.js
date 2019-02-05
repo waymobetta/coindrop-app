@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import "./ChangePasswordSuccess.css";
+import React, { Component } from 'react'
+import './ChangePasswordSuccess.css'
 
 export default class ChangePasswordSuccess extends Component {
-  render() {
+  render () {
     return (
-      <div className="ChangePasswordSuccess">
-        <div className="lander">
-          <h1 align="center">success!</h1>
-          <p align="center">successfully updated password</p>
-          <p align="center">click <a href="/profile">here</a> to return to your profile</p>
+      <div className='ChangePasswordSuccess'>
+        <div className='lander'>
+          <h1 align='center'>success!</h1>
+          <p align='center'>successfully updated password</p>
+          <p align='center'>click <a href='/profile'>here</a> to return to your profile</p>
         </div>
       </div>
-    );
+    )
   }
 }
