@@ -89,9 +89,9 @@ export default class AdChainArchaeologist extends Component {
           width='750'
           height='315'
           src='https://www.youtube-nocookie.com/embed/iQD92lCxbM8'
-          frameborder='0'
+          frameBorder='0'
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-          allowfullscreen />
+          allowFullScreen />
         <div
           className='typeform-widget'
           data-url='https://jon698.typeform.com/to/mDDkkK'
