@@ -158,7 +158,7 @@ export default ({ childProps }) =>
       component={AdChainAssociate}
       props={childProps} />
     <AuthenticatedRoute
-      path='/tasks/adchain/associate'
+      path='/tasks/adchain/quiz'
       exact
       component={AdChainQuiz}
       props={childProps} />
