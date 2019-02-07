@@ -11,7 +11,6 @@ import TaskBuilder from './containers/TaskBuilder'
 import TaskBuilderSuccess from './components/TaskBuilderSuccess'
 import { AdChainAcknowledged, ColonyContributor } from './tasks/TaskDescriptions'
 import TaskSubmissionSuccess from './components/TaskSubmissionSuccess'
-import AdChainArchaeologist from './tasks/AdChainArchaeologist'
 import AdChainAssociate from './tasks/AdChainAssociate'
 import AdChainQuiz from './tasks/AdChainQuiz'
 import Profile from './containers/Profile'
@@ -146,11 +145,6 @@ export default ({ childProps }) =>
       path='/tasks/colony/contributor'
       exact
       component={ColonyContributor}
-      props={childProps} />
-    <AuthenticatedRoute
-      path='/tasks/adchain/archaeologist'
-      exact
-      component={AdChainArchaeologist}
       props={childProps} />
     <AuthenticatedRoute
       path='/tasks/adchain/associate'
