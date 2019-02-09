@@ -40,6 +40,7 @@ export class User {
 
 async function initClient () {
   client = await Swagger({ spec })
+  window.client = client
 }
 
 initClient()

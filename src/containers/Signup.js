@@ -118,8 +118,8 @@ export default class Signup extends Component {
 
       /// ////////////////////////////////
 
-      this.props.userHasAuthenticated(true)
-      this.props.history.push('/profile')
+      // this.props.userHasAuthenticated(true)
+      // this.props.history.push('/profile')
     } catch (e) {
       alert(e.message)
       this.setState({ isLoading: false })

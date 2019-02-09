@@ -1,4 +1,3 @@
-
 {
   "extends": ["standard", "standard-react"],
   "plugins": [
@@ -6,6 +5,10 @@
     "promise"
   ],
   "rules": {
-    "react/jsx-uses-vars": [2]
+    "react/jsx-uses-vars": [2],
+    "react/prop-types": 0
+  },
+  "env": {
+  "browser": true
   }
 }

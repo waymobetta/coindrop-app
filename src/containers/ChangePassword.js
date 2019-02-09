@@ -46,7 +46,7 @@ export default class ChangePassword extends Component {
         this.state.password
       )
 
-      this.props.history.push('/settings/passwordsuccess')
+      // this.props.history.push('/settings/passwordsuccess')
     } catch (e) {
       console.error(e.message)
       this.setState({

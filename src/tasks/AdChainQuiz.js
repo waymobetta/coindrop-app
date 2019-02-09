@@ -27,6 +27,8 @@ export default class AdChainArchaeologist extends Component {
   }
 
   render () {
+    const surveyUrl = 'https://coindrop.typeform.com/to/mDDkkK?name=' + 'bob'
+
     return (
       <div
         align='center'
@@ -52,7 +54,7 @@ export default class AdChainArchaeologist extends Component {
           allowFullScreen />
         <div
           className='typeform-widget'
-          data-url='https://jon698.typeform.com/to/mDDkkK'
+          data-url={surveyUrl}
           data-transparency='50'
           data-hide-headers='true'
           data-hide-footer='true' />
