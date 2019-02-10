@@ -29,11 +29,9 @@ export default class Tasks extends Component {
 
       const tasksForUser = await TasksModule.getTasksForUser(userID, jwt)
 
-      if (tasksForUser.status === true) {
-        this.setState({
-          tasks: tasksForUser.message.tasks
-        })
-      }
+      this.setState({
+        tasks: tasksForUser.taskList
+      })
     } catch (e) {
       console.error(e.message)
     }

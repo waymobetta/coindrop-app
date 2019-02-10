@@ -15,19 +15,17 @@ const Tasks = {
     })
   },
   async getTasksForUser (authUserId, JwtToken) {
-    const payload = {
-      'auth_user_id': authUserId
-    }
-    return fetch(`${baseURL}/getusertasks`, {
-      method: 'POST',
+    const userTaskURL = `${baseURL}/tasks?userId=${authUserId}`
+
+    return fetch(`${userTaskURL}`, {
+      method: 'GET',
       headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
+        'Content-type': 'application/json'
+      }
     }).then(res => {
       return res.json()
     }).then(jsonResponse => {
+      console.log(jsonResponse)
       return jsonResponse
     })
   },

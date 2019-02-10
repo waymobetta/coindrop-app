@@ -30,6 +30,7 @@ export default class Profile extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
 
       const userID = currentUser.signInUserSession.accessToken.payload.username
+
       const userEmail = currentUser.attributes.email
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
