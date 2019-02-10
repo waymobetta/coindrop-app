@@ -25,7 +25,6 @@ const Tasks = {
     }).then(res => {
       return res.json()
     }).then(jsonResponse => {
-      console.log(jsonResponse)
       return jsonResponse
     })
   },
