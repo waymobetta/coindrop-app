@@ -79,7 +79,7 @@ export default class ResetPassword extends Component {
 
   renderRequestCodeForm () {
     return (
-      <form onSubmit={this.handleSendCodeClick}>
+      <form onSubmit={event => this.handleSendCodeClick(event)}>
         <FormGroup
           controlId='email'>
           <ControlLabel>email</ControlLabel>
@@ -87,7 +87,7 @@ export default class ResetPassword extends Component {
             autoFocus
             type='email'
             value={this.state.email}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
         </FormGroup>
         <LoaderButton
@@ -107,7 +107,7 @@ export default class ResetPassword extends Component {
 
   renderConfirmationForm () {
     return (
-      <form onSubmit={this.handleConfirmClick}>
+      <form onSubmit={event => this.handleConfirmClick(event)}>
         <FormGroup
           controlId='code'>
           <ControlLabel>confirmation code</ControlLabel>
@@ -115,7 +115,7 @@ export default class ResetPassword extends Component {
             autoFocus
             type='tel'
             value={this.state.code}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
           <HelpBlock>
             please check your email ({this.state.email}) for the confirmation
@@ -129,7 +129,7 @@ export default class ResetPassword extends Component {
           <FormControl
             type='password'
             value={this.state.password}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
         </FormGroup>
         <FormGroup
@@ -137,7 +137,7 @@ export default class ResetPassword extends Component {
           <ControlLabel>confirm password</ControlLabel>
           <FormControl
             type='password'
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
             value={this.state.confirmPassword}
           />
         </FormGroup>

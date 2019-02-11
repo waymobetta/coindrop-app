@@ -38,8 +38,10 @@ class App extends Component {
       this.setState({
         pendingTasks: tasksForUser.taskList.length
       })
-    } catch (e) {
-      console.error(e.message)
+    } catch (err) {
+      if (err.message) {
+        console.error(err.message)
+      }
     }
   }
 

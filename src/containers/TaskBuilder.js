@@ -104,7 +104,7 @@ export default class TaskBuilder extends Component {
           </h1>
           <br />
           <div className='TaskBuilderForm'>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={event => this.handleSubmit(event)}>
               <FormGroup controlId='taskTitle'>
                 <ControlLabel>title</ControlLabel>
                 <FormControl
@@ -112,7 +112,7 @@ export default class TaskBuilder extends Component {
                   type='text'
                   placeholder='my task title'
                   value={this.state.taskTitle}
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                 />
               </FormGroup>
               <FormGroup controlId='taskAuthor'>
@@ -120,7 +120,7 @@ export default class TaskBuilder extends Component {
                 <FormControl
                   type='text'
                   placeholder='my company name'
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                   value={this.state.taskAuthor}
                 />
               </FormGroup>
@@ -128,7 +128,7 @@ export default class TaskBuilder extends Component {
                 <ControlLabel>type</ControlLabel>
                 <FormControl
                   componentClass='select'
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                   value={this.state.taskType}>
                   <option
                     value='select type'>
@@ -149,7 +149,7 @@ export default class TaskBuilder extends Component {
                 <FormControl
                   componentClass='textarea'
                   placeholder='my task description'
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                   value={this.state.taskDescription}
                 />
               </FormGroup>
@@ -159,7 +159,7 @@ export default class TaskBuilder extends Component {
                   type='text'
                   name='tokenName'
                   placeholder='my token symbol (e.g. ADT)'
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                   value={this.state.taskTokenName}
                 />
               </FormGroup>
@@ -169,7 +169,7 @@ export default class TaskBuilder extends Component {
                   type='text'
                   name='tokenAllocation'
                   placeholder='2500'
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                   value={this.state.taskTokenAllocation}
                 />
               </FormGroup>
@@ -179,7 +179,7 @@ export default class TaskBuilder extends Component {
                   type='text'
                   name='badgeName'
                   placeholder='my task badge'
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                   value={this.state.taskBadge}
                 />
               </FormGroup>

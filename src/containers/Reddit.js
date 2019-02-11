@@ -115,7 +115,7 @@ export default class Reddit extends Component {
             outline
             color='primary'
             block
-            onClick={this.handleClick}
+            onClick={event => this.handleClick(event)}
             disabled={this.validateClick()}>
 verify
           </Button>

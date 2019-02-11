@@ -44,21 +44,21 @@ export default class Login extends Component {
   render () {
     return (
       <div className='Login'>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={event => this.handleSubmit(event)}>
           <FormGroup controlId='email' bsSize='large'>
             <ControlLabel>email</ControlLabel>
             <FormControl
               autoFocus
               type='email'
               value={this.state.email}
-              onChange={this.handleChange}
+              onChange={event => this.handleChange(event)}
             />
           </FormGroup>
           <FormGroup controlId='password' bsSize='large'>
             <ControlLabel>password</ControlLabel>
             <FormControl
               value={this.state.password}
-              onChange={this.handleChange}
+              onChange={event => this.handleChange(event)}
               type='password'
             />
           </FormGroup>

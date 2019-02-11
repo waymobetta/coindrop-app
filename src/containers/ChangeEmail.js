@@ -88,7 +88,7 @@ export default class ChangeEmail extends Component {
 
   renderUpdateForm () {
     return (
-      <form onSubmit={this.handleUpdateClick}>
+      <form onSubmit={event => this.handleUpdateClick(event)}>
         <FormGroup
           bsSize='large'
           controlId='email'>
@@ -98,7 +98,7 @@ export default class ChangeEmail extends Component {
             type='email'
             value={this.state.email}
             placeholder='enter your new email here'
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
         </FormGroup>
         <LoaderButton
@@ -127,7 +127,7 @@ export default class ChangeEmail extends Component {
             autoFocus
             type='tel'
             value={this.state.code}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
           <HelpBlock>
 please check your email ({this.state.email}) for the confirmation code.

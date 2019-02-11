@@ -66,14 +66,14 @@ export default class ChangePassword extends Component {
             <p align='center'>if you'd like to change your password, this is the place to do it</p>
             <br />
           </div>
-          <form onSubmit={this.handleChangeClick}>
+          <form onSubmit={event => this.handleChangeClick(event)}>
             <FormGroup
               bsSize='large'
               controlId='oldPassword'>
               <ControlLabel>old password</ControlLabel>
               <FormControl
                 type='password'
-                onChange={this.handleChange}
+                onChange={event => this.handleChange(event)}
                 value={this.state.oldPassword}
               />
             </FormGroup>
@@ -84,7 +84,7 @@ export default class ChangePassword extends Component {
               <ControlLabel>new password</ControlLabel>
               <FormControl
                 type='password'
-                onChange={this.handleChange}
+                onChange={event => this.handleChange(event)}
                 value={this.state.password}
               />
             </FormGroup>
@@ -94,7 +94,7 @@ export default class ChangePassword extends Component {
               <ControlLabel>confirm password</ControlLabel>
               <FormControl
                 type='password'
-                onChange={this.handleChange}
+                onChange={event => this.handleChange(event)}
                 value={this.state.confirmPassword}
               />
             </FormGroup>

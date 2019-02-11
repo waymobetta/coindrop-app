@@ -124,7 +124,7 @@ export default class Accounts extends Component {
                       id='redditUsername'
                       placeholder='coindrop_bob'
                       aria-label='Verify'
-                      onChange={this.handleChange}
+                      onChange={event => this.handleChange(event)}
                     />
                     <Button
                       className='button--cd btn btn-outline-primary'
@@ -160,7 +160,7 @@ export default class Accounts extends Component {
                       id='stackOverflowUserID'
                       placeholder='01234567890'
                       aria-label='verify'
-                      onChange={this.handleChange}
+                      onChange={event => this.handleChange(event)}
                     />
                     <Button
                       className='button--cd btn btn-outline-primary'

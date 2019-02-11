@@ -135,7 +135,7 @@ export default class Signup extends Component {
             autoFocus
             type='tel'
             value={this.state.confirmationCode}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
           <HelpBlock>please check your email for the code.</HelpBlock>
         </FormGroup>
@@ -156,21 +156,21 @@ export default class Signup extends Component {
 
   renderForm () {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={event => this.handleSubmit(event)}>
         <FormGroup controlId='email'>
           <ControlLabel>email</ControlLabel>
           <FormControl
             autoFocus
             type='email'
             value={this.state.email}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
           />
         </FormGroup>
         <FormGroup controlId='password'>
           <ControlLabel>password</ControlLabel>
           <FormControl
             value={this.state.password}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
             type='password'
           />
         </FormGroup>
@@ -178,7 +178,7 @@ export default class Signup extends Component {
           <ControlLabel>confirm password</ControlLabel>
           <FormControl
             value={this.state.confirmPassword}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
             type='password'
           />
         </FormGroup>

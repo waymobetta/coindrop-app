@@ -116,7 +116,7 @@ export default class StackOverflow extends Component {
             outline
             color='primary'
             block
-            onClick={this.handleClick}
+            onClick={event => this.handleClick(event)}
             disabled={this.validateClick()}>
 verify
           </Button>

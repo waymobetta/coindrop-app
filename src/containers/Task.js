@@ -65,7 +65,7 @@ export default class Task extends Component {
         <Button
           id={'toggler' + task.id}
           className='TaskButton'
-          onClick={this.handleTaskClick}>
+          onClick={event => this.handleTaskClick(event)}>
           <div id='task'>
             {task.title} - <i><span style={{ color: 'black' }}>{task.type}</span></i> - {task.is_completed ? <span style={{ color: 'green' }}>completed</span> : <span style={{ color: 'orange' }}>not complete</span>}
           </div>
