@@ -8,6 +8,8 @@ export default class AdChainArchaeologist extends Component {
 
     this.state = {
       userID: '',
+      userName: '',
+      wallet: '',
       token: ''
     }
   }
@@ -17,8 +19,12 @@ export default class AdChainArchaeologist extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
+      console.log(currentUser)
+
       this.setState({
         userID: currentUser.signInUserSession.accessToken.payload.username,
+        userName: currentUser.attributes.email,
+        wallet: "0x123",  // placeholder
         token: jwt
       })
     } catch (e) {
@@ -27,7 +33,10 @@ export default class AdChainArchaeologist extends Component {
   }
 
   render () {
-    const surveyUrl = 'https://coindrop.typeform.com/to/mDDkkK?name=' + 'bob'
+    const userName = this.state.userName
+    const userNameShort = userName.split('@')[0]
+    const userWallet = this.state.wallet
+    const surveyUrl = `https://coindrop.typeform.com/to/mDDkkK?name=${userNameShort}&walletaddress=${userWallet}`
 
     return (
       <div
