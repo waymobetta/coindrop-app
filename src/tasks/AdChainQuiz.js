@@ -24,7 +24,7 @@ export default class AdChainArchaeologist extends Component {
       this.setState({
         userID: currentUser.signInUserSession.accessToken.payload.username,
         userName: currentUser.attributes.email,
-        wallet: "0x123",  // placeholder
+        wallet: '0x123', // placeholder
         token: jwt
       })
     } catch (e) {
