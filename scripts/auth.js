@@ -6,7 +6,7 @@ global.fetch = require('node-fetch');
 
 const poolData = {
     UserPoolId: process.env.REACT_APP_AWS_COINDROP_COGNITO_USER_POOL_ID,
-  ClientId: process.env.REACT_APP_AWS_COINDROP_COGNITO_APP_CLIENT_ID
+    ClientId: process.env.REACT_APP_AWS_COINDROP_COGNITO_APP_CLIENT_ID
 }
 
 const pool_region = process.env.REACT_APP_AWS_COINDROP_COGNITO_REGION
@@ -14,7 +14,6 @@ const pool_region = process.env.REACT_APP_AWS_COINDROP_COGNITO_REGION
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData)
 
 function Login() { 
-
     const email = args['email']
     const pass = args['pass']
 
