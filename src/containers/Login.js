@@ -32,7 +32,10 @@ export default class Login extends Component {
     this.setState({ isLoading: true })
 
     try {
-      await Auth.signIn(this.state.email, this.state.password)
+      const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(this.state.email, this.state.password)
+      // for debugging
+      localStorage.setItem('accessToken', jwtToken)
+
       // this.props.userHasAuthenticated(true)
       // this.props.history.push('/profile')
     } catch (e) {

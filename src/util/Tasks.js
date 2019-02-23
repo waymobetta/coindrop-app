@@ -20,7 +20,8 @@ const Tasks = {
     return fetch(`${userTaskURL}`, {
       method: 'GET',
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + JwtToken
       }
     }).then(res => {
       return res.json()
