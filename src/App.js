@@ -73,7 +73,7 @@ class App extends Component {
   render () {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
+      userHasAuthenticated: this.userHasAuthenticated.bind(this)
     }
 
     return (
@@ -115,7 +115,7 @@ class App extends Component {
                   <LinkContainer to='/settings'>
                     <NavItem>settings</NavItem>
                   </LinkContainer>
-                  <NavItem onClick={this.handleLogout}>logout</NavItem>
+                  <NavItem onClick={event => this.handleLogout(event)}>logout</NavItem>
                 </Fragment>
                 : <Fragment>
                   <LinkContainer to='/signup'>

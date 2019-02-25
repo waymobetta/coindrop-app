@@ -80,7 +80,7 @@ export default class Wallets extends Component {
           </h1>
           <br />
           <div className='WalletsForm'>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={event => this.handleSubmit(event)}>
               <FormGroup controlId='ethWalletAddress'>
                 <ControlLabel>ethereum wallet address</ControlLabel>
                 <FormControl
@@ -88,7 +88,7 @@ export default class Wallets extends Component {
                   type='text'
                   placeholder='my ethereum wallet address'
                   value={this.state.ethWalletAddress}
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                 />
               </FormGroup>
               <FormGroup controlId='btcWalletAddress'>
@@ -98,7 +98,7 @@ export default class Wallets extends Component {
                   placeholder='my bitcoin wallet address'
                   disabled
                   value={this.state.btcWalletAddress}
-                  onChange={this.handleChange}
+                  onChange={event => this.handleChange(event)}
                 />
               </FormGroup>
               <LoaderButton

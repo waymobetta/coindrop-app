@@ -36,12 +36,13 @@ export default class Login extends Component {
       // for debugging
       localStorage.setItem('accessToken', jwtToken)
 
-      // this.props.userHasAuthenticated(true)
-      // this.props.history.push('/profile')
+      this.props.userHasAuthenticated(true)
+      this.props.history.push('/profile')
     } catch (e) {
       alert(e.message)
-      this.setState({ isLoading: false })
     }
+
+    this.setState({ isLoading: false })
   }
 
   render () {
