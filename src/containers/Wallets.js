@@ -54,13 +54,16 @@ export default class Wallets extends Component {
     this.setState({ isLoading: true })
 
     try {
-      await CoindropAuth.updateWallet(this.state.userID, this.state.ethWalletAddress, this.state.token)
+      const resp = await CoindropAuth.updateWallet(this.state.userID, this.state.ethWalletAddress, this.state.token)
+      if (resp.walletAddress) {
+        this.setState({
+          isWalletSubmitted: true
+        })
 
-      this.setState({
-        isWalletSubmitted: true
-      })
-
-      this.props.history.push('/settings/wallets/success')
+        this.props.history.push('/settings/wallets/success')
+      } else if (resp.status !== 200) {
+        throw new Error(resp.detail)
+      }
     } catch (e) {
       alert(e.message)
       this.setState({

@@ -22,12 +22,10 @@ const CoindropAuth = {
   },
   async updateWallet (authUserId, walletAddress, JwtToken) {
     const payload = {
-      'info': {
-        'auth_user_id': authUserId,
-        'wallet_address': walletAddress
-      }
+      'cognitoAuthUserID': authUserId,
+      'walletAddress': walletAddress
     }
-    return fetch(`${baseURL}/updatewallet`, {
+    return fetch(`${baseURL}/wallets`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -41,18 +39,12 @@ const CoindropAuth = {
     })
   },
   async getUserWallet (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId
-      }
-    }
-    return fetch(`${baseURL}/getwallet`, {
-      method: 'POST',
+    return fetch(`${baseURL}/wallets?userId=${authUserId}`, {
+      method: 'GET',
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
+      }
     }).then(res => {
       return res.json()
     }).then(jsonResponse => {

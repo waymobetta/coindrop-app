@@ -36,16 +36,12 @@ export default class Profile extends Component {
 
       const walletResponse = await CoindropAuth.getUserWallet(userID, jwt)
 
-      if (walletResponse.status === false) {
-        walletResponse.message = '0x0'
-      }
-
       const emojiURL = Emoji.fetchRandomEmoji()
 
       this.setState({
         email: userEmail,
         username: userID,
-        wallet: walletResponse.message,
+        wallet: walletResponse.walletAddress,
         profilePhotoURL: emojiURL
       })
     } catch (e) {
