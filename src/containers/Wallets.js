@@ -38,7 +38,7 @@ export default class Wallets extends Component {
 
   validateForm () {
     return (
-      this.state.ethWalletAddress.length > 0
+      this.state.walletAddress.length > 0
     )
   }
 
