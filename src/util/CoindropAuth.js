@@ -3,11 +3,9 @@ import { baseURL } from './api'
 const CoindropAuth = {
   async signUp (authUserId, JwtToken) {
     const payload = {
-      'info': {
-        'auth_user_id': authUserId
-      }
+      'cognitoAuthUserId': authUserId
     }
-    return fetch(`${baseURL}/adduserid`, {
+    return fetch(`${baseURL}/users`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -20,9 +18,8 @@ const CoindropAuth = {
       return jsonResponse
     })
   },
-  async updateWallet (authUserId, walletAddress, JwtToken) {
+  async updateWallet (walletAddress, JwtToken) {
     const payload = {
-      'cognitoAuthUserID': authUserId,
       'walletAddress': walletAddress
     }
     return fetch(`${baseURL}/wallets`, {

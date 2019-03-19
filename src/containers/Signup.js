@@ -8,10 +8,11 @@ import {
 } from 'react-bootstrap'
 import LoaderButton from '../components/LoaderButton'
 import './Signup.css'
-import { Auth } from 'aws-amplify'
-import CoindropAuth from '../util/CoindropAuth'
-import Reddit from '../util/Reddit'
-import StackOverflow from '../util/StackOverflow'
+// import { Auth } from 'aws-amplify'
+// import CoindropAuth from '../util/CoindropAuth'
+import { signupUser } from '../util/api'
+// import Reddit from '../util/Reddit'
+// import StackOverflow from '../util/StackOverflow'
 
 export default class Signup extends Component {
   constructor (props) {
@@ -51,10 +52,7 @@ export default class Signup extends Component {
     this.setState({ isLoading: true })
 
     try {
-      const newUser = await Auth.signUp({
-        username: this.state.email,
-        password: this.state.password
-      })
+      const newUser = signupUser(this.state.email, this.state.password)
       this.setState({
         newUser
       })
@@ -65,92 +63,14 @@ export default class Signup extends Component {
     this.setState({ isLoading: false })
   }
 
-  async handleConfirmationSubmit (event) {
-    event.preventDefault()
-
-    this.setState({ isLoading: true })
-
-    try {
-      await Auth.confirmSignUp(this.state.email, this.state.confirmationCode)
-      await Auth.signIn(this.state.email, this.state.password)
-
-      const currentUser = await Auth.currentAuthenticatedUser()
-
-      const jwt = currentUser.signInUserSession.accessToken.jwtToken
-
-      // TODO:
-      // refactor this block
-
-      /// ////////////////////////////////
-
-      try {
-        setTimeout(async () => {
-          const addCoindropUserResponse = await CoindropAuth.signUp(currentUser.username, jwt)
-          if (addCoindropUserResponse.message !== 'success') {
-            console.error(addCoindropUserResponse.message)
-          }
-        }, 500)
-      } catch (e) {
-        console.error(e.message)
-      }
-
-      try {
-        setTimeout(async () => {
-          const addRedditUserResponse = await Reddit.addUser(currentUser.username, jwt)
-          if (addRedditUserResponse.message !== 'success') {
-            console.error(addRedditUserResponse.message)
-          }
-        }, 500)
-      } catch (e) {
-        console.error(e.message)
-      }
-
-      try {
-        setTimeout(async () => {
-          const addStackUserResponse = await StackOverflow.addUser(currentUser.username, jwt)
-          if (addStackUserResponse.message !== 'success') {
-            console.error(addStackUserResponse.message)
-          }
-        }, 500)
-      } catch (e) {
-        console.error(e.message)
-      }
-
-      /// ////////////////////////////////
-
-      // this.props.userHasAuthenticated(true)
-      // this.props.history.push('/profile')
-    } catch (e) {
-      alert(e.message)
-      this.setState({ isLoading: false })
-    }
-  }
+  checkConfirmedLoop () {}
 
   renderConfirmationForm () {
     return (
-      <form onSubmit={this.handleConfirmationSubmit}>
-        <FormGroup controlId='confirmationCode'>
-          <ControlLabel>confirmation code</ControlLabel>
-          <FormControl
-            autoFocus
-            type='tel'
-            value={this.state.confirmationCode}
-            onChange={event => this.handleChange(event)}
-          />
-          <HelpBlock>please check your email for the code.</HelpBlock>
-        </FormGroup>
-        <LoaderButton
-          block
-          className='button--cd btn btn-outline-primary'
-          outline
-          color='primary'
-          disabled={!this.validateConfirmationForm()}
-          type='submit'
-          isLoading={this.state.isLoading}
-          text='verify'
-          loadingText='verifying…'
-        />
-      </form>
+      <HelpBlock>
+        Please check your email for the confirmation link <br />
+        If you've already verified, please click <a href='/login'>here</a> to log in.
+      </HelpBlock>
     )
   }
 
