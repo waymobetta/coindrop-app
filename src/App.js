@@ -35,8 +35,10 @@ class App extends Component {
 
       const tasksForUser = await TasksModule.getTasksForUser(userID, jwt)
 
+      console.log(tasksForUser.tasks)
+
       this.setState({
-        pendingTasks: tasksForUser.taskList.length
+        pendingTasks: tasksForUser.tasks.length
       })
     } catch (err) {
       if (err.message) {
