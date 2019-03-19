@@ -93,7 +93,7 @@ export default class Wallets extends Component {
                   autoFocus
                   type='text'
                   placeholder='my ethereum wallet address'
-                  value={this.state.ethWalletAddress}
+                  value={this.state.walletAddress}
                   onChange={event => this.handleChange(event)}
                 />
               </FormGroup>
@@ -103,7 +103,7 @@ export default class Wallets extends Component {
                   type='text'
                   placeholder='my bitcoin wallet address'
                   disabled
-                  value={this.state.btcWalletAddress}
+                  value={this.state.walletAddress}
                   onChange={event => this.handleChange(event, 'bitcoin')}
                 />
               </FormGroup>
