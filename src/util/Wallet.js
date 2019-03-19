@@ -1,9 +1,10 @@
 import { baseURL } from './api'
 
 const Wallet = {
-  async updateWallet (walletAddress, JwtToken) {
+  async updateWallet (walletAddress, walletType, JwtToken) {
     const payload = {
-      'walletAddress': walletAddress
+      'walletAddress': walletAddress,
+      'walletType': walletType
     }
     return fetch(`${baseURL}/wallets`, {
       method: 'POST',

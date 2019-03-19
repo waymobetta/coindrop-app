@@ -1,19 +1,6 @@
 import { baseURL } from './api'
 
 const Tasks = {
-  async getTasks (JwtToken) {
-    return fetch(`${baseURL}/gettasks`, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + JwtToken
-      }
-    }).then(res => {
-      return res.json()
-    }).then(jsonResponse => {
-      return jsonResponse
-    })
-  },
   async getTasksForUser (authUserId, JwtToken) {
     const userTaskURL = `${baseURL}/tasks?userId=${authUserId}`
 

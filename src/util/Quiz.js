@@ -1,18 +1,13 @@
 import { baseURL } from './api'
 
 const Quiz = {
-  async getResults (newQuizObj, JwtToken) {
-    const payload = {
-      'title': newQuizObj.title,
-      'auth_user_id': newQuizObj.userID
-    }
-    return fetch(`${baseURL}/getresults`, {
-      method: 'POST',
+  async getResults (quizID, JwtToken) {
+    return fetch(`${baseURL}/quizzes/${quizID}/results`, {
+      method: 'GET',
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
+      }
     }).then(res => {
       return res.json()
     }).then(jsonResponse => {

@@ -22,15 +22,15 @@ export default class Tasks extends Component {
       const userID = currentUser.signInUserSession.accessToken.payload.username
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      this.setState({
-        userID: userID,
-        token: jwt
-      })
-
       const tasksForUser = await TasksModule.getTasksForUser(userID, jwt)
 
+      // TODO:
+      // badges endpoint to retrieve badge data
+
       this.setState({
-        tasks: tasksForUser.taskList
+        userID: userID,
+        token: jwt,
+        tasks: tasksForUser.tasks
       })
     } catch (e) {
       console.error(e.message)

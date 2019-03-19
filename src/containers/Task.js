@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { UncontrolledCollapse } from 'reactstrap'
 import LoaderButton from '../components/LoaderButton'
 import { Button, Well } from 'react-bootstrap'
-import Quiz from '../util/Quiz'
+// import Quiz from '../util/Quiz'
 import './Task.css'
 
 export default class Task extends Component {
@@ -17,22 +17,18 @@ export default class Task extends Component {
   }
 
   async componentWillMount () {
-    const { task, userID, token } = this.props
+    // const { task, token } = this.props
 
-    if (task.type === 'quiz') {
-      const quizObj = {
-        title: task.title,
-        userID: userID
-      }
-
-      const quizResultResponse = await Quiz.getResults(quizObj, token)
-      if (quizResultResponse.status !== false) {
-        const score = `${(quizResultResponse.message.questions_correct / (quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect)) * 100}%`
-        this.setState({
-          quizScore: score
-        })
-      }
-    }
+    // if (task.type === 'quiz') {
+    //   const quizResultResponse = await Quiz.getResults(task.title, token)
+    //   quizResultResponse = false
+    //   if (quizResultResponse.status !== false) {
+    //     const score = `${(quizResultResponse.message.questions_correct / (quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect)) * 100}%`
+    //     this.setState({
+    //       quizScore: score
+    //     })
+    //   }
+    // }
   }
 
   handleTaskClick (event) {
@@ -57,7 +53,7 @@ export default class Task extends Component {
     const { task } = this.props
 
     if (this.state.quizScore !== null) {
-      task.is_completed = true
+      task.completed = true
     }
 
     return (
@@ -74,8 +70,8 @@ export default class Task extends Component {
           <Well>
             {task.description}<br /><br />
             <strong>Rewards:</strong><br />
-Token Allocation: <i>{task.token_allocation} {task.token}</i><br />
-Badge: <a href='/badges'>{task.badge_data.name}</a><br />
+Token Allocation: <i>{task.tokenAllocation} {task.token}</i><br />
+Badge: <a href='/badges'>{task.badge.id}</a><br />
             {
               (task.type === 'quiz' && this.state.quizScore === null)
                 ? <span>Score: <span style={{ color: 'red' }}>no score</span></span>

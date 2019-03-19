@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap'
 import LoaderButton from '../components/LoaderButton'
 import { Auth } from 'aws-amplify'
-import CoindropAuth from '../util/CoindropAuth'
+import Wallet from '../util/Wallet'
 import './Wallets.css'
 
 export default class Wallets extends Component {
@@ -16,8 +16,8 @@ export default class Wallets extends Component {
     this.state = {
       userID: '',
       token: '',
-      ethWalletAddress: '',
-      btcWalletAddress: ''
+      walletAddress: '',
+      walletType: ''
     }
   }
 
@@ -48,13 +48,13 @@ export default class Wallets extends Component {
     })
   }
 
-  async handleSubmit (event) {
+  async handleSubmit (event, walletType) {
     event.preventDefault()
 
     this.setState({ isLoading: true })
 
     try {
-      const resp = await CoindropAuth.updateWallet(this.state.userID, this.state.ethWalletAddress, this.state.token)
+      const resp = await Wallet.updateWallet(this.state.walletAddress, walletType, this.state.token)
       if (resp.walletAddress) {
         this.setState({
           isWalletSubmitted: true
@@ -72,6 +72,9 @@ export default class Wallets extends Component {
     }
   }
 
+  // TODO:
+  // fix hard coding of walletType (lines: 89, 107)
+
   render () {
     return (
       <div
@@ -79,13 +82,13 @@ export default class Wallets extends Component {
         className='Wallets'>
         <div className='lander'>
           <h1>
-            wallets
+            Wallets
           </h1>
           <br />
           <div className='WalletsForm'>
-            <form onSubmit={event => this.handleSubmit(event)}>
+            <form onSubmit={event => this.handleSubmit(event, 'ethereum')}>
               <FormGroup controlId='ethWalletAddress'>
-                <ControlLabel>ethereum wallet address</ControlLabel>
+                <ControlLabel>Ethereum</ControlLabel>
                 <FormControl
                   autoFocus
                   type='text'
@@ -95,13 +98,13 @@ export default class Wallets extends Component {
                 />
               </FormGroup>
               <FormGroup controlId='btcWalletAddress'>
-                <ControlLabel>bitcoin wallet address</ControlLabel>
+                <ControlLabel>Bitcoin</ControlLabel>
                 <FormControl
                   type='text'
                   placeholder='my bitcoin wallet address'
                   disabled
                   value={this.state.btcWalletAddress}
-                  onChange={event => this.handleChange(event)}
+                  onChange={event => this.handleChange(event, 'bitcoin')}
                 />
               </FormGroup>
               <LoaderButton

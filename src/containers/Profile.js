@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Badge from './Badge'
 import { BadgeList } from './BadgeList'
 import { Auth } from 'aws-amplify'
-import CoindropAuth from '../util/CoindropAuth'
+import Wallet from '../util/Wallet'
 import './Profile.css'
 import Emoji from '../util/Emoji'
 
@@ -13,7 +13,7 @@ export default class Profile extends Component {
     this.state = {
       email: '',
       username: '',
-      wallet: '',
+      wallet: null,
       profilePhotoURL: '',
       badgeList: []
     }
@@ -34,14 +34,14 @@ export default class Profile extends Component {
       const userEmail = currentUser.attributes.email
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      const walletResponse = await CoindropAuth.getUserWallet(userID, jwt)
+      const walletResponse = await Wallet.getUserWallet(userID, jwt)
 
       const emojiURL = Emoji.fetchRandomEmoji()
 
       this.setState({
         email: userEmail,
         username: userID,
-        wallet: walletResponse.walletAddress,
+        wallet: walletResponse.address,
         profilePhotoURL: emojiURL
       })
     } catch (e) {
@@ -58,7 +58,7 @@ export default class Profile extends Component {
             <img alt='' src={this.state.profilePhotoURL} height='60' width='75' />
             <p style={{ color: '#999' }}><i>{this.state.email}</i></p>
             <p>&nbsp;</p>
-            <strong>ethereum: </strong>
+            <strong>Ethereum: </strong>
             <a href={'https://etherscan.io/address/' + this.state.wallet}>
               {this.state.wallet}
             </a>
