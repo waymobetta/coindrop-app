@@ -9,7 +9,6 @@ import {
 import LoaderButton from '../components/LoaderButton'
 import './Signup.css'
 // import { Auth } from 'aws-amplify'
-// import CoindropAuth from '../util/CoindropAuth'
 import { signupUser } from '../util/api'
 // import Reddit from '../util/Reddit'
 // import StackOverflow from '../util/StackOverflow'
