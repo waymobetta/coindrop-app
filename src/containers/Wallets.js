@@ -52,8 +52,6 @@ export default class Wallets extends Component {
   async handleSubmit (event, walletType) {
     event.preventDefault()
 
-    this.setState({ isLoading: true })
-
     let address
 
     if (walletType === 'btc') {
@@ -63,21 +61,17 @@ export default class Wallets extends Component {
     }
 
     try {
-      const resp = await Wallet.updateWallet(address, walletType, this.state.token)
-      if (resp.walletAddress) {
-        this.setState({
-          isWalletSubmitted: true
-        })
+      const resp = await Wallet.updateWallet(this.state.userID, address, walletType, this.state.token)
+      this.setState({
+        isWalletSubmitted: true
+      })
 
-        this.props.history.push('/settings/wallets/success')
-      } else if (resp.status !== 200) {
+      this.props.history.push('/settings/wallets/success')
+      if (resp.status !== 200) {
         throw new Error(resp.detail)
       }
     } catch (e) {
       alert(e.message)
-      this.setState({
-        isLoading: false
-      })
     }
   }
 

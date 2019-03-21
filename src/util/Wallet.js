@@ -1,8 +1,9 @@
 import { baseURL } from './api'
 
 const Wallet = {
-  async updateWallet (walletAddress, walletType, JwtToken) {
+  async updateWallet (userID, walletAddress, walletType, JwtToken) {
     const payload = {
+      'userID': userID,
       'walletAddress': walletAddress,
       'walletType': walletType
     }
