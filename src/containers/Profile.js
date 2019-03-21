@@ -3,6 +3,7 @@ import Badge from './Badge'
 import { BadgeList } from './BadgeList'
 import { Auth } from 'aws-amplify'
 import Wallet from '../util/Wallet'
+// import { getWallets } from '../util/api'
 import './Profile.css'
 import Emoji from '../util/Emoji'
 
@@ -13,7 +14,7 @@ export default class Profile extends Component {
     this.state = {
       email: '',
       username: '',
-      wallet: null,
+      wallet: [],
       profilePhotoURL: '',
       badgeList: []
     }
@@ -34,14 +35,19 @@ export default class Profile extends Component {
       const userEmail = currentUser.attributes.email
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      const walletResponse = await Wallet.getUserWallet(userID, jwt)
+      const walletsResponse = await Wallet.getUserWallets(userID, jwt)
 
       const emojiURL = Emoji.fetchRandomEmoji()
+
+      for (let i = 0; i < walletsResponse.wallets.length; i++) {
+        if (walletsResponse.wallets[i].walletType === 'eth') {
+          this.setState({ wallet: walletsResponse.wallets[i].address })
+        }
+      }
 
       this.setState({
         email: userEmail,
         username: userID,
-        wallet: walletResponse.address,
         profilePhotoURL: emojiURL
       })
     } catch (e) {

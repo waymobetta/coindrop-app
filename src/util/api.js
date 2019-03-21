@@ -123,6 +123,16 @@ export const sendResetPasswordLink = async (email) => {
   return Auth.forgotPassword(email)
 }
 
+export const getWallets = async () => {
+  const cognitoUserId = await getCognitoUserId()
+
+  const res = await client.apis.wallets.wallets_show({
+    cognitoAuthUserId: cognitoUserId
+  })
+
+  return res
+}
+
 async function initClient () {
   client = await Swagger({ spec })
   window.client = client

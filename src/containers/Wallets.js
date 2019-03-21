@@ -16,8 +16,9 @@ export default class Wallets extends Component {
     this.state = {
       userID: '',
       token: '',
-      walletAddress: '',
-      walletType: ''
+      ethWalletAddress: '',
+      btcWalletAddress: '',
+      isWalletSubmitted: false
     }
   }
 
@@ -38,7 +39,7 @@ export default class Wallets extends Component {
 
   validateForm () {
     return (
-      this.state.walletAddress.length > 0
+      this.state.ethWalletAddress.length > 0
     )
   }
 
@@ -53,8 +54,16 @@ export default class Wallets extends Component {
 
     this.setState({ isLoading: true })
 
+    let address
+
+    if (walletType === 'btc') {
+      address = this.state.btcWalletAddress
+    } else if (walletType === 'eth') {
+      address = this.state.ethWalletAddress
+    }
+
     try {
-      const resp = await Wallet.updateWallet(this.state.walletAddress, walletType, this.state.token)
+      const resp = await Wallet.updateWallet(address, walletType, this.state.token)
       if (resp.walletAddress) {
         this.setState({
           isWalletSubmitted: true
@@ -86,14 +95,14 @@ export default class Wallets extends Component {
           </h1>
           <br />
           <div className='WalletsForm'>
-            <form onSubmit={event => this.handleSubmit(event, 'ethereum')}>
+            <form onSubmit={event => this.handleSubmit(event, 'eth')}>
               <FormGroup controlId='ethWalletAddress'>
                 <ControlLabel>Ethereum</ControlLabel>
                 <FormControl
                   autoFocus
                   type='text'
                   placeholder='my ethereum wallet address'
-                  value={this.state.walletAddress}
+                  value={this.state.ethWalletAddress}
                   onChange={event => this.handleChange(event)}
                 />
               </FormGroup>
@@ -103,8 +112,8 @@ export default class Wallets extends Component {
                   type='text'
                   placeholder='my bitcoin wallet address'
                   disabled
-                  value={this.state.walletAddress}
-                  onChange={event => this.handleChange(event, 'bitcoin')}
+                  value={this.state.btcWalletAddress}
+                  onChange={event => this.handleChange(event, 'btc')}
                 />
               </FormGroup>
               <LoaderButton
