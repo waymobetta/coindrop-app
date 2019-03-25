@@ -1,8 +1,8 @@
 import { baseURL } from './api'
 
 const Tasks = {
-  async getTasksForUser (authUserId, JwtToken) {
-    const userTaskURL = `${baseURL}/tasks?userId=${authUserId}`
+  async getTasksForUser (userId, JwtToken) {
+    const userTaskURL = `${baseURL}/tasks?userId=${userId}`
 
     return fetch(`${userTaskURL}`, {
       method: 'GET',

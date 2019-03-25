@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import Badge from './Badge'
 import { BadgeList } from './BadgeList'
 import { Auth } from 'aws-amplify'
-import Wallet from '../util/Wallet'
-// import { getWallets } from '../util/api'
+import { getWallets } from '../util/api'
 import './Profile.css'
 import Emoji from '../util/Emoji'
 
@@ -33,9 +32,8 @@ export default class Profile extends Component {
       const userID = currentUser.signInUserSession.accessToken.payload.username
 
       const userEmail = currentUser.attributes.email
-      const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      const walletsResponse = await Wallet.getUserWallets(userID, jwt)
+      const walletsResponse = await getWallets()
 
       const emojiURL = Emoji.fetchRandomEmoji()
 

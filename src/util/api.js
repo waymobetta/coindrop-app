@@ -81,6 +81,36 @@ export const signupUser = async (email, password) => {
   return result
 }
 
+export const login = async (email, password) => {
+  const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(email, password)
+
+  localStorage.setItem('accessToken', jwtToken)
+
+  const userId = await getUserId(await getCognitoUserId())
+  localStorage.setItem('userId', userId)
+
+  return jwtToken
+}
+
+export const logout = () => {
+  Auth.signOut({ global: true })
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('userId')
+}
+
+export const isLoggedIn = async () => {
+  try {
+    await currentUser()
+    return true
+  } catch (err) {
+    return false
+  }
+}
+
+export const currentUser = async () => {
+  return Auth.currentAuthenticatedUser()
+}
+
 export const getCognitoUserId = async () => {
   return (await Auth.currentAuthenticatedUser()).username
 }
@@ -104,17 +134,6 @@ export const getUserId = async () => {
   return res.body.id
 }
 
-export const login = async (email, password) => {
-  const { signInUserSession: { accessToken: { jwtToken } } } = await Auth.signIn(email, password)
-
-  localStorage.setItem('accessToken', jwtToken)
-
-  const userId = await getUserId(await getCognitoUserId())
-  localStorage.setItem('userId', userId)
-
-  return jwtToken
-}
-
 export const resetPassword = async (email, confirmationCode, newPassword) => {
   return Auth.forgotPasswordSubmit(email, confirmationCode, newPassword)
 }
@@ -123,18 +142,45 @@ export const sendResetPasswordLink = async (email) => {
   return Auth.forgotPassword(email)
 }
 
-export const getWallets = async () => {
-  const cognitoUserId = await getCognitoUserId()
-
-  const res = await client.apis.wallets.wallets_show({
-    cognitoAuthUserId: cognitoUserId
+export const getTasks = async (userId) => {
+  const { body: result, ok } = await client.apis.tasks.tasks_list({
+    payload: {
+      userId
+    }
   })
 
-  return res
+  if (!ok) {
+    throw new Error('could not get user tasks')
+  }
+
+  return result.tasks
+}
+
+export const getWallets = async () => {
+  const { body: result, ok } = await client.apis.wallets.wallets_show()
+
+  if (!ok) {
+    throw new Error('could not get user wallet')
+  }
+
+  return result
+}
+
+export const accessToken = () => {
+  return localStorage.getItem('accessToken')
 }
 
 async function initClient () {
-  client = await Swagger({ spec })
+  client = await Swagger({
+    spec,
+    requestInterceptor (req) {
+      const token = accessToken()
+      if (token) {
+        req.headers['Authorization'] = `Bearer ${token}`
+        return req
+      }
+    }
+  })
   window.client = client
 }
 
