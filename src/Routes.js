@@ -27,7 +27,6 @@ import ChangePasswordSuccess from './components/ChangePasswordSuccess'
 import ChangeEmailSuccess from './components/ChangeEmailSuccess'
 import UnauthenticatedRoute from './components/UnauthenticatedRoute'
 import AuthenticatedRoute from './components/AuthenticatedRoute'
-import Test from './containers/Test'
 
 export default ({ childProps }) =>
   <Switch>
@@ -160,14 +159,6 @@ export default ({ childProps }) =>
       path='/tasks/success'
       exact
       component={TaskSubmissionSuccess}
-      props={childProps} />
-
-    { /* testing purposes */ }
-
-    <AuthenticatedRoute
-      path='/test'
-      exact
-      component={Test}
       props={childProps} />
 
     { /* Finally, catch all unmatched routes */ }
