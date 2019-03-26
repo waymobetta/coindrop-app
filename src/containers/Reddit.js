@@ -34,16 +34,14 @@ export default class Reddit extends Component {
 
       const redditUserInfo = await RedditModule.getVerificationState(this.state.userID, jwt)
 
-      if (redditUserInfo.status === 200) {
-        if (redditUserInfo.message.verification.verified) {
-          this.setState({
-            isVerified: true
-          })
-        }
+      if (redditUserInfo.verified) {
         this.setState({
-          verificationCode: redditUserInfo.message.verification.confirmedVerificationCode
+          isVerified: true
         })
       }
+      this.setState({
+        verificationCode: redditUserInfo.confirmedVerificationCode
+      })
     } catch (e) {
       console.error(e.message)
     }
@@ -58,9 +56,9 @@ export default class Reddit extends Component {
 
   async handleClick (event) {
     try {
-      const validationResponse = await RedditModule.validateVerificationCode(this.state.userID, this.state.token)
+      const verificationResponse = await RedditModule.validateVerificationCode(this.state.userID, this.state.token)
 
-      if (validationResponse.message === 'success') {
+      if (verificationResponse.verified === true) {
         this.setState({
           isVerified: true
         })

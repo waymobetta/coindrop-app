@@ -41,26 +41,16 @@ export default class Accounts extends Component {
 
       const stackUserInfo = await StackOverflowModule.getVerificationState(this.state.userID, jwt)
 
-      if (redditUserInfo.status === 200) {
+      if (redditUserInfo.verified) {
         this.setState({
-          redditUsername: redditUserInfo.username
+          redditVerified: true
         })
-        if (redditUserInfo.verification.verified) {
-          this.setState({
-            redditVerified: true
-          })
-        }
       }
 
-      if (stackUserInfo.status === 200) {
+      if (stackUserInfo.verified) {
         this.setState({
-          stackOverflowUserID: stackUserInfo.stackUserId
+          stackOverflowVerified: true
         })
-        if (stackUserInfo.verification.verified) {
-          this.setState({
-            stackOverflowVerified: true
-          })
-        }
       }
     } catch (e) {
       console.error(e.message)

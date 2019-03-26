@@ -14,8 +14,7 @@ export default class StackOverflow extends Component {
     super(props)
 
     this.state = {
-      userID: '',
-      stackOverflowUserID: '',
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
       verificationCode: '',
       codeCopied: false,
       isVerified: false
@@ -29,23 +28,20 @@ export default class StackOverflow extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
+        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
 
-      const stackUserInfo = await StackOverflowModule.getUser(this.state.userID, jwt)
+      const stackUserInfo = await StackOverflowModule.getVerificationState(this.state.userID, jwt)
 
-      if (stackUserInfo.message.info.id > 0) {
-        if (stackUserInfo.message.info.stackoverflow_data.verification_data.is_verified) {
-          this.setState({
-            isVerified: true
-          })
-        }
+      if (stackUserInfo.verified) {
         this.setState({
-          stackOverlowUserID: stackUserInfo.message.info.stackoverflow_data.user_id,
-          verificationCode: stackUserInfo.message.info.stackoverflow_data.verification_data.stored_verification_code
+          isVerified: true
         })
       }
+      this.setState({
+        verificationCode: stackUserInfo.confirmedVerificationCode
+      })
     } catch (e) {
       console.error(e.message)
     }
@@ -57,9 +53,9 @@ export default class StackOverflow extends Component {
 
   async handleClick (event) {
     try {
-      const validationResponse = await StackOverflowModule.validateVerificationCode(this.state.userID, this.state.token)
+      const verificationResponse = await StackOverflowModule.validateVerificationCode(this.state.userID, this.state.token)
 
-      if (validationResponse.message === 'success') {
+      if (verificationResponse.verified === true) {
         this.setState({
           isVerified: true
         })

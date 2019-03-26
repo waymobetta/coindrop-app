@@ -16,7 +16,7 @@ const StackOverflow = {
   },
   async addUser (userID, stackUserID, JwtToken) {
     const payload = {
-      'stackUserId': stackUserID,
+      'stackUserId': Number(stackUserID),
       'userId': userID
     }
     return fetch(`${baseURL}/social/stackoverflow`, {
