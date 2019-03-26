@@ -14,7 +14,7 @@ export default class Wallets extends Component {
     super(props)
 
     this.state = {
-      userID: '',
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
       token: '',
       ethWalletAddress: '',
       btcWalletAddress: '',
@@ -29,7 +29,7 @@ export default class Wallets extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
+        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
     } catch (e) {
@@ -61,15 +61,11 @@ export default class Wallets extends Component {
     }
 
     try {
-      const resp = await Wallet.updateWallet(this.state.userID, address, walletType, this.state.token)
+      await Wallet.updateWallet(this.state.userID, address, walletType, this.state.token)
       this.setState({
         isWalletSubmitted: true
       })
-
       this.props.history.push('/settings/wallets/success')
-      if (resp.status !== 200) {
-        throw new Error(resp.detail)
-      }
     } catch (e) {
       alert(e.message)
     }
