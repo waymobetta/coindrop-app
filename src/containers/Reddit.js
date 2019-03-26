@@ -14,7 +14,7 @@ export default class Reddit extends Component {
     super(props)
 
     this.state = {
-      userID: '',
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
       verificationCode: '',
       codeCopied: false,
       isVerified: false
@@ -28,20 +28,20 @@ export default class Reddit extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
+        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
 
-      const redditUserInfo = await RedditModule.getUser(this.state.userID, jwt)
+      const redditUserInfo = await RedditModule.getVerificationState(this.state.userID, jwt)
 
-      if (redditUserInfo.message.info.id > 0) {
-        if (redditUserInfo.message.info.reddit_data.verification_data.is_verified) {
+      if (redditUserInfo.status === 200) {
+        if (redditUserInfo.message.verification.verified) {
           this.setState({
             isVerified: true
           })
         }
         this.setState({
-          verificationCode: redditUserInfo.message.info.reddit_data.verification_data.stored_verification_code
+          verificationCode: redditUserInfo.message.verification.confirmedVerificationCode
         })
       }
     } catch (e) {

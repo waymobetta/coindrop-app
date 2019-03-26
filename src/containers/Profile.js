@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Badge from './Badge'
 import { BadgeList } from './BadgeList'
 import { Auth } from 'aws-amplify'
-import { getWallets } from '../util/api'
+// import { getWallets } from '../util/api'
+import WalletModule from '../util/Wallet'
 import './Profile.css'
 import Emoji from '../util/Emoji'
 
@@ -11,6 +12,7 @@ export default class Profile extends Component {
     super(props)
 
     this.state = {
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90', // <-- actual UUID within db
       email: '',
       username: '',
       wallet: [],
@@ -29,11 +31,14 @@ export default class Profile extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
 
-      const userID = currentUser.signInUserSession.accessToken.payload.username
+      // const userID = currentUser.signInUserSession.accessToken.payload.username
+      const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       const userEmail = currentUser.attributes.email
 
-      const walletsResponse = await getWallets()
+      // const walletsResponse = await getWallets()
+
+      const walletsResponse = await WalletModule.getUserWallets(this.state.userID, jwt)
 
       const emojiURL = Emoji.fetchRandomEmoji()
 
@@ -45,7 +50,6 @@ export default class Profile extends Component {
 
       this.setState({
         email: userEmail,
-        username: userID,
         profilePhotoURL: emojiURL
       })
     } catch (e) {

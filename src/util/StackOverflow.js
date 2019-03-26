@@ -1,13 +1,25 @@
 import { baseURL } from './api'
 
 const StackOverflow = {
-  async getUser (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId
+  async getUser (userID, JwtToken) {
+    return fetch(`${baseURL}/social/stackoverflow/${userID}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + JwtToken
       }
+    }).then(res => {
+      return res.json()
+    }).then(jsonResponse => {
+      return jsonResponse
+    })
+  },
+  async addUser (userID, stackUserID, JwtToken) {
+    const payload = {
+      'stackUserId': stackUserID,
+      'userId': userID
     }
-    return fetch(`${baseURL}/getstackuser`, {
+    return fetch(`${baseURL}/social/stackoverflow`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -20,65 +32,24 @@ const StackOverflow = {
       return jsonResponse
     })
   },
-  async addUser (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId,
-        'stackoverflow_data': {
-          'exchange_account_id': 0,
-          'user_id': 0,
-          'display_name': '',
-          'accounts': []
-        },
-        'verification_data': {
-          'posted_verification_code': '',
-          'stored_verification_code': '',
-          'is_verified': false
-        }
-      }
-    }
-    return fetch(`${baseURL}/addstackuser`, {
-      method: 'POST',
+  async getVerificationState (userID, JwtToken) {
+    return fetch(`${baseURL}/social/stackoverflow/${userID}/verify`, {
+      method: 'GET',
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
+      }
     }).then(res => {
       return res.json()
     }).then(jsonResponse => {
       return jsonResponse
     })
   },
-  async generateVerificationCode (authUserId, userId, JwtToken) {
+  async validateVerificationCode (userID, JwtToken) {
     const payload = {
-      'info': {
-        'auth_user_id': authUserId,
-        'stackoverflow_data': {
-          'user_id': userId
-        }
-      }
+      'userId': userID
     }
-    return fetch(`${baseURL}/generatestackverificationcode`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
-    }).then(res => {
-      return res.json()
-    }).then(jsonResponse => {
-      return jsonResponse
-    })
-  },
-  async validateVerificationCode (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId
-      }
-    }
-    return fetch(`${baseURL}/validatestackverificationcode`, {
+    return fetch(`${baseURL}/social/stackoverflow/${userID}/verify`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

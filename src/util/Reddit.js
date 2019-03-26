@@ -1,13 +1,25 @@
 import { baseURL } from './api'
 
 const Reddit = {
-  async getUser (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId
+  async getUser (userID, JwtToken) {
+    return fetch(`${baseURL}/social/reddit/${userID}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + JwtToken
       }
+    }).then(res => {
+      return res.json()
+    }).then(jsonResponse => {
+      return jsonResponse
+    })
+  },
+  async addUser (userID, username, JwtToken) {
+    const payload = {
+      'userId': userID,
+      'username': username
     }
-    return fetch(`${baseURL}/getreddituser`, {
+    return fetch(`${baseURL}/social/reddit`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -20,66 +32,24 @@ const Reddit = {
       return jsonResponse
     })
   },
-  async addUser (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId,
-        'reddit_data': {
-          'username': '',
-          'link_karma': 0,
-          'comment_karma': 0,
-          'trophies': [],
-          'subreddits': []
-        },
-        'verification_data': {
-          'posted_verification_code': '',
-          'stored_verification_code': '',
-          'isVerified': false
-        }
-      }
-    }
-    return fetch(`${baseURL}/addreddituser`, {
-      method: 'POST',
+  async getVerificationState (userID, JwtToken) {
+    return fetch(`${baseURL}/social/reddit/${userID}/verify`, {
+      method: 'GET',
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
+      }
     }).then(res => {
       return res.json()
     }).then(jsonResponse => {
       return jsonResponse
     })
   },
-  async generateVerificationCode (authUserId, username, JwtToken) {
+  async validateVerificationCode (userID, JwtToken) {
     const payload = {
-      'info': {
-        'auth_user_id': authUserId,
-        'reddit_data': {
-          'username': username
-        }
-      }
+      'userId': userID
     }
-    return fetch(`${baseURL}/generateredditverificationcode`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + JwtToken
-      },
-      body: JSON.stringify(payload)
-    }).then(res => {
-      return res.json()
-    }).then(jsonResponse => {
-      return jsonResponse
-    })
-  },
-  async validateVerificationCode (authUserId, JwtToken) {
-    const payload = {
-      'info': {
-        'auth_user_id': authUserId
-      }
-    }
-    return fetch(`${baseURL}/validateredditverificationcode`, {
+    return fetch(`${baseURL}/social/reddit/${userID}/verify`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

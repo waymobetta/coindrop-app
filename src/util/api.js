@@ -5,7 +5,8 @@ import spec from '../swagger/swagger.json'
 import CoindropAuth from './CoindropAuth'
 dotenv.config()
 
-export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
+// export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
+export const baseURL = 'http://localhost:5000/v1'
 
 spec.host = baseURL.replace(/.*\/\/([\w+:]+)\/.*/, '$1')
 
@@ -22,6 +23,20 @@ Amplify.configure({
     userPoolWebClientId: '6f1spb636ptn074on0pdjgnk8l'
   }
 })
+
+async function initClient () {
+  client = await Swagger({
+    spec,
+    requestInterceptor (req) {
+      const token = accessToken()
+      if (token) {
+        req.headers['Authorization'] = `Bearer ${token}`
+        return req
+      }
+    }
+  })
+  window.client = client
+}
 
 export class User {
   static async create ({ cognitoAuthUserId }) {
@@ -168,20 +183,6 @@ export const getWallets = async () => {
 
 export const accessToken = () => {
   return localStorage.getItem('accessToken')
-}
-
-async function initClient () {
-  client = await Swagger({
-    spec,
-    requestInterceptor (req) {
-      const token = accessToken()
-      if (token) {
-        req.headers['Authorization'] = `Bearer ${token}`
-        return req
-      }
-    }
-  })
-  window.client = client
 }
 
 initClient()

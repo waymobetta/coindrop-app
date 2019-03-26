@@ -6,15 +6,16 @@ import {
 import { Button } from 'reactstrap'
 import './Accounts.css'
 import { Auth } from 'aws-amplify'
-import Reddit from '../util/Reddit'
-import StackOverflow from '../util/StackOverflow'
+import RedditModule from '../util/Reddit'
+import StackOverflowModule from '../util/StackOverflow'
 
 export default class Accounts extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      userID: '',
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      token: '',
       redditUsername: '',
       stackOverflowUserID: '',
       isVerifyingReddit: false,
@@ -33,30 +34,29 @@ export default class Accounts extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
 
-      const redditUserInfo = await Reddit.getUser(currentUser.signInUserSession.accessToken.payload.username, jwt)
+      const redditUserInfo = await RedditModule.getVerificationState(this.state.userID, jwt)
 
-      const stackUserInfo = await StackOverflow.getUser(currentUser.signInUserSession.accessToken.payload.username, jwt)
+      const stackUserInfo = await StackOverflowModule.getVerificationState(this.state.userID, jwt)
 
-      if (redditUserInfo.status === true) {
+      if (redditUserInfo.status === 200) {
         this.setState({
-          redditUsername: redditUserInfo.message.info.reddit_data.username
+          redditUsername: redditUserInfo.username
         })
-        if (redditUserInfo.message.info.reddit_data.verification_data.is_verified) {
+        if (redditUserInfo.verification.verified) {
           this.setState({
             redditVerified: true
           })
         }
       }
 
-      if (stackUserInfo.status === true) {
+      if (stackUserInfo.status === 200) {
         this.setState({
-          stackOverflowUserID: stackUserInfo.message.info.id
+          stackOverflowUserID: stackUserInfo.stackUserId
         })
-        if (stackUserInfo.message.info.stackoverflow_data.verification_data.is_verified) {
+        if (stackUserInfo.verification.verified) {
           this.setState({
             stackOverflowVerified: true
           })
@@ -87,7 +87,7 @@ export default class Accounts extends Component {
         isVerifyingReddit: true
       })
 
-      Reddit.generateVerificationCode(this.state.userID, this.state.redditUsername, this.state.token)
+      await RedditModule.addUser(this.state.userID, this.state.redditUsername, this.state.token)
 
       this.props.history.push('/accounts/reddit')
     } else if (account === 'stackOverflow') {
@@ -95,7 +95,7 @@ export default class Accounts extends Component {
         isVerifyingStackOverflow: true
       })
 
-      StackOverflow.generateVerificationCode(this.state.userID, Number(this.state.stackOverflowUserID), this.state.token)
+      await StackOverflowModule.addUser(this.state.userID, this.state.stackOverflowUserID, this.state.token)
 
       this.props.history.push('/accounts/stackoverflow')
     }
