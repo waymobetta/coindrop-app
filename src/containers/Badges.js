@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Badge from './Badge'
-import { BadgeList } from './BadgeList'
+import BadgesModule from '../util/Badges'
+import { Auth } from 'aws-amplify'
 import './Badges.css'
 
 export default class Badges extends Component {
@@ -12,9 +13,16 @@ export default class Badges extends Component {
     }
   }
 
-  componentWillMount () {
+  async componentWillMount () {
+    const currentUser = await Auth.currentAuthenticatedUser()
+    const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+    const badgesResponse = await BadgesModule.getBadges(jwt)
+
+    console.log(badgesResponse)
+
     this.setState({
-      badgeList: BadgeList
+      badgeList: badgesResponse
     })
   }
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Badge from './Badge'
-import { BadgeList } from './BadgeList'
 import { Auth } from 'aws-amplify'
 // import { getWallets } from '../util/api'
 import WalletModule from '../util/Wallet'
+import BadgesModule from '../util/Badges'
 import './Profile.css'
 import Emoji from '../util/Emoji'
 
@@ -21,12 +21,6 @@ export default class Profile extends Component {
     }
   }
 
-  componentWillMount () {
-    this.setState({
-      badgeList: BadgeList
-    })
-  }
-
   async componentDidMount () {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
@@ -40,6 +34,8 @@ export default class Profile extends Component {
 
       const walletsResponse = await WalletModule.getUserWallets(this.state.userID, jwt)
 
+      const badgesResponse = await BadgesModule.getBadgesForUser(this.state.userID, jwt)
+
       const emojiURL = Emoji.fetchRandomEmoji()
 
       for (let i = 0; i < walletsResponse.wallets.length; i++) {
@@ -50,7 +46,8 @@ export default class Profile extends Component {
 
       this.setState({
         email: userEmail,
-        profilePhotoURL: emojiURL
+        profilePhotoURL: emojiURL,
+        badgeList: badgesResponse.badges
       })
     } catch (e) {
       console.error(e.message)
