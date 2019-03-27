@@ -5,6 +5,7 @@ import {
   Well,
   Glyphicon
 } from 'react-bootstrap'
+import TasksModule from '../util/Tasks'
 // import EtherscanModule from "../util/Etherscan";
 import './AdChainAssociate.css'
 
@@ -14,7 +15,8 @@ export default class ContractInteraction extends Component {
 
     this.state = {
       userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
-      isVerified: false
+      isVerified: false,
+      tasks: []
     }
   }
 
@@ -24,8 +26,11 @@ export default class ContractInteraction extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
+      const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
+
       this.setState({
-        token: jwt
+        token: jwt,
+        tasks: tasksResp.tasks
       })
     } catch (e) {
       console.error(e.message)
@@ -61,6 +66,19 @@ export default class ContractInteraction extends Component {
   }
 
   render () {
+    let tokenName
+    let tokenAmount
+    let badgeName
+    let badgeLogoURL
+
+    for (let i = 0; i < this.state.tasks.length; i++) {
+      if (this.state.tasks[i].title === 'Associate') {
+        tokenName = this.state.tasks[i].token
+        tokenAmount = this.state.tasks[i].tokenAllocation
+        badgeName = this.state.tasks[i].badge.name
+        badgeLogoURL = this.state.tasks[i].badge.logoURL
+      }
+    }
     return (
       <div
         align='center'
@@ -81,6 +99,47 @@ export default class ContractInteraction extends Component {
               bsSize='large'>
               <h2>Apply a domain to the <a href='http://staging-redesign.adchain.com/' target='_blank' rel='noopener noreferrer'>adChain Registry</a> to be eligible for the rewards!
               </h2>
+              <Well className='rewardsWell'>
+                <strong>
+                  <span
+                    style={{ color: 'red' }}>
+                    R
+                  </span>
+                  <span
+                    style={{ color: 'green' }}>
+                    E
+                  </span>
+                  <span
+                    style={{ color: 'blue' }}>
+                    W
+                  </span>
+                  <span
+                    style={{ color: 'red' }}>
+                    A
+                  </span>
+                  <span
+                    style={{ color: 'blue' }}>
+                    R
+                  </span>
+                  <span
+                    style={{ color: 'green' }}>
+                    D
+                  </span>
+                  <span
+                    style={{ color: 'red' }}>
+                    S
+                  </span>
+                </strong><br />
+    Token Allocation: <i>{tokenAmount} {tokenName}</i><br />
+    Badge: <a href='/badges'>{badgeName}</a>
+                <img
+                  className='badgeLogo'
+                  alt=''
+                  width='40'
+                  height='32'
+                  src={badgeLogoURL}
+                /><br />
+              </Well>
             </Well>
           </div>
           <p>

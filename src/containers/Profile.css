@@ -6,15 +6,27 @@
   font-family: "Open Sans", sans-serif;
 }
 
-.row::after {
+/*.row::after {
   content: "";
   clear: both;
   display: table;
   float: center;
+}*/
+
+.badgeTitle {
+	font-size: 22pt;
+	color: #6b3eff;
+}
+
+hr {
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-top-color: rgb(157, 8, 230);
 }
 
 .badgeWell {
-	background-color: #777;
+	/*background-color: #777;*/
+	background-color: rgb(157, 8, 230);
 }
 
 .badgeDiv {

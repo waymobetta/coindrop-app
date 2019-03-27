@@ -70,7 +70,9 @@ export default class Profile extends Component {
             </a>
           </div>
           <hr />
-          <p>Badges</p>
+          <p className='badgeTitle'>
+            Badges
+          </p>
           <Well
             className='badgeWell'>
             <div align='center'>

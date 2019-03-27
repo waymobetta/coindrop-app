@@ -24,6 +24,10 @@
     display:inline-block;
 }
 
+.rewardsWell {
+  background-color: white;
+}
+
 .WellDiv {
   max-width: 450px;
 }
