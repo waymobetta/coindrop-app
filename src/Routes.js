@@ -12,7 +12,7 @@ import TaskBuilderSuccess from './components/TaskBuilderSuccess'
 import { AdChainAcknowledged, ColonyContributor } from './tasks/TaskDescriptions'
 import TaskSubmissionSuccess from './components/TaskSubmissionSuccess'
 import AdChainAssociate from './tasks/AdChainAssociate'
-import AdChainQuiz from './tasks/AdChainQuiz'
+import AdChainArchaeologist from './tasks/AdChainArchaeologist'
 import Profile from './containers/Profile'
 import Accounts from './containers/Accounts'
 import Reddit from './containers/Reddit'
@@ -151,9 +151,9 @@ export default ({ childProps }) =>
       component={AdChainAssociate}
       props={childProps} />
     <AuthenticatedRoute
-      path='/tasks/adchain/quiz'
+      path='/tasks/adchain/archaeologist'
       exact
-      component={AdChainQuiz}
+      component={AdChainArchaeologist}
       props={childProps} />
     <AuthenticatedRoute
       path='/tasks/success'

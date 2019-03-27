@@ -3,7 +3,6 @@ import { UncontrolledCollapse } from 'reactstrap'
 import LoaderButton from '../components/LoaderButton'
 import { Button, Well } from 'react-bootstrap'
 // import QuizModule from '../util/Quiz'
-import BadgesModule from '../util/Badges'
 import './Task.css'
 
 export default class Task extends Component {
@@ -19,10 +18,12 @@ export default class Task extends Component {
   }
 
   async componentWillMount () {
-    const { task, token } = this.props
+    const { task } = this.props
+
+    // console.log(task)
 
     if (task.type === 'Quiz') {
-      console.log(task.type)
+      // console.log(task.type)
       //   const quizResultResponse = await Quiz.getResults(task.title, token)
       //   quizResultResponse = false
       //   if (quizResultResponse.status !== false) {
@@ -32,15 +33,6 @@ export default class Task extends Component {
       //     })
       //   }
     }
-
-    // get badges
-    const badgesResponse = await BadgesModule.getBadges(token)
-
-    // get resources
-    // const quizResponse = await QuizModule.
-    this.setState({
-      badges: badgesResponse
-    })
   }
 
   handleTaskClick (event) {
@@ -53,12 +45,13 @@ export default class Task extends Component {
     }
   }
 
-  handleClick (event) {
-    const pathArr = event.target.id.split('-')
-
-    const path = `/tasks/${pathArr[0]}/${pathArr[1]}`
-
-    this.props.history.push(path)
+  handleClick (event, taskAuthor, taskName) {
+    try {
+      const path = `/tasks/${taskAuthor.toLowerCase()}/${taskName.toLowerCase()}`
+      this.props.history.push(path)
+    } catch (err) {
+      console.error(err.message)
+    }
   }
 
   render () {
@@ -68,13 +61,9 @@ export default class Task extends Component {
     let badgePath
     let badgeLogoURL
 
-    this.state.badges.map(badge => {
-      if (task.badge.id === badge.id) {
-        badgeName = badge.name
-        badgeLogoURL = badge.logoURL
-        badgePath = `/badges/${badge.name}`
-      }
-    })
+    badgeName = task.badge.name
+    badgeLogoURL = task.badge.logoURL
+    badgePath = `/badges/${task.author.toLowerCase()}/${task.badge.name.toLowerCase()}`
 
     if (this.state.quizScore !== null) {
       task.completed = true
@@ -132,9 +121,9 @@ Badge: <a href={badgePath}>{badgeName}</a>
               className='button--cd btn btn-outline-primary'
               outline
               color='primary'
-              onClick={this.handleClick}
+              onClick={event => this.handleClick(event, task.author, task.badge.name)}
               type='submit'
-              disabled={task.is_completed}
+              disabled={task.completed}
               text='enlist'
             />
           </Well>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 // import { getTasks } from '../util/api'
 import { Auth } from 'aws-amplify'
-import BadgesModule from '../util/Badges'
 import TasksModule from '../util/Tasks'
 import Task from './Task'
 import './Tasks.css'
@@ -13,8 +12,7 @@ export default class Tasks extends Component {
     this.state = {
       userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
       token: '',
-      tasks: [],
-      badges: []
+      tasks: []
     }
   }
 
@@ -28,11 +26,8 @@ export default class Tasks extends Component {
 
       const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
 
-      const badgesResponse = await BadgesModule.getBadges(jwt)
-
       this.setState({
         token: jwt,
-        badges: badgesResponse,
         tasks: tasksResp.tasks
       })
     } catch (e) {

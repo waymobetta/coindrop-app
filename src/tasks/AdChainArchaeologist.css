@@ -1,31 +1,12 @@
-@media all and (min-width: 480px) {
-  .TaskBuilder {
-    padding: 60px 0;
-  }
-}
 
 .lander {
 	font-family: "Open Sans", sans-serif;
   padding: 0px 0;
 }
 
-.TaskBuilder .lander h1 {
-  font-family: "Open Sans", sans-serif;
-}
-
-.TaskBuilder .lander p {
-	color: #999;
-}
-
-.TaskBuilderForm {
-  max-width: 350px;
-}
-
-.TaskTextArea {
-  min-height: 100px;
-  max-height: 250px;
-  min-width: 350px;
-  max-width: 400px;
+.typeform-widget {
+  width: 100%;
+  height: 400px;
 }
 
 .InfoDescription {
@@ -41,6 +22,7 @@
   -webkit-transform: translateZ(50px); 
   transform: translateZ(50px);
 }
+
 .button--cd {
   height: 40px;
   border-radius: 5px;
