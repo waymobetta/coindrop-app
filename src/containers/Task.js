@@ -48,14 +48,6 @@ export default class Task extends Component {
   render () {
     const { task } = this.props
 
-    let badgeName
-    let badgePath
-    let badgeLogoURL
-
-    badgeName = task.badge.name
-    badgeLogoURL = task.badge.logoURL
-    badgePath = `/badges/${task.author.toLowerCase()}/${task.badge.name.toLowerCase()}`
-
     return (
       <div className='Task'>
         <Button
@@ -67,7 +59,7 @@ export default class Task extends Component {
           </div>
         </Button>
         <UncontrolledCollapse toggler={'toggler' + task.id}>
-          <Well>
+          <Well className='taskWell'>
             <strong>
               Author:&nbsp;
             </strong>
@@ -85,23 +77,55 @@ export default class Task extends Component {
               }}>
               {task.description}<br /><br />
             </i>
-            <strong>Rewards:</strong><br />
-Token Allocation: <i>{task.tokenAllocation} {task.token}</i><br />
-Badge: <a href={badgePath}>{badgeName}</a>
-            <img
-              className='badgeLogo'
-              alt=''
-              width='40'
-              height='32'
-              src={badgeLogoURL}
-            /><br />
-            {
-              (task.type === 'Quiz' && this.state.quizScore === null)
-                ? <span>Score: <span style={{ color: 'red' }}>no score</span></span>
-                : task.type === 'Quiz'
-                  ? <span>Score: <span style={{ color: 'green' }}>{this.state.quizScore}</span></span>
-                  : <span />
-            }<br />
+            <Well
+              className='rewardWell'>
+              <strong>
+                <span
+                  style={{ color: 'red' }}>
+                  R
+                </span>
+                <span
+                  style={{ color: 'green' }}>
+                  E
+                </span>
+                <span
+                  style={{ color: 'blue' }}>
+                  W
+                </span>
+                <span
+                  style={{ color: 'red' }}>
+                  A
+                </span>
+                <span
+                  style={{ color: 'blue' }}>
+                  R
+                </span>
+                <span
+                  style={{ color: 'green' }}>
+                  D
+                </span>
+                <span
+                  style={{ color: 'red' }}>
+                  S
+                </span>
+              </strong><br />
+  Token Allocation: <i>{task.tokenAllocation} {task.token}</i><br />
+  Badge: <a href='/badges'>{task.badge.name}</a>
+              <img
+                className='badgeLogo'
+                alt=''
+                width='40'
+                height='32'
+                src={task.badge.logoURL}
+              /><br />
+              {
+                (task.type === 'Quiz' && this.state.quizScore === null)
+                  ? <span>Score: <span style={{ color: 'red' }}>no score</span></span>
+                  : task.type === 'Quiz'
+                    ? <span>Score: <span style={{ color: 'green' }}>{this.state.quizScore}</span></span>
+                    : <span />
+              }<br />
+            </Well>
             <LoaderButton
               block
               id={`${task.author}-${task.title}`}

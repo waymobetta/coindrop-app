@@ -16,6 +16,11 @@ i {
   color: #9836B8;
 }
 
+.col {
+  padding-left: 5px;
+  display: inline-block;
+}
+
 .Badge h2 {
   font-size: 11pt;
   font-weight: 100;

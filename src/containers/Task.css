@@ -17,6 +17,14 @@
 	color: #999;
 }
 
+.taskWell {
+  background-color: lightgrey;
+}
+
+.rewardWell {
+  background-color: white;
+}
+
 ol {
   list-style-type: upper-roman;
   text-align: left;

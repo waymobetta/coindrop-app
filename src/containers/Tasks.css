@@ -17,6 +17,10 @@ ol {
   text-align: left;
 }
 
+.tasksWell {
+  background-color: white;
+}
+
 .TaskButton {
 	padding: 0;
   outline: none;

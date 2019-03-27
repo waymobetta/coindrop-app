@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { getTasks } from '../util/api'
 import { Auth } from 'aws-amplify'
+import { Well } from 'react-bootstrap'
 import TasksModule from '../util/Tasks'
 import Task from './Task'
 import './Tasks.css'
@@ -39,9 +40,16 @@ export default class Tasks extends Component {
     return (
       <div className='lander'>
         <h1>
-          tasks
+          Tasks
         </h1>
-        <p>You have no tasks at the moment. Subscribe to the coindrop email service to be notified when new tasks are available for you.</p>
+        <p>
+        Welcome to your task wall.<br /><br />Here you will be presented with tasks from projects based on their eligiblity requirements.<br />For example, a basic task requirement might include beloging to a project's Reddit community.
+        </p>
+        <Well>
+          <p>
+          You have no tasks at the moment. Subscribe to the coindrop email service to be notified when new tasks are available for you.
+          </p>
+        </Well>
       </div>
     )
   }
@@ -50,20 +58,25 @@ export default class Tasks extends Component {
     return (
       <div className='lander'>
         <h1>
-          tasks
+          Tasks
         </h1>
+        <p>
+        Here you will be presented with tasks from projects based on their eligiblity requirements.<br />For example, a basic task requirement might include beloging to a project's Reddit community.
+        </p>
         <div align='center'>
-          <ol>
-            {
-              this.state.tasks.map(task => {
-                return <li key={'Item_' + task.id}>
-                  <Task key={'Task_' + task.id} task={task} userID={this.state.userID} token={this.state.token} history={this.props.history} />
-                  <br />
-                  <br />
-                </li>
-              })
-            }
-          </ol>
+          <Well className='tasksWell'>
+            <ol>
+              {
+                this.state.tasks.map(task => {
+                  return <li key={'Item_' + task.id}>
+                    <Task key={'Task_' + task.id} task={task} userID={this.state.userID} token={this.state.token} history={this.props.history} />
+                    <br />
+                    <br />
+                  </li>
+                })
+              }
+            </ol>
+          </Well>
         </div>
       </div>
     )

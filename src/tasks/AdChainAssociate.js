@@ -25,7 +25,6 @@ export default class ContractInteraction extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
-        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
     } catch (e) {

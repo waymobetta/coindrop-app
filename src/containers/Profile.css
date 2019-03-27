@@ -13,6 +13,16 @@
   float: center;
 }
 
+.badgeWell {
+	background-color: #777;
+}
+
+.badgeDiv {
+	background-color: white;
+	max-width: 950px;
+	padding-bottom: 10px;
+}
+
 span {
 	text-align: center;
 }

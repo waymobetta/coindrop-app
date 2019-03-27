@@ -20,8 +20,8 @@ const Wallet = {
       return jsonResponse
     })
   },
-  async getUserWallets (authUserId, JwtToken) {
-    return fetch(`${baseURL}/wallets?userId=${authUserId}`, {
+  async getUserWallets (JwtToken) {
+    return fetch(`${baseURL}/wallets`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',

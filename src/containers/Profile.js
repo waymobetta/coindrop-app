@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Badge from './Badge'
 import { Auth } from 'aws-amplify'
 // import { getWallets } from '../util/api'
+import { Well } from 'react-bootstrap'
 import WalletModule from '../util/Wallet'
 import BadgesModule from '../util/Badges'
 import './Profile.css'
@@ -32,7 +33,7 @@ export default class Profile extends Component {
 
       // const walletsResponse = await getWallets()
 
-      const walletsResponse = await WalletModule.getUserWallets(this.state.userID, jwt)
+      const walletsResponse = await WalletModule.getUserWallets(jwt)
 
       const badgesResponse = await BadgesModule.getBadgesForUser(this.state.userID, jwt)
 
@@ -59,7 +60,7 @@ export default class Profile extends Component {
       <div className='Profile'>
         <div className='lander'>
           <div align='center'>
-            <h1>profile</h1>
+            <h1>Profile</h1>
             <img alt='' src={this.state.profilePhotoURL} height='60' width='75' />
             <p style={{ color: '#999' }}><i>{this.state.email}</i></p>
             <p>&nbsp;</p>
@@ -69,16 +70,19 @@ export default class Profile extends Component {
             </a>
           </div>
           <hr />
-          <p>badges</p>
-          <div align='center'>
-            <div className='row'>
-              {
-                this.state.badgeList.map(badge => {
-                  return <Badge key={'Badge_' + badge.name} badge={badge} />
-                })
-              }
+          <p>Badges</p>
+          <Well
+            className='badgeWell'>
+            <div align='center'>
+              <div className='badgeDiv'>
+                {
+                  this.state.badgeList.map(badge => {
+                    return <Badge key={'Badge_' + badge.name} badge={badge} />
+                  })
+                }
+              </div>
             </div>
-          </div>
+          </Well>
         </div>
       </div>
     )

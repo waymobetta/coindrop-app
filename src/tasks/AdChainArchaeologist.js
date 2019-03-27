@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Auth } from 'aws-amplify'
 import './AdChainArchaeologist.css'
+import WalletModule from '../util/Wallet'
 import LoaderButton from '../components/LoaderButton'
 import * as typeformEmbed from '@typeform/embed'
 
@@ -21,10 +22,18 @@ export default class AdChainArchaeologist extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+      const walletsResponse = await WalletModule.getUserWallets(jwt)
+
+      for (let i = 0; i < walletsResponse.wallets.length; i++) {
+        if (walletsResponse.wallets[i].walletType === 'eth') {
+          this.setState({ wallet: walletsResponse.wallets[i].address })
+        }
+      }
+
       this.setState({
         userID: currentUser.signInUserSession.accessToken.payload.username,
         userName: currentUser.attributes.email,
-        wallet: '0x46f85C845BE7Bd2062b13d60139d952a6cFBC3e8', // placeholder
         token: jwt
       })
     } catch (e) {
@@ -36,8 +45,7 @@ export default class AdChainArchaeologist extends Component {
     try {
       const userName = this.state.userName
       const userNameShort = userName.split('@')[0]
-      const userWallet = this.state.wallet
-      const surveyUrl = `https://coindrop.typeform.com/to/mDDkkK?name=${userNameShort}&walletaddress=${userWallet}`
+      const surveyUrl = `https://coindrop.typeform.com/to/mDDkkK?name=${userNameShort}`
       const reference = typeformEmbed.makePopup(
         surveyUrl, {
           mode: 'popup',
