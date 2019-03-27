@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { UncontrolledCollapse } from 'reactstrap'
 import LoaderButton from '../components/LoaderButton'
 import { Button, Well } from 'react-bootstrap'
-// import Quiz from '../util/Quiz'
+// import QuizModule from '../util/Quiz'
+import BadgesModule from '../util/Badges'
 import './Task.css'
 
 export default class Task extends Component {
@@ -12,23 +13,34 @@ export default class Task extends Component {
     this.state = {
       isOpen: false,
       quizScore: null,
-      isEnlisting: false
+      isEnlisting: false,
+      badges: []
     }
   }
 
   async componentWillMount () {
-    // const { task, token } = this.props
+    const { task, token } = this.props
 
-    // if (task.type === 'quiz') {
-    //   const quizResultResponse = await Quiz.getResults(task.title, token)
-    //   quizResultResponse = false
-    //   if (quizResultResponse.status !== false) {
-    //     const score = `${(quizResultResponse.message.questions_correct / (quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect)) * 100}%`
-    //     this.setState({
-    //       quizScore: score
-    //     })
-    //   }
-    // }
+    if (task.type === 'Quiz') {
+      console.log(task.type)
+      //   const quizResultResponse = await Quiz.getResults(task.title, token)
+      //   quizResultResponse = false
+      //   if (quizResultResponse.status !== false) {
+      //     const score = `${(quizResultResponse.message.questions_correct / (quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect)) * 100}%`
+      //     this.setState({
+      //       quizScore: score
+      //     })
+      //   }
+    }
+
+    // get badges
+    const badgesResponse = await BadgesModule.getBadges(token)
+
+    // get resources
+    // const quizResponse = await QuizModule.
+    this.setState({
+      badges: badgesResponse
+    })
   }
 
   handleTaskClick (event) {
@@ -52,6 +64,18 @@ export default class Task extends Component {
   render () {
     const { task } = this.props
 
+    let badgeName
+    let badgePath
+    let badgeLogoURL
+
+    this.state.badges.map(badge => {
+      if (task.badge.id === badge.id) {
+        badgeName = badge.name
+        badgeLogoURL = badge.logoURL
+        badgePath = `/badges/${badge.name}`
+      }
+    })
+
     if (this.state.quizScore !== null) {
       task.completed = true
     }
@@ -68,14 +92,37 @@ export default class Task extends Component {
         </Button>
         <UncontrolledCollapse toggler={'toggler' + task.id}>
           <Well>
-            {task.description}<br /><br />
+            <strong>
+              Author:&nbsp;
+            </strong>
+            <span
+              style={{
+                color: 'purple'
+              }}
+            >
+              {task.author}
+            </span>
+            <br /><br />
+            <i
+              style={{
+                color: 'darkblue'
+              }}>
+              {task.description}<br /><br />
+            </i>
             <strong>Rewards:</strong><br />
 Token Allocation: <i>{task.tokenAllocation} {task.token}</i><br />
-Badge: <a href='/badges'>{task.badge.id}</a><br />
+Badge: <a href={badgePath}>{badgeName}</a>
+            <img
+              className='badgeLogo'
+              alt=''
+              width='40'
+              height='32'
+              src={badgeLogoURL}
+            /><br />
             {
-              (task.type === 'quiz' && this.state.quizScore === null)
+              (task.type === 'Quiz' && this.state.quizScore === null)
                 ? <span>Score: <span style={{ color: 'red' }}>no score</span></span>
-                : task.type === 'quiz'
+                : task.type === 'Quiz'
                   ? <span>Score: <span style={{ color: 'green' }}>{this.state.quizScore}</span></span>
                   : <span />
             }<br />

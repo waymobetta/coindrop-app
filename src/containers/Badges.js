@@ -19,8 +19,6 @@ export default class Badges extends Component {
 
     const badgesResponse = await BadgesModule.getBadges(jwt)
 
-    console.log(badgesResponse)
-
     this.setState({
       badgeList: badgesResponse
     })
