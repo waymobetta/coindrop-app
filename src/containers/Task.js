@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { UncontrolledCollapse } from 'reactstrap'
 import LoaderButton from '../components/LoaderButton'
 import { Button, Well } from 'react-bootstrap'
-// import QuizModule from '../util/Quiz'
+import QuizModule from '../util/Quiz'
 import './Task.css'
 
 export default class Task extends Component {
@@ -18,21 +18,12 @@ export default class Task extends Component {
   }
 
   async componentWillMount () {
-    const { task } = this.props
-
-    // console.log(task)
-
-    if (task.type === 'Quiz') {
-      // console.log(task.type)
-      //   const quizResultResponse = await Quiz.getResults(task.title, token)
-      //   quizResultResponse = false
-      //   if (quizResultResponse.status !== false) {
-      //     const score = `${(quizResultResponse.message.questions_correct / (quizResultResponse.message.questions_correct + quizResultResponse.message.questions_incorrect)) * 100}%`
-      //     this.setState({
-      //       quizScore: score
-      //     })
-      //   }
-    }
+    const { task, token } = this.props
+    const quizResultResponse = await QuizModule.getResults(task.resourceId, token)
+    const score = `${(quizResultResponse.questionsCorrect / (quizResultResponse.questionsCorrect + quizResultResponse.questionsIncorrect)) * 100}%`
+    this.setState({
+      quizScore: score
+    })
   }
 
   handleTaskClick (event) {
@@ -64,10 +55,6 @@ export default class Task extends Component {
     badgeName = task.badge.name
     badgeLogoURL = task.badge.logoURL
     badgePath = `/badges/${task.author.toLowerCase()}/${task.badge.name.toLowerCase()}`
-
-    if (this.state.quizScore !== null) {
-      task.completed = true
-    }
 
     return (
       <div className='Task'>

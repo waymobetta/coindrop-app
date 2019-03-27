@@ -13,9 +13,6 @@ const Quiz = {
     }).then(jsonResponse => {
       return jsonResponse
     })
-  },
-  async getQuizForTask (taskID, JwtToken) {
-    return fetch(`${baseURL}/quizzes/{`)
   }
 }
 

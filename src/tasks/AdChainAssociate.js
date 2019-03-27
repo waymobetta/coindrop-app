@@ -13,7 +13,7 @@ export default class ContractInteraction extends Component {
     super(props)
 
     this.state = {
-      userID: '',
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
       isVerified: false
     }
   }
@@ -25,7 +25,7 @@ export default class ContractInteraction extends Component {
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
+        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
     } catch (e) {
@@ -67,7 +67,7 @@ export default class ContractInteraction extends Component {
         align='center'
         className='ContractInteraction'>
         <div className='lander'>
-          <h1>adchain associate</h1>
+          <h1>adChain Associate</h1>
           <p>Prove you interacted with our contract!</p>
           <div
             className='CodeDiv'>
@@ -85,21 +85,24 @@ export default class ContractInteraction extends Component {
             </Well>
           </div>
           <p>
+            <i style={{ color: 'darkred' }}>
+            FRAUDSTERS BEWARE!
+            </i><br />
             <i style={{ color: 'grey' }}>
-              FRAUDSTERS BEWARE! Impersonating a user who has already applied a domain to the registry may seem like a good idea, but what you will be doing is simply passing your rewards on to them..
+              Impersonating a user who has already applied a domain to the registry may seem like a good idea, but what you will be doing is simply passing your rewards on to them..
             </i>
           </p>
         </div>
         <div>
           <br />
-          <i>already applied a domain? click verify below to check </i>
+          <i>Already applied a domain? Click verify below to check </i>
         </div>
         <Button
           className='button--cd btn btn-outline-primary'
           outline
           color='primary'
           block
-          onClick={this.handleClick}
+          onClick={event => this.handleClick()}
           disabled={this.validateClick()}>
             verify
         </Button>
