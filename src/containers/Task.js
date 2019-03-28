@@ -61,14 +61,16 @@ export default class Task extends Component {
         <UncontrolledCollapse toggler={'toggler' + task.id}>
           <Well className='taskWell'>
             <strong>
-              Author:&nbsp;
+              <span style={{ color: 'black' }}>
+                Author:&nbsp;
+              </span>
             </strong>
             <span
               style={{
                 color: 'purple'
               }}
             >
-              {task.author}
+              <a href='/projects'>{task.author}</a>
             </span>
             <br /><br />
             <i
