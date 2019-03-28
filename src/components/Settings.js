@@ -7,8 +7,12 @@ export default class Settings extends Component {
   render () {
     return (
       <div className='Settings'>
-        <h1 align='center'>settings</h1>
-        <p>
+        <p
+          className='badgeTitle'
+          align='center'>
+          Settings
+        </p>
+        <p className='buttonSettings'>
           <LinkContainer to='/settings/wallets'>
             <LoaderButton
               className='button--cd btn btn-outline-primary'

@@ -80,9 +80,9 @@ export default class Wallets extends Component {
         align='center'
         className='Wallets'>
         <div className='lander'>
-          <h1>
+          <p className='badgeTitle'>
             Wallets
-          </h1>
+          </p>
           <br />
           <div className='WalletsForm'>
             <form onSubmit={event => this.handleSubmit(event, 'eth')}>

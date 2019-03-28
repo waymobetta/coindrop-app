@@ -95,7 +95,9 @@ export default class Accounts extends Component {
     return (
       <div className='Accounts'>
         <div className='lander'>
-          <h1>accounts</h1>
+          <p className='badgeTitle'>
+            Accounts
+          </p>
           <div id='account'>
             <Button
               className='TaskButton'

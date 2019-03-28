@@ -94,32 +94,37 @@ class App extends Component {
             <Nav pullRight>
               {this.state.isAuthenticated
                 ? <Fragment>
+                  <LinkContainer to='/projects'>
+                    <NavItem>
+                      Projects
+                    </NavItem>
+                  </LinkContainer>
                   <LinkContainer to='/badges'>
                     <NavItem>
-                        badges
+                        Badges
                     </NavItem>
                   </LinkContainer>
                   <LinkContainer to='/tasks'>
-                    <NavItem>tasks <Badge className='TaskBadge'>{this.state.pendingTasks}</Badge>
+                    <NavItem>Tasks <Badge className='TaskBadge'>{this.state.pendingTasks}</Badge>
                     </NavItem>
                   </LinkContainer>
                   <LinkContainer to='/accounts'>
-                    <NavItem>accounts</NavItem>
+                    <NavItem>Accounts</NavItem>
                   </LinkContainer>
                   <LinkContainer to='/profile'>
-                    <NavItem>profile</NavItem>
+                    <NavItem>Profile</NavItem>
                   </LinkContainer>
                   <LinkContainer to='/settings'>
-                    <NavItem>settings</NavItem>
+                    <NavItem>Settings</NavItem>
                   </LinkContainer>
-                  <NavItem onClick={event => this.handleLogout(event)}>logout</NavItem>
+                  <NavItem onClick={event => this.handleLogout(event)}>Logout</NavItem>
                 </Fragment>
                 : <Fragment>
                   <LinkContainer to='/signup'>
-                    <NavItem>signup</NavItem>
+                    <NavItem>Signup</NavItem>
                   </LinkContainer>
                   <LinkContainer to='/login'>
-                    <NavItem>login</NavItem>
+                    <NavItem>Login</NavItem>
                   </LinkContainer>
                 </Fragment>
               }

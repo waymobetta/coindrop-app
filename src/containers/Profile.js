@@ -60,7 +60,9 @@ export default class Profile extends Component {
       <div className='Profile'>
         <div className='lander'>
           <div align='center'>
-            <h1>Profile</h1>
+            <p className='badgeTitle'>
+              Profile
+            </p>
             <img alt='' src={this.state.profilePhotoURL} height='60' width='75' />
             <p style={{ color: '#999' }}><i>{this.state.email}</i></p>
             <p>&nbsp;</p>

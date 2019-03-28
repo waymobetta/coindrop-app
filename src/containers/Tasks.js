@@ -39,9 +39,9 @@ export default class Tasks extends Component {
   renderNoTasks () {
     return (
       <div className='lander'>
-        <h1>
+        <p className='badgeTitle'>
           Tasks
-        </h1>
+        </p>
         <p>
         Welcome to your task wall.<br /><br />Here you will be presented with tasks from projects based on their eligiblity requirements.<br />For example, a basic task requirement might include beloging to a project's Reddit community.
         </p>
@@ -57,9 +57,9 @@ export default class Tasks extends Component {
   renderTasks () {
     return (
       <div className='lander'>
-        <h1>
+        <p className='badgeTitle'>
           Tasks
-        </h1>
+        </p>
         <p>
         Here you will be presented with tasks from projects based on their eligiblity requirements.<br />For example, a basic task requirement might include beloging to a project's Reddit community.
         </p>

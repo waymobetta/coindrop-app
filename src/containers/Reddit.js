@@ -74,7 +74,9 @@ export default class Reddit extends Component {
         align='center'
         className='Reddit'>
         <div className='lander'>
-          <h1>reddit</h1>
+          <p className='badgeTitle'>
+            Reddit
+          </p>
           <p>verification code</p>
           <div
             className='CodeDiv'>

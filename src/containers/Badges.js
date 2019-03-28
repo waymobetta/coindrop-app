@@ -28,9 +28,9 @@ export default class Badges extends Component {
     return (
       <div className='Badges'>
         <div className='lander'>
-          <h1>
-        badges
-          </h1>
+          <p className='badgeTitle'>
+            Badges
+          </p>
           <div align='center'>
             {
               this.state.badgeList.map(badge => {

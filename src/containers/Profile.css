@@ -26,7 +26,8 @@ hr {
 
 .badgeWell {
 	/*background-color: #777;*/
-	background-color: rgb(157, 8, 230);
+	/*background-color: rgb(157, 8, 230);*/
+  background-color: #6b3eff;
 }
 
 .badgeDiv {

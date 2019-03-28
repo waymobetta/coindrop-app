@@ -1,26 +1,29 @@
-.Accounts .lander {
-	font-family: "Open Sans", sans-serif;
-  padding: 2px 0;
-  text-align: center;
+@media all and (min-width: 480px) {
+  .TaskBuilderSuccess {
+    padding: 0px 0;
+  }
+
+  .TaskBuilderSuccess form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
 }
 
-.Accounts .lander h1 {
-  font-family: "Open Sans", sans-serif;
+.projectWell {
+  /*background-color: rgb(157, 8, 230);*/
+  background-color: #6b3eff;
 }
 
-.Accounts .lander {
-	color: #999;
+.projectLogo {
+  margin-top: -55pt;
 }
 
-.Accounts #account {
-	padding: 5px;
-	font-size: 13pt;
+.individualWell {
+  background-color: white;
 }
 
-#AccountSpan {
-	color: #9836B8;
-	font-size: 13pt;
-	padding: 10px;
+.titleDiv {
+  color: darkred;
 }
 
 :root {
@@ -32,7 +35,6 @@
   -webkit-transform: translateZ(50px); 
   transform: translateZ(50px);
 }
-
 .button--cd {
   height: 40px;
   border-radius: 5px;
@@ -43,10 +45,7 @@
   background-color: #fff;
   position: relative;
   z-index: 100;
-  min-width: 15px;
-  max-width: 15px;
-  min-height: 20px;
-  max-height: 35px;
+  min-width: 150px;
 }
 
 .button--cd:hover {

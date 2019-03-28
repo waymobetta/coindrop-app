@@ -16,7 +16,10 @@
 }
 
 .TaskBadge {
-	background-color: #9836B8;
+	/*background-color: #9836B8;*/
+	/*background-color: #6b3eff;*/
+	background: linear-gradient(to right, #b500ff 0%, #3c00ff 100%);
+	margin-top: -2pt;
 }
 
 #dropdown-no-carat {

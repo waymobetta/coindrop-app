@@ -14,6 +14,7 @@ import TaskSubmissionSuccess from './components/TaskSubmissionSuccess'
 import AdChainAssociate from './tasks/AdChainAssociate'
 import AdChainArchaeologist from './tasks/AdChainArchaeologist'
 import Profile from './containers/Profile'
+import Projects from './components/Projects'
 import Accounts from './containers/Accounts'
 import Reddit from './containers/Reddit'
 import StackOverflow from './containers/StackOverflow'
@@ -56,6 +57,11 @@ export default ({ childProps }) =>
       props={childProps} />
 
     { /* authenticated routes */ }
+    <AuthenticatedRoute
+      path='/projects'
+      exact
+      component={Projects}
+      props={childProps} />
     <AuthenticatedRoute
       path='/profile'
       exact

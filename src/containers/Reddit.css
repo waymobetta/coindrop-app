@@ -6,7 +6,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
-.Reddit .lander p {
+.Reddit .lander {
 	color: #999;
 }
 
@@ -20,6 +20,7 @@
 
 .CodeDiv {
   text-align: center;
+  color: #999;
 }
 
 .Divider {

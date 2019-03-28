@@ -17,8 +17,12 @@
   max-width: 200px;
 }
 
-.Settings p {
+/*.Settings {
 	padding: 60px 0;
+}*/
+
+.buttonSettings {
+  padding: 60px 0;
 }
 
 :root {

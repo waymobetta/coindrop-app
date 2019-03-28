@@ -73,7 +73,9 @@ export default class StackOverflow extends Component {
         align='center'
         className='StackOverflow'>
         <div className='lander'>
-          <h1>stack overflow</h1>
+          <p className='badgeTitle'>
+            Stack Overflow
+          </p>
           <p>verification code</p>
           <div
             className='CodeDiv'>
