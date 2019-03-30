@@ -13,6 +13,7 @@ import { AdChainAcknowledged, ColonyContributor } from './tasks/TaskDescriptions
 import TaskSubmissionSuccess from './components/TaskSubmissionSuccess'
 import AdChainAssociate from './tasks/AdChainAssociate'
 import AdChainArchaeologist from './tasks/AdChainArchaeologist'
+import MyCryptoConscious from './tasks/MyCryptoConscious'
 import Profile from './containers/Profile'
 import Projects from './components/Projects'
 import Accounts from './containers/Accounts'
@@ -160,6 +161,11 @@ export default ({ childProps }) =>
       path='/tasks/adchain/archaeologist'
       exact
       component={AdChainArchaeologist}
+      props={childProps} />
+    <AuthenticatedRoute
+      path='/tasks/mycrypto/crypto-conscious'
+      exact
+      component={MyCryptoConscious}
       props={childProps} />
     <AuthenticatedRoute
       path='/tasks/success'

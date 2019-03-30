@@ -10,6 +10,7 @@ export default class Task extends Component {
     super(props)
 
     this.state = {
+      token: '',
       isOpen: false,
       quizScore: null,
       isEnlisting: false,
@@ -22,6 +23,7 @@ export default class Task extends Component {
     const quizResultResponse = await QuizModule.getResults(task.resourceId, token)
     const score = `${(quizResultResponse.questionsCorrect / (quizResultResponse.questionsCorrect + quizResultResponse.questionsIncorrect)) * 100}%`
     this.setState({
+      token: token,
       quizScore: score
     })
   }
@@ -39,7 +41,7 @@ export default class Task extends Component {
   handleClick (event, taskAuthor, taskName) {
     try {
       const path = `/tasks/${taskAuthor.toLowerCase()}/${taskName.toLowerCase()}`
-      this.props.history.push(path)
+      this.props.history.push(path, this.state)
     } catch (err) {
       console.error(err.message)
     }

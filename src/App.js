@@ -51,7 +51,6 @@ class App extends Component {
         console.log('not logged in')
       }
     }
-
     this.setState({ isAuthenticating: false })
   }
 
