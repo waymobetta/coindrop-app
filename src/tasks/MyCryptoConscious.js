@@ -48,6 +48,9 @@ export default class MyCryptoConscious extends Component {
 
   async handleClick (event) {
     try {
+      // TODO:
+      // create wallet verify endpoint
+      // POST with message payload, response is verified boolean
       // const validationResponse = await WalletModule.verifyMessage(this.state.message, this.state.token);
 
       // simulate successful response
@@ -97,7 +100,11 @@ export default class MyCryptoConscious extends Component {
         align='center'
         className='ContractInteraction'>
         <div className='lander'>
-          <h1>{taskTitle}</h1>
+          <p
+            className='TaskTitle'
+            style={{ color: '#6b3eff', 'fontSize': '18pt' }}>
+            {taskTitle}
+          </p>
           <p>
           Let's verify you know the basics before getting into the crypto world.
           </p>
@@ -190,13 +197,14 @@ export default class MyCryptoConscious extends Component {
           <Form>
             <FormGroup>
               <Label
-                for='exampleText'>
+                for='verifyMessage'>
 Verify Message
               </Label>
               <Input
+                className='inputClass'
                 type='textarea'
                 name='text'
-                id='exampleText' />
+                id='verifyMessage' />
             </FormGroup>
           </Form>
         </div>

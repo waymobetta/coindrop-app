@@ -65,10 +65,10 @@ export default class AdChainArchaeologist extends Component {
       <div
         align='center'
         className='TaskAuthor'>
-        <h1>adChain</h1>
         <p
-          className='TaskTitle'>
-          archaeologist
+          className='TaskTitle'
+          style={{ color: '#6b3eff', 'font-size': '18pt' }}>
+          Archaeologist
         </p>
         <br />
         <div

@@ -70,10 +70,12 @@ export default class ContractInteraction extends Component {
     let tokenAmount
     let badgeName
     let badgeLogoURL
+    let taskTitle
 
     for (let i = 0; i < this.state.tasks.length; i++) {
       if (this.state.tasks[i].title === 'Associate') {
         tokenName = this.state.tasks[i].token
+        taskTitle = this.state.tasks[i].title
         tokenAmount = this.state.tasks[i].tokenAllocation
         badgeName = this.state.tasks[i].badge.name
         badgeLogoURL = this.state.tasks[i].badge.logoURL
@@ -84,7 +86,11 @@ export default class ContractInteraction extends Component {
         align='center'
         className='ContractInteraction'>
         <div className='lander'>
-          <h1>adChain Associate</h1>
+          <p
+            className='TaskTitle'
+            style={{ color: '#6b3eff', 'font-size': '18pt' }}>
+            {taskTitle}
+          </p>
           <p>Prove you interacted with our contract!</p>
           <div
             className='CodeDiv'>
