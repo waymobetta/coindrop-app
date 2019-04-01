@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Auth } from 'aws-amplify'
 import './AdChainArchaeologist.css'
-import WalletModule from '../util/Wallet'
 import LoaderButton from '../components/LoaderButton'
+import QuizModule from '../util/Quiz'
 import * as typeformEmbed from '@typeform/embed'
 
 export default class AdChainArchaeologist extends Component {
@@ -10,10 +10,9 @@ export default class AdChainArchaeologist extends Component {
     super(props)
 
     this.state = {
-      userID: '',
+      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
       userName: '',
-      wallet: '',
-      isCompleted: false,
+      quizTaken: false,
       token: ''
     }
   }
@@ -23,18 +22,22 @@ export default class AdChainArchaeologist extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      const walletsResponse = await WalletModule.getUserWallets(jwt)
+      // TODO:
+      // fetch resource ID other ways
+      let taskResourceID = 'e1d49fb1-2fd9-48ba-b17d-3831b882373a'
 
-      for (let i = 0; i < walletsResponse.wallets.length; i++) {
-        if (walletsResponse.wallets[i].walletType === 'eth') {
-          this.setState({ wallet: walletsResponse.wallets[i].address })
-        }
+      const quizResultResponse = await QuizModule.getResults(taskResourceID, jwt)
+
+      let quizTaken = false
+
+      if (quizResultResponse.code !== 500) {
+        quizTaken = true
       }
 
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
-        userName: currentUser.attributes.email,
-        token: jwt
+        token: jwt,
+        // userID: currentUser.signInUserSession.accessToken.payload.username,
+        quizTaken: quizTaken
       })
     } catch (e) {
       console.error(e.message)
@@ -43,15 +46,16 @@ export default class AdChainArchaeologist extends Component {
 
   launchTypeformPopUp (event) {
     try {
-      const userName = this.state.userName
-      const userNameShort = userName.split('@')[0]
-      const surveyUrl = `https://coindrop.typeform.com/to/mDDkkK?name=${userNameShort}`
+      const surveyUrl = `https://coindrop.typeform.com/to/mDDkkK?user_id=${this.state.userID}`
       const reference = typeformEmbed.makePopup(
         surveyUrl, {
           mode: 'popup',
           hideHeaders: true,
           hideFooter: true,
-          onSubmit: () => alert('ADT [token] incoming!!') // placeholder
+          onSubmit: () => {
+            alert('ADT [token] incoming!!') // placeholder
+            this.setState({ quizTaken: true })
+          }
         }
       )
       reference.open()
@@ -93,7 +97,7 @@ export default class AdChainArchaeologist extends Component {
             color='primary'
             onClick={event => this.launchTypeformPopUp(event)}
             type='submit'
-            disabled={this.state.isCompleted}
+            disabled={this.state.quizTaken}
             text="let's go!"
           />
         </div>
