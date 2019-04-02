@@ -11,6 +11,9 @@ import {
   Well,
   Glyphicon
 } from 'react-bootstrap'
+import {
+  getUserId
+} from '../util/api'
 import './MyCryptoConscious.css'
 import TasksModule from '../util/Tasks'
 // import WalletModule from '../util/Wallet'
@@ -20,7 +23,7 @@ export default class MyCryptoConscious extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       message: '',
       isCompleted: false,
       tasks: [],
@@ -32,6 +35,12 @@ export default class MyCryptoConscious extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
 
       const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
 

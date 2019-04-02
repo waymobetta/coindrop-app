@@ -3,6 +3,9 @@ import { Auth } from 'aws-amplify'
 import './AdChainArchaeologist.css'
 import LoaderButton from '../components/LoaderButton'
 import QuizModule from '../util/Quiz'
+import {
+  getUserId
+} from '../util/api'
 import * as typeformEmbed from '@typeform/embed'
 
 export default class AdChainArchaeologist extends Component {
@@ -10,7 +13,7 @@ export default class AdChainArchaeologist extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       userName: '',
       quizTaken: false,
       token: ''
@@ -21,6 +24,12 @@ export default class AdChainArchaeologist extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
 
       // TODO:
       // fetch resource ID other ways
@@ -36,7 +45,6 @@ export default class AdChainArchaeologist extends Component {
 
       this.setState({
         token: jwt,
-        // userID: currentUser.signInUserSession.accessToken.payload.username,
         quizTaken: quizTaken
       })
     } catch (e) {

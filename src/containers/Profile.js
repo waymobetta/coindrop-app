@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Badge from './Badge'
 import { Auth } from 'aws-amplify'
-// import { getWallets } from '../util/api'
+import {
+  getUserId
+} from '../util/api'
 import { Well } from 'react-bootstrap'
 import WalletModule from '../util/Wallet'
 import BadgesModule from '../util/Badges'
@@ -13,7 +15,7 @@ export default class Profile extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90', // <-- actual UUID within db
+      userID: '',
       email: '',
       username: '',
       wallet: [],
@@ -29,9 +31,13 @@ export default class Profile extends Component {
       // const userID = currentUser.signInUserSession.accessToken.payload.username
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      const userEmail = currentUser.attributes.email
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
 
-      // const walletsResponse = await getWallets()
+      const userEmail = currentUser.attributes.email
 
       const walletsResponse = await WalletModule.getUserWallets(jwt)
 

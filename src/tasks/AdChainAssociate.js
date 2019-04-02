@@ -5,6 +5,9 @@ import {
   Well,
   Glyphicon
 } from 'react-bootstrap'
+import {
+  getUserId
+} from '../util/api'
 import TasksModule from '../util/Tasks'
 // import EtherscanModule from "../util/Etherscan";
 import './AdChainAssociate.css'
@@ -14,7 +17,7 @@ export default class ContractInteraction extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       isVerified: false,
       tasks: []
     }
@@ -25,6 +28,12 @@ export default class ContractInteraction extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
 
       const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
 

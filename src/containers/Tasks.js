@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-// import { getTasks } from '../util/api'
 import { Auth } from 'aws-amplify'
 import { Well } from 'react-bootstrap'
 import TasksModule from '../util/Tasks'
+import {
+  getUserId
+} from '../util/api'
 import Task from './Task'
 import './Tasks.css'
 
@@ -11,7 +13,7 @@ export default class Tasks extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       token: '',
       tasks: []
     }
@@ -24,6 +26,12 @@ export default class Tasks extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
 
       const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
 

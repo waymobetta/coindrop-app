@@ -5,6 +5,9 @@ import {
   Well,
   Glyphicon
 } from 'react-bootstrap'
+import {
+  getUserId
+} from '../util/api'
 import StackOverflowModule from '../util/StackOverflow'
 import './StackOverflow.css'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -14,7 +17,8 @@ export default class StackOverflow extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
+      token: '',
       verificationCode: '',
       codeCopied: false,
       isVerified: false
@@ -27,8 +31,13 @@ export default class StackOverflow extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
+
       this.setState({
-        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
 

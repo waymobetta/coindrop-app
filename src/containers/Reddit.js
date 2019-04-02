@@ -6,6 +6,9 @@ import {
   Glyphicon
 } from 'react-bootstrap'
 import RedditModule from '../util/Reddit'
+import {
+  getUserId
+} from '../util/api'
 import './Reddit.css'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
@@ -14,7 +17,7 @@ export default class Reddit extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       verificationCode: '',
       codeCopied: false,
       isVerified: false
@@ -27,8 +30,13 @@ export default class Reddit extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
+
       this.setState({
-        // userID: currentUser.signInUserSession.accessToken.payload.username,
         token: jwt
       })
 

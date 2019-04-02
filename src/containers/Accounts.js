@@ -7,6 +7,9 @@ import { Button } from 'reactstrap'
 import './Accounts.css'
 import { Auth } from 'aws-amplify'
 import RedditModule from '../util/Reddit'
+import {
+  getUserId
+} from '../util/api'
 import StackOverflowModule from '../util/StackOverflow'
 
 export default class Accounts extends Component {
@@ -14,7 +17,7 @@ export default class Accounts extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       token: '',
       redditUsername: '',
       stackOverflowUserID: '',
@@ -32,6 +35,12 @@ export default class Accounts extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
+
+      getUserId().then(userID => {
+        this.setState({
+          userID: userID
+        })
+      })
 
       this.setState({
         token: jwt
