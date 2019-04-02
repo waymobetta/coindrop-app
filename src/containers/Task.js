@@ -13,7 +13,6 @@ export default class Task extends Component {
       token: '',
       isOpen: false,
       quizScore: null,
-      quizTaken: false,
       isEnlisting: false,
       badges: []
     }
@@ -24,16 +23,13 @@ export default class Task extends Component {
     const quizResultResponse = await QuizModule.getResults(task.resourceId, token)
 
     let score = 0
-    let quizTaken = false
 
     if (quizResultResponse.code !== 500) {
       score = `${(quizResultResponse.questionsCorrect / (quizResultResponse.questionsCorrect + quizResultResponse.questionsIncorrect)) * 100}%`
-      quizTaken = true
     }
     this.setState({
       token: token,
-      quizScore: score,
-      quizTaken: quizTaken
+      quizScore: score
     })
   }
 
@@ -66,7 +62,7 @@ export default class Task extends Component {
           className='TaskButton'
           onClick={event => this.handleTaskClick(event)}>
           <div id='task'>
-            {task.title} - <i><span style={{ color: 'black' }}>{task.type}</span></i> - {this.state.quizTaken ? <span style={{ color: 'green' }}>completed</span> : <span style={{ color: 'orange' }}>not complete</span>}
+            {task.title} - <i><span style={{ color: 'black' }}>{task.type}</span></i> - {task.completed ? <span style={{ color: 'green' }}>completed</span> : <span style={{ color: 'orange' }}>not complete</span>}
           </div>
         </Button>
         <UncontrolledCollapse toggler={'toggler' + task.id}>
@@ -147,7 +143,7 @@ export default class Task extends Component {
               color='primary'
               onClick={event => this.handleClick(event, task.author, task.badge.name)}
               type='submit'
-              disabled={this.state.quizTaken}
+              disabled={task.completed}
               text='enlist'
             />
           </Well>

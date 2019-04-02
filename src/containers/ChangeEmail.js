@@ -153,10 +153,14 @@ please check your email ({this.state.email}) for the confirmation code.
       <div
         align='center'
         className='updateEmail'>
-        <h1>update email</h1>
+        <p
+          className='badgeTitle'
+          style={{ color: '#6b3eff', fontSize: '22pt' }}>
+          Update Email
+        </p>
         <div className='ChangeEmail'>
           <div>
-            <p align='center'>if you'd like to change your email, this is the place to do it</p>
+            <p align='center'>If you'd like to change your email, this is the place to do it</p>
             <br />
           </div>
           {!this.state.codeSent

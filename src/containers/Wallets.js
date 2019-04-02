@@ -80,7 +80,9 @@ export default class Wallets extends Component {
         align='center'
         className='Wallets'>
         <div className='lander'>
-          <p className='badgeTitle'>
+          <p
+            className='badgeTitle'
+            style={{ color: '#6b3eff', fontSize: '22pt' }}>
             Wallets
           </p>
           <br />

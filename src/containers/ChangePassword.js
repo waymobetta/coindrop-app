@@ -60,10 +60,14 @@ export default class ChangePassword extends Component {
       <div
         align='center'
         className='updatePassword'>
-        <h1>update password</h1>
+        <p
+          className='badgeTitle'
+          style={{ color: '#6b3eff', fontSize: '22pt' }}>
+          Update Password
+        </p>
         <div className='ChangePassword'>
           <div>
-            <p align='center'>if you'd like to change your password, this is the place to do it</p>
+            <p align='center'>If you'd like to change your password, this is the place to do it</p>
             <br />
           </div>
           <form onSubmit={event => this.handleChangeClick(event)}>
