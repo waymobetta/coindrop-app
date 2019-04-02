@@ -56,8 +56,7 @@ export default class AdChainArchaeologist extends Component {
             alert('ADT [token] incoming!!') // placeholder
             this.setState({ quizTaken: true })
           }
-        }
-      )
+        })
       reference.open()
     } catch (err) {
       console.error(err.message)
@@ -71,7 +70,7 @@ export default class AdChainArchaeologist extends Component {
         className='TaskAuthor'>
         <p
           className='TaskTitle'
-          style={{ color: '#6b3eff', 'font-size': '18pt' }}>
+          style={{ color: '#6b3eff', 'fontSize': '18pt' }}>
           Archaeologist
         </p>
         <br />
