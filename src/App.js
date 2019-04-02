@@ -6,7 +6,9 @@ import { LinkContainer } from 'react-router-bootstrap'
 import Routes from './Routes'
 import './App.css'
 import { Auth } from 'aws-amplify'
-// import { getTasks } from './util/api'
+import {
+  getUserId
+} from './util/api'
 import TasksModule from './util/Tasks'
 
 class App extends Component {
@@ -14,7 +16,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      userID: '1e0cf398-b729-4a9c-9d26-0260ac6acb90',
+      userID: '',
       isAuthenticated: false,
       isAuthenticating: true,
       pendingTasks: 0
@@ -30,10 +32,13 @@ class App extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
+      getUserId().then(async userID => {
+        const tasksResp = await TasksModule.getTasksForUser(userID, jwt)
 
-      this.setState({
-        pendingTasks: tasksResp.tasks.length
+        this.setState({
+          userID: userID,
+          pendingTasks: tasksResp.tasks.length
+        })
       })
     } catch (err) {
       if (err.message) {

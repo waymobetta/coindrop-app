@@ -22,22 +22,18 @@ export default class Tasks extends Component {
   async componentWillMount () {
     try {
       // const tasksResp = await getTasks()
-
       const currentUser = await Auth.currentAuthenticatedUser()
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      getUserId().then(userID => {
+      getUserId().then(async userID => {
+        const tasksResp = await TasksModule.getTasksForUser(userID, jwt)
+
         this.setState({
-          userID: userID
+          userID: userID,
+          token: jwt,
+          tasks: tasksResp.tasks
         })
-      })
-
-      const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
-
-      this.setState({
-        token: jwt,
-        tasks: tasksResp.tasks
       })
     } catch (e) {
       console.error(e.message)
