@@ -38,7 +38,6 @@ export default class Accounts extends Component {
 
       getUserId().then(async userID => {
         this.setState({ userID: userID })
-
         const redditUserInfo = await RedditModule.getVerificationState(userID, jwt)
 
         const stackUserInfo = await StackOverflowModule.getVerificationState(userID, jwt)

@@ -20,6 +20,10 @@ export default class Tasks extends Component {
   }
 
   async componentWillMount () {
+    const { propsUserID } = this.props
+
+    console.log(propsUserID)
+
     try {
       // const tasksResp = await getTasks()
       const currentUser = await Auth.currentAuthenticatedUser()

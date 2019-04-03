@@ -17,7 +17,6 @@ export default class Profile extends Component {
     this.state = {
       userID: '',
       email: '',
-      username: '',
       wallet: [],
       profilePhotoURL: '',
       badgeList: []
@@ -28,20 +27,19 @@ export default class Profile extends Component {
     try {
       const currentUser = await Auth.currentAuthenticatedUser()
 
-      // const userID = currentUser.signInUserSession.accessToken.payload.username
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      getUserId().then(userID => {
+      getUserId().then(async userID => {
+        const badgesResponse = await BadgesModule.getBadgesForUser(userID, jwt)
         this.setState({
-          userID: userID
+          userID: userID,
+          badgeList: badgesResponse.badges
         })
       })
 
       const userEmail = currentUser.attributes.email
 
       const walletsResponse = await WalletModule.getUserWallets(jwt)
-
-      const badgesResponse = await BadgesModule.getBadgesForUser(this.state.userID, jwt)
 
       const emojiURL = Emoji.fetchRandomEmoji()
 
@@ -53,8 +51,7 @@ export default class Profile extends Component {
 
       this.setState({
         email: userEmail,
-        profilePhotoURL: emojiURL,
-        badgeList: badgesResponse.badges
+        profilePhotoURL: emojiURL
       })
     } catch (e) {
       console.error(e.message)

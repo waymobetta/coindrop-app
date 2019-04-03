@@ -73,6 +73,7 @@ class App extends Component {
 
   render () {
     const childProps = {
+      propsUserID: this.state.userID,
       isAuthenticated: this.state.isAuthenticated,
       userHasAuthenticated: this.userHasAuthenticated.bind(this)
     }
