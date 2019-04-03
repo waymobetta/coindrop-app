@@ -36,31 +36,29 @@ export default class Accounts extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      getUserId().then(userID => {
-        this.setState({
-          userID: userID
-        })
+      getUserId().then(async userID => {
+        this.setState({ userID: userID })
+
+        const redditUserInfo = await RedditModule.getVerificationState(userID, jwt)
+
+        const stackUserInfo = await StackOverflowModule.getVerificationState(userID, jwt)
+
+        if (redditUserInfo.verified) {
+          this.setState({
+            redditVerified: true
+          })
+        }
+
+        if (stackUserInfo.verified) {
+          this.setState({
+            stackOverflowVerified: true
+          })
+        }
       })
 
       this.setState({
         token: jwt
       })
-
-      const redditUserInfo = await RedditModule.getVerificationState(this.state.userID, jwt)
-
-      const stackUserInfo = await StackOverflowModule.getVerificationState(this.state.userID, jwt)
-
-      if (redditUserInfo.verified) {
-        this.setState({
-          redditVerified: true
-        })
-      }
-
-      if (stackUserInfo.verified) {
-        this.setState({
-          stackOverflowVerified: true
-        })
-      }
     } catch (e) {
       console.error(e.message)
     }
