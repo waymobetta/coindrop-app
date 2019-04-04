@@ -2,7 +2,7 @@ import { baseURL } from './api'
 
 const Quiz = {
   async getResults (quizID, JwtToken) {
-    return fetch(`${baseURL}/quizzes/${quizID}/results`, {
+    return fetch(`${baseURL}quizzes/${quizID}/results`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',

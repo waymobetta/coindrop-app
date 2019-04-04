@@ -7,7 +7,7 @@ const Wallet = {
       'walletAddress': walletAddress,
       'walletType': walletType
     }
-    return fetch(`${baseURL}/wallets`, {
+    return fetch(`${baseURL}wallets`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -21,7 +21,7 @@ const Wallet = {
     })
   },
   async getUserWallets (JwtToken) {
-    return fetch(`${baseURL}/wallets`, {
+    return fetch(`${baseURL}wallets`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',

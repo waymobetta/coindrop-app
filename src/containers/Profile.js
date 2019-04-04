@@ -31,23 +31,26 @@ export default class Profile extends Component {
 
       getUserId().then(async userID => {
         const badgesResponse = await BadgesModule.getBadgesForUser(userID, jwt)
-        this.setState({
-          userID: userID,
-          badgeList: badgesResponse.badges
-        })
+        if (badgesResponse.badges !== null) {
+          this.setState({
+            badgeList: badgesResponse.badges
+          })
+        }
+        this.setState({ userID: userID })
       })
 
       const userEmail = currentUser.attributes.email
 
       const walletsResponse = await WalletModule.getUserWallets(jwt)
 
-      const emojiURL = Emoji.fetchRandomEmoji()
-
-      for (let i = 0; i < walletsResponse.wallets.length; i++) {
-        if (walletsResponse.wallets[i].walletType === 'eth') {
-          this.setState({ wallet: walletsResponse.wallets[i].address })
+      if (walletsResponse.wallets !== null) {
+        for (let i = 0; i < walletsResponse.wallets.length; i++) {
+          if (walletsResponse.wallets[i].walletType === 'eth') {
+            this.setState({ wallet: walletsResponse.wallets[i].address })
+          }
         }
       }
+      const emojiURL = Emoji.fetchRandomEmoji()
 
       this.setState({
         email: userEmail,

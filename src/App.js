@@ -27,6 +27,7 @@ class App extends Component {
     try {
       // throws client undefined error
       // const tasksResp = await getTasks()
+      // console.log(tasksResp)
 
       const currentUser = await Auth.currentAuthenticatedUser()
 
@@ -35,9 +36,14 @@ class App extends Component {
       getUserId().then(async userID => {
         const tasksResp = await TasksModule.getTasksForUser(userID, jwt)
 
+        if (tasksResp.tasks !== null) {
+          this.setState({
+            pendingTasks: tasksResp.tasks.length
+          })
+        }
+
         this.setState({
-          userID: userID,
-          pendingTasks: tasksResp.tasks.length
+          userID: userID
         })
       })
     } catch (err) {

@@ -2,7 +2,7 @@ import { baseURL } from './api'
 
 const Reddit = {
   async getUser (userID, JwtToken) {
-    return fetch(`${baseURL}/social/reddit/${userID}`, {
+    return fetch(`${baseURL}social/reddit/${userID}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -19,7 +19,7 @@ const Reddit = {
       'userId': userID,
       'username': username
     }
-    return fetch(`${baseURL}/social/reddit`, {
+    return fetch(`${baseURL}social/reddit`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -33,7 +33,7 @@ const Reddit = {
     })
   },
   async getVerificationState (userID, JwtToken) {
-    return fetch(`${baseURL}/social/reddit/${userID}/verify`, {
+    return fetch(`${baseURL}social/reddit/${userID}/verify`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -49,7 +49,7 @@ const Reddit = {
     const payload = {
       'userId': userID
     }
-    return fetch(`${baseURL}/social/reddit/${userID}/verify`, {
+    return fetch(`${baseURL}social/reddit/${userID}/verify`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

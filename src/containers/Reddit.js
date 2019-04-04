@@ -18,6 +18,7 @@ export default class Reddit extends Component {
 
     this.state = {
       userID: '',
+      token: '',
       verificationCode: '',
       codeCopied: false,
       isVerified: false
@@ -30,25 +31,19 @@ export default class Reddit extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      getUserId().then(userID => {
+      getUserId().then(async userID => {
+        const redditUserInfo = await RedditModule.getVerificationState(userID, jwt)
+
+        if (redditUserInfo.verified) {
+          this.setState({
+            isVerified: true
+          })
+        }
         this.setState({
-          userID: userID
+          userID: userID,
+          token: jwt,
+          verificationCode: redditUserInfo.confirmedVerificationCode
         })
-      })
-
-      this.setState({
-        token: jwt
-      })
-
-      const redditUserInfo = await RedditModule.getVerificationState(this.state.userID, jwt)
-
-      if (redditUserInfo.verified) {
-        this.setState({
-          isVerified: true
-        })
-      }
-      this.setState({
-        verificationCode: redditUserInfo.confirmedVerificationCode
       })
     } catch (e) {
       console.error(e.message)

@@ -21,8 +21,6 @@ export default class Accounts extends Component {
       token: '',
       redditUsername: '',
       stackOverflowUserID: '',
-      isVerifyingReddit: false,
-      isVerifyingStackOverflow: false,
       redditVerified: false,
       stackOverflowVerified: false,
       isRedditDropOpen: false,
@@ -75,25 +73,24 @@ export default class Accounts extends Component {
     this.setState({
       [event.target.id]: event.target.value
     })
-  };
+  }
 
   async handleSubmit (event, account) {
+    console.log(account)
     if (account === 'reddit') {
-      this.setState({
-        isVerifyingReddit: true
-      })
+      const redditUserAddResp = await RedditModule.addUser(this.state.userID, this.state.redditUsername, this.state.token)
 
-      await RedditModule.addUser(this.state.userID, this.state.redditUsername, this.state.token)
+      console.log(redditUserAddResp)
 
-      this.props.history.push('/accounts/reddit')
-    } else if (account === 'stackOverflow') {
-      this.setState({
-        isVerifyingStackOverflow: true
-      })
+      console.log('redirecting..')
+      // this.props.history.push('/accounts/reddit')
+    } else {
+      const stackUserAddResp = await StackOverflowModule.addUser(this.state.userID, this.state.stackOverflowUserID, this.state.token)
 
-      await StackOverflowModule.addUser(this.state.userID, this.state.stackOverflowUserID, this.state.token)
+      console.log(JSON.parse(stackUserAddResp))
 
-      this.props.history.push('/accounts/stackoverflow')
+      console.log('redirecting..')
+      // this.props.history.push('/accounts/stackoverflow')
     }
   }
 
@@ -120,7 +117,7 @@ export default class Accounts extends Component {
                       className='form-control mr-sm-2'
                       type='text'
                       id='redditUsername'
-                      placeholder='coindrop_bob'
+                      placeholder='crypto_wizard'
                       aria-label='Verify'
                       onChange={event => this.handleChange(event)}
                     />

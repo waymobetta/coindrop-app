@@ -118,7 +118,7 @@ export default class Task extends Component {
                   S
                 </span>
               </strong><br />
-  Token Allocation: <i>{task.tokenAllocation} {task.token}</i><br />
+  Maximum Token Allocation: <i>{task.tokenAllocation} {task.token}</i><br />
   Badge: <a href='/badges'>{task.badge.name}</a>
               <img
                 className='badgeLogo'

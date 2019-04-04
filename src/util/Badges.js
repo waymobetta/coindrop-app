@@ -2,7 +2,7 @@ import { baseURL } from './api'
 
 const Badges = {
   async getBadgesForUser (userId, JwtToken) {
-    const userBadgeURL = `${baseURL}/badges/${userId}`
+    const userBadgeURL = `${baseURL}badges/${userId}`
     return fetch(`${userBadgeURL}`, {
       method: 'GET',
       headers: {
@@ -16,7 +16,7 @@ const Badges = {
     })
   },
   async getBadges (JwtToken) {
-    return fetch(`${baseURL}/badges`, {
+    return fetch(`${baseURL}badges`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -31,7 +31,7 @@ const Badges = {
   // for company usage only
   async addBadge (badgeObj, JwtToken) {
     const payload = badgeObj
-    return fetch(`${baseURL}/addtask`, {
+    return fetch(`${baseURL}addbadge`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

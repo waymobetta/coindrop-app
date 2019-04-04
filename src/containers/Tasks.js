@@ -22,6 +22,8 @@ export default class Tasks extends Component {
   async componentWillMount () {
     const { propsUserID } = this.props
 
+    // TODO:
+    // sometimes this works, sometimes it does not??
     console.log(propsUserID)
 
     try {

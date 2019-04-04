@@ -5,10 +5,12 @@ import spec from '../swagger/swagger.json'
 import CoindropAuth from './CoindropAuth'
 dotenv.config()
 
-export const baseURL = process.env.API_BASE_URL || 'http://localhost:5000/v1'
-// export const baseURL = 'http://localhost:5000/v1'
+// export const baseURL = 'http://api.coindrop.io/v1/'
+export const baseURL = 'http://localhost:5000/v1/'
 
-spec.host = baseURL.replace(/.*\/\/([\w+:]+)\/.*/, '$1')
+spec.host = baseURL.replace(/.*\/\/([\w.:]+)\/.*/, '$1')
+
+console.log(spec.host)
 
 let client
 

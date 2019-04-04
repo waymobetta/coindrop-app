@@ -31,25 +31,19 @@ export default class StackOverflow extends Component {
 
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      getUserId().then(userID => {
+      getUserId().then(async userID => {
+        const stackUserInfo = await StackOverflowModule.getVerificationState(userID, jwt)
+
+        if (stackUserInfo.verified) {
+          this.setState({
+            isVerified: true
+          })
+        }
         this.setState({
-          userID: userID
+          userID: userID,
+          token: jwt,
+          verificationCode: stackUserInfo.confirmedVerificationCode
         })
-      })
-
-      this.setState({
-        token: jwt
-      })
-
-      const stackUserInfo = await StackOverflowModule.getVerificationState(this.state.userID, jwt)
-
-      if (stackUserInfo.verified) {
-        this.setState({
-          isVerified: true
-        })
-      }
-      this.setState({
-        verificationCode: stackUserInfo.confirmedVerificationCode
       })
     } catch (e) {
       console.error(e.message)
@@ -57,7 +51,10 @@ export default class StackOverflow extends Component {
   }
 
   validateClick () {
-    return this.state.isVerified
+    if (this.state.isVerified) {
+      return true
+    }
+    return false
   }
 
   async handleClick (event) {

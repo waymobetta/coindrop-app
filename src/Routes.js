@@ -16,7 +16,7 @@ import AdChainArchaeologist from './tasks/AdChainArchaeologist'
 import MyCryptoConscious from './tasks/MyCryptoConscious'
 import Profile from './containers/Profile'
 import Projects from './components/Projects'
-import Accounts from './containers/Accounts'
+import Accounts2 from './containers/Accounts2'
 import Reddit from './containers/Reddit'
 import StackOverflow from './containers/StackOverflow'
 import Settings from './components/Settings'
@@ -76,7 +76,7 @@ export default ({ childProps }) =>
     <AuthenticatedRoute
       path='/accounts'
       exact
-      component={Accounts}
+      component={Accounts2}
       props={childProps} />
     <AuthenticatedRoute
       path='/accounts/reddit'

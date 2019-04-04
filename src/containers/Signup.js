@@ -8,10 +8,9 @@ import {
 } from 'react-bootstrap'
 import LoaderButton from '../components/LoaderButton'
 import './Signup.css'
-// import { Auth } from 'aws-amplify'
-import { signupUser } from '../util/api'
-// import Reddit from '../util/Reddit'
-// import StackOverflow from '../util/StackOverflow'
+import CoindropAuthModule from '../util/CoindropAuth'
+import { Auth } from 'aws-amplify'
+// import { signupUser } from '../util/api'
 
 export default class Signup extends Component {
   constructor (props) {
@@ -51,8 +50,15 @@ export default class Signup extends Component {
     this.setState({ isLoading: true })
 
     try {
-      const newUser = signupUser(this.state.email, this.state.password)
+      // const newUser = signupUser(this.state.email, this.state.password)
+      const newUser = await Auth.signUp(this.state.email, this.state.password)
+      const jwt = newUser.user.storage.accessToken
+
+      const signUpRes = await CoindropAuthModule.signUp(newUser.userSub, jwt)
+      console.log(signUpRes)
+
       this.setState({
+        token: jwt,
         newUser
       })
     } catch (e) {

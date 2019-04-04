@@ -2,7 +2,7 @@ import { baseURL } from './api'
 
 const Tasks = {
   async getTasksForUser (userId, JwtToken) {
-    const userTaskURL = `${baseURL}/tasks?userId=${userId}`
+    const userTaskURL = `${baseURL}tasks?userId=${userId}`
 
     return fetch(`${userTaskURL}`, {
       method: 'GET',
@@ -19,7 +19,7 @@ const Tasks = {
   // for company usage only
   async addTask (taskObj, JwtToken) {
     const payload = taskObj
-    return fetch(`${baseURL}/addtask`, {
+    return fetch(`${baseURL}addtask`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

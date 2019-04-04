@@ -2,7 +2,7 @@ import { baseURL } from './api'
 
 const StackOverflow = {
   async getUser (userID, JwtToken) {
-    return fetch(`${baseURL}/social/stackoverflow/${userID}`, {
+    return fetch(`${baseURL}social/stackoverflow/${userID}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -19,7 +19,7 @@ const StackOverflow = {
       'stackUserId': Number(stackUserID),
       'userId': userID
     }
-    return fetch(`${baseURL}/social/stackoverflow`, {
+    return fetch(`${baseURL}social/stackoverflow`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -33,7 +33,7 @@ const StackOverflow = {
     })
   },
   async getVerificationState (userID, JwtToken) {
-    return fetch(`${baseURL}/social/stackoverflow/${userID}/verify`, {
+    return fetch(`${baseURL}social/stackoverflow/${userID}/verify`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -49,7 +49,7 @@ const StackOverflow = {
     const payload = {
       'userId': userID
     }
-    return fetch(`${baseURL}/social/stackoverflow/${userID}/verify`, {
+    return fetch(`${baseURL}social/stackoverflow/${userID}/verify`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
