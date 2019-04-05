@@ -5,7 +5,6 @@ import { Auth } from 'aws-amplify'
 import {
   getUserId
 } from '../util/api'
-import { Well } from 'react-bootstrap'
 import WalletModule from '../util/Wallet'
 import BadgesModule from '../util/Badges'
 import TransactionModule from '../util/Transaction'
@@ -88,32 +87,26 @@ export default class Profile extends Component {
           </div>
           <hr />
           <p className='badgeTitle'>
-            Transaction
+            Transactions
           </p>
-          <Well
-            className='badgeWell'>
-            {
-              this.state.transactionList.map(transaction => {
-                return <Transaction key={'Transaction_' + transaction.id} transaction={transaction} />
-              })
-            }
-          </Well>
+          {
+            this.state.transactionList.map(transaction => {
+              return <Transaction key={'Transaction_' + transaction.id} transaction={transaction} />
+            })
+          }
           <hr />
           <p className='badgeTitle'>
             Badges
           </p>
-          <Well
-            className='badgeWell'>
-            <div align='center'>
-              <div className='badgeDiv'>
-                {
-                  this.state.badgeList.map(badge => {
-                    return <Badge key={'Badge_' + badge.name} badge={badge} />
-                  })
-                }
-              </div>
+          <div align='center'>
+            <div className='badgeDiv'>
+              {
+                this.state.badgeList.map(badge => {
+                  return <Badge key={'Badge_' + badge.name} badge={badge} />
+                })
+              }
             </div>
-          </Well>
+          </div>
         </div>
       </div>
     )

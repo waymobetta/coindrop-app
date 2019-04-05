@@ -10,9 +10,13 @@ export default class Transaction extends Component {
         <div className='col'>
           <div
             className='Transaction-information'>
-            <p align='center'>
-              {transaction.hash}<br /><br />
-            </p>
+            <a
+              align='center'
+              href={'https://rinkeby.etherscan.io/tx/' + transaction.hash}>
+              {transaction.hash}
+            </a>
+            <br />
+            <br />
           </div>
         </div>
       </div>
