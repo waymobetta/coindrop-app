@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Badge from './Badge'
+import Transaction from './Transaction'
 import { Auth } from 'aws-amplify'
 import {
   getUserId
@@ -7,6 +8,7 @@ import {
 import { Well } from 'react-bootstrap'
 import WalletModule from '../util/Wallet'
 import BadgesModule from '../util/Badges'
+import TransactionModule from '../util/Transaction'
 import './Profile.css'
 import Emoji from '../util/Emoji'
 
@@ -19,7 +21,8 @@ export default class Profile extends Component {
       email: '',
       wallet: [],
       profilePhotoURL: '',
-      badgeList: []
+      badgeList: [],
+      transactionList: []
     }
   }
 
@@ -35,6 +38,12 @@ export default class Profile extends Component {
           this.setState({
             badgeList: badgesResponse.badges
           })
+        }
+
+        const transactionResponse = await TransactionModule.getTransactionsForUser(userID, jwt)
+
+        if (transactionResponse.transactions !== null) {
+          this.setState({ transactionList: transactionResponse.transactions })
         }
         this.setState({ userID: userID })
       })
@@ -77,6 +86,18 @@ export default class Profile extends Component {
               {this.state.wallet}
             </a>
           </div>
+          <hr />
+          <p className='badgeTitle'>
+            Transaction
+          </p>
+          <Well
+            className='badgeWell'>
+            {
+              this.state.transactionList.map(transaction => {
+                return <Transaction key={'Transaction_' + transaction.id} transaction={transaction} />
+              })
+            }
+          </Well>
           <hr />
           <p className='badgeTitle'>
             Badges

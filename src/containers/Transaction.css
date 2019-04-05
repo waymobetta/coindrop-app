@@ -1,0 +1,34 @@
+.Transaction {
+  flex-direction: column;
+  width: 16.66rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+.Transaction {
+  padding-top: 10px;
+  height: 5.66rem;
+}
+
+.col {
+  display: inline-block;
+}
+
+.Transaction h2 {
+  font-size: 11pt;
+  font-weight: 50;
+  color: white;
+  background-image: linear-gradient(to bottom right, purple, black);
+}
+
+.Transaction-information {
+  justify-content: space-between;
+}
+
+.Transaction-information p {
+  color: white;
+  font-size: 12pt;
+  font-weight: 100;
+  line-height: 10pt;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
