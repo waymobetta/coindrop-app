@@ -72,6 +72,8 @@ export default class StackOverflow extends Component {
   }
 
   render () {
+    // TODO;
+    // get stack user ID for edit URL
     const profileURL = 'https://stackoverflow.com/users/edit/' + this.state.stackOverlowUserID
 
     return (
