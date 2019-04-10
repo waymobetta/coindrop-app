@@ -40,12 +40,9 @@ export default class MyCryptoConscious extends Component {
         const tasksResp = await TasksModule.getTasksForUser(userID, jwt)
         this.setState({
           userID: userID,
+          token: jwt,
           tasks: tasksResp.tasks
         })
-      })
-
-      this.setState({
-        token: jwt
       })
     } catch (e) {
       console.error(e.message)
