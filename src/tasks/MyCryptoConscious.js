@@ -17,6 +17,7 @@ import {
 import './MyCryptoConscious.css'
 import TasksModule from '../util/Tasks'
 import WalletModule from '../util/Wallet'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 export default class MyCryptoConscious extends Component {
   constructor (props) {
@@ -24,8 +25,10 @@ export default class MyCryptoConscious extends Component {
 
     this.state = {
       userID: '',
-      message: '',
+      verifyMessage: '',
+      message: 'I <3 coindrop',
       isCompleted: false,
+      codeCopied: false,
       tasks: [],
       token: ''
     }
@@ -190,6 +193,27 @@ export default class MyCryptoConscious extends Component {
           <p>
             Sign the below message within the MyCrypto app
           </p>
+        </div>
+        <div
+          className='verificationMessage'>
+          <Well
+            className='verificationMessageWell'>
+            {this.state.message}
+            <div
+              className='Divider' />
+            <CopyToClipboard
+              text={this.state.message}
+              onCopy={() => this.setState({ codeCopied: true })}>
+              <span
+                role='img'
+                description='aria-label'>
+                <Glyphicon glyph='pushpin' />
+              </span>
+            </CopyToClipboard>
+            {this.state.codeCopied
+              ? <span style={{ color: 'green' }}>copied</span>
+              : null}
+          </Well>
         </div>
         <div>
           <br />

@@ -100,7 +100,7 @@ export default class StackOverflow extends Component {
               </span>
             </CopyToClipboard>
             {this.state.codeCopied
-              ? <span style={{ color: '#9836B8' }}>copied</span>
+              ? <span style={{ color: 'green' }}>copied</span>
               : null}
           </div>
           <br />

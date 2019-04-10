@@ -10,6 +10,14 @@
   color: #999;
 }
 
+.verificationMessage {
+  font-size: 11pt;
+}
+
+.verificationMessageWell {
+  max-width: 500px;
+}
+
 .stepHeader {
   font-size: 24pt;
 }
