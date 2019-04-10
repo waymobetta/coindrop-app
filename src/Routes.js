@@ -76,7 +76,7 @@ export default ({ childProps }) =>
     <AuthenticatedRoute
       path='/accounts'
       exact
-      component={Accounts2}
+      component={Accounts}
       props={childProps} />
     <AuthenticatedRoute
       path='/accounts/reddit'
