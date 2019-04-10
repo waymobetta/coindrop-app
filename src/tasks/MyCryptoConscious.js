@@ -16,7 +16,7 @@ import {
 } from '../util/api'
 import './MyCryptoConscious.css'
 import TasksModule from '../util/Tasks'
-// import WalletModule from '../util/Wallet'
+import WalletModule from '../util/Wallet'
 
 export default class MyCryptoConscious extends Component {
   constructor (props) {
@@ -36,18 +36,15 @@ export default class MyCryptoConscious extends Component {
       const currentUser = await Auth.currentAuthenticatedUser()
       const jwt = currentUser.signInUserSession.accessToken.jwtToken
 
-      getUserId().then(userID => {
+      getUserId().then(async userID => {
+        const tasksResp = await TasksModule.getTasksForUser(userID, jwt)
         this.setState({
-          userID: userID
+          userID: userID,
+          tasks: tasksResp.tasks
         })
       })
 
-      const tasksResp = await TasksModule.getTasksForUser(this.state.userID, jwt)
-
       this.setState({
-        userID: currentUser.signInUserSession.accessToken.payload.username,
-        userName: currentUser.attributes.email,
-        tasks: tasksResp.tasks,
         token: jwt
       })
     } catch (e) {
@@ -55,21 +52,14 @@ export default class MyCryptoConscious extends Component {
     }
   }
 
-  async handleClick (event) {
+  async handleClick (event, taskID) {
     try {
-      // TODO:
-      // create wallet verify endpoint
-      // POST with message payload, response is verified boolean
-      // const validationResponse = await WalletModule.verifyMessage(this.state.message, this.state.token);
+      const verifyObj = JSON.parse(this.state.verifyMessage)
 
-      // simulate successful response
-      const validationResponse = {
-        message: 'success'
-      }
+      const validationResponse = await WalletModule.verifyWallet(this.state.userID, verifyObj, taskID, this.state.token)
 
-      console.log('verifying message..')
-
-      if (validationResponse.message === 'success') {
+      if (validationResponse.verified === true) {
+        console.log('verified')
         this.setState({
           isVerified: true
         })
@@ -86,7 +76,14 @@ export default class MyCryptoConscious extends Component {
     return false
   }
 
+  handleChange (event) {
+    this.setState({
+      [event.target.id]: event.target.value
+    })
+  }
+
   render () {
+    let taskID
     let tokenName
     let taskTitle
     let tokenAmount
@@ -96,6 +93,7 @@ export default class MyCryptoConscious extends Component {
 
     for (let i = 0; i < this.state.tasks.length; i++) {
       if (this.state.tasks[i].title === 'Crypto-conscious') {
+        taskID = this.state.tasks[i].id
         tokenName = this.state.tasks[i].token
         taskTitle = this.state.tasks[i].title
         tokenAmount = this.state.tasks[i].tokenAllocation
@@ -213,7 +211,10 @@ Verify Message
                 className='inputClass'
                 type='textarea'
                 name='text'
-                id='verifyMessage' />
+                id='verifyMessage'
+                value={this.state.verifyMessage}
+                onChange={event => this.handleChange(event)}
+              />
             </FormGroup>
           </Form>
         </div>
@@ -222,7 +223,7 @@ Verify Message
           outline
           color='primary'
           block
-          onClick={event => this.handleClick()}
+          onClick={event => this.handleClick(event, taskID)}
           disabled={this.validateClick()}>
             verify
         </Button>

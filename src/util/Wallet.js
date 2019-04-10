@@ -20,6 +20,28 @@ const Wallet = {
       return jsonResponse
     })
   },
+  async verifyWallet (userID, verifyObj, taskID, JwtToken) {
+    const payload = {
+      'userID': userID,
+      'taskID': taskID,
+      'address': verifyObj.address,
+      'message': verifyObj.msg,
+      'signature': verifyObj.sig,
+      'version': verifyObj.version
+    }
+    return fetch(`${baseURL}wallets/verify`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + JwtToken
+      },
+      body: JSON.stringify(payload)
+    }).then(res => {
+      return res.json()
+    }).then(jsonResponse => {
+      return jsonResponse
+    })
+  },
   async getUserWallets (JwtToken) {
     return fetch(`${baseURL}wallets`, {
       method: 'GET',

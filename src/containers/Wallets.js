@@ -113,7 +113,7 @@ export default class Wallets extends Component {
                   placeholder='my bitcoin wallet address'
                   disabled
                   value={this.state.btcWalletAddress}
-                  onChange={event => this.handleChange(event, 'btc')}
+                  onChange={event => this.handleChange(event)}
                 />
               </FormGroup>
               <LoaderButton
