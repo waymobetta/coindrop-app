@@ -29,6 +29,7 @@ export default class MyCryptoConscious extends Component {
       message: 'I <3 coindrop',
       isCompleted: false,
       codeCopied: false,
+      isVerified: false,
       tasks: [],
       token: ''
     }
@@ -69,11 +70,24 @@ export default class MyCryptoConscious extends Component {
     }
   }
 
-  validateClick () {
-    if (this.state.isVerified) {
+  isJsonString (str) {
+    try {
+      JSON.parse(str)
+    } catch (e) {
+      return false
+    }
+    return true
+  }
+
+  validateForm () {
+    if (!this.state.isVerified) {
+      if (this.state.verifyMessage !== '' &&
+        this.isJsonString(this.state.verifyMessage)
+      ) {
+        return false
+      }
       return true
     }
-    return false
   }
 
   handleChange (event) {
@@ -102,6 +116,14 @@ export default class MyCryptoConscious extends Component {
         resourceURL = this.state.tasks[i].resourceURL
       }
     }
+
+    const verifySample = `{
+      'address': '0xfedc485ab2c87529fb13414c57e391a98fd113ef',
+      'msg': 'I <3 coindrop',
+      'sig': '0x995f0b0cef348d3eb6c9fd6f3537dbe7e7906a1c498a5796a098f587e2a61380602874c36c24599f67ecfe4429d842f454f0362037c1758900ccef8aae805dee1b',
+      'version': '2'
+    }`
+
     return (
       <div
         align='center'
@@ -182,7 +204,8 @@ export default class MyCryptoConscious extends Component {
             </strong>
           </h1>
           <p>
-            Download the MyCrypto app by clicking <a href={resourceURL}>here</a> and following the instructions
+            Download the MyCrypto app by clicking <a href={resourceURL}>here</a> and following the <a href='https://support.mycrypto.com/how-to/getting-started/how-to-sign-and-verify-messages-on-ethereum'>
+              instructions</a>
           </p>
           <h1
             className='stepHeader'>
@@ -231,6 +254,7 @@ Verify Message
               <Input
                 className='inputClass'
                 type='textarea'
+                placeholder={verifySample}
                 name='text'
                 id='verifyMessage'
                 value={this.state.verifyMessage}
@@ -245,7 +269,7 @@ Verify Message
           color='primary'
           block
           onClick={event => this.handleClick(event, taskID)}
-          disabled={this.validateClick()}>
+          disabled={this.validateForm()}>
             verify
         </Button>
         <div>
