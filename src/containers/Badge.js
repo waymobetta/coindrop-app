@@ -9,7 +9,9 @@ export default class Badge extends Component {
       <div className='Badge'>
         <div className='col'>
           <div className='image-container'>
-            <img src={badge.logoURL} alt='' width='60' height='52' />
+            <a href='/badges'>
+              <img src={badge.logoURL} alt='' width='60' height='52' />
+            </a>
           </div>
           <h2>{badge.name}</h2>
           <div className='Badge-information'>
