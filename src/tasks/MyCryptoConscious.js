@@ -59,6 +59,8 @@ export default class MyCryptoConscious extends Component {
 
       const validationResponse = await WalletModule.verifyWallet(this.state.userID, verifyObj, taskID, this.state.token)
 
+      console.log(validationResponse)
+
       if (validationResponse.verified === true) {
         console.log('verified')
         this.setState({
@@ -88,6 +90,7 @@ export default class MyCryptoConscious extends Component {
       }
       return true
     }
+    return true
   }
 
   handleChange (event) {
