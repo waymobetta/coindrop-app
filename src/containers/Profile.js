@@ -19,6 +19,7 @@ export default class Profile extends Component {
       userID: '',
       email: '',
       wallet: [],
+      walletVerified: false,
       profilePhotoURL: '',
       badgeList: [],
       transactionList: []
@@ -54,7 +55,10 @@ export default class Profile extends Component {
       if (walletsResponse.wallets !== null) {
         for (let i = 0; i < walletsResponse.wallets.length; i++) {
           if (walletsResponse.wallets[i].walletType === 'eth') {
-            this.setState({ wallet: walletsResponse.wallets[i].address })
+            this.setState({
+              wallet: walletsResponse.wallets[i].address,
+              walletVerified: walletsResponse.wallets[i].verified
+            })
           }
         }
       }
@@ -82,7 +86,11 @@ export default class Profile extends Component {
             <p>&nbsp;</p>
             <strong>Ethereum: </strong>
             <a href={'https://etherscan.io/address/' + this.state.wallet}>
-              {this.state.wallet}
+              {
+                this.state.walletVerified
+                  ? <span style={{ color: 'green' }}>{this.state.wallet}</span>
+                  : this.state.wallet
+              }
             </a>
           </div>
           <hr />
