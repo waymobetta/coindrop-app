@@ -31,6 +31,7 @@ export default class MyCryptoConscious extends Component {
       codeCopied: false,
       isVerified: false,
       tasks: [],
+      wallet: '',
       token: ''
     }
   }
@@ -42,6 +43,20 @@ export default class MyCryptoConscious extends Component {
 
       getUserId().then(async userID => {
         const tasksResp = await TasksModule.getTasksForUser(userID, jwt)
+
+        const walletsResponse = await WalletModule.getUserWallets(jwt)
+
+        if (walletsResponse.wallets !== null) {
+          for (let i = 0; i < walletsResponse.wallets.length; i++) {
+            if (walletsResponse.wallets[i].walletType === 'eth') {
+              this.setState({
+                wallet: walletsResponse.wallets[i].address,
+                isVerified: walletsResponse.wallets[i].verified
+              })
+            }
+          }
+        }
+
         this.setState({
           userID: userID,
           token: jwt,
@@ -57,9 +72,12 @@ export default class MyCryptoConscious extends Component {
     try {
       const verifyObj = JSON.parse(this.state.verifyMessage)
 
-      const validationResponse = await WalletModule.verifyWallet(this.state.userID, verifyObj, taskID, this.state.token)
+      if (verifyObj.address !== this.state.wallet) {
+        alert('addresses do not match!')
+        return
+      }
 
-      console.log(validationResponse)
+      const validationResponse = await WalletModule.verifyWallet(this.state.userID, verifyObj, taskID, this.state.token)
 
       if (validationResponse.verified === true) {
         console.log('verified')
